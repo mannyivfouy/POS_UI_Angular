@@ -1,6 +1,13 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { LucideWarehouse, LucideUser, LucideLock, LucideLogIn, LucideEye } from '@lucide/angular';
-import { LoginRequest, LoginResponse } from '../../../core/models/auth.model';
+import {
+  LucideWarehouse,
+  LucideUser,
+  LucideLock,
+  LucideLogIn,
+  LucideEye,
+  LucideShield,
+  LucideEyeOff,
+} from '@lucide/angular';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
@@ -12,7 +19,10 @@ import { CommonModule } from '@angular/common';
     LucideWarehouse,
     LucideUser,
     LucideLock,
+    LucideLogIn,
     LucideEye,
+    LucideEyeOff,
+    LucideShield,
     ReactiveFormsModule,
     CommonModule,
   ],
@@ -29,6 +39,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
@@ -58,25 +69,17 @@ export class LoginComponent {
 
     this.authService.login(data).subscribe({
       next: (res) => {
-        console.log('LOGIN SUCCESS:', res); // 👈 debug
-
         this.isLoading = false;
-
-        this.authService.saveSession(res.token, res.user);
-
-        // 👇 FORCE NAVIGATION CHECK
-        this.router.navigateByUrl('/dashboard').then((success) => {
-          console.log('NAV RESULT:', success);
-        });
+        this.authService.saveSession(res.result.token, res.result.user);
+        this.router.navigateByUrl('/dashboard');
       },
-
       error: (err) => {
-        console.log('LOGIN ERROR:', err); // 👈 debug
-
         this.isLoading = false;
-
         this.errorMessage = err?.error?.message || err?.message || 'Invalid username or password';
+        this.cdr.detectChanges();
       },
     });
   }
 }
+
+
