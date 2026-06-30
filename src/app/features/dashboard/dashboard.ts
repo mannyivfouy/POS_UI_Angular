@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-dashboard.componet',
   imports: [],
-  templateUrl: './dashboard.componet.html',
-  styleUrl: './dashboard.componet.css',
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.css',
 })
 export class DashboardComponet {
 
