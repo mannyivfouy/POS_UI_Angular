@@ -12,13 +12,12 @@ import { CommonModule } from '@angular/common';
     LucideWarehouse,
     LucideUser,
     LucideLock,
-    LucideLogIn,
     LucideEye,
     ReactiveFormsModule,
     CommonModule,
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  templateUrl: './login.html',
+  styleUrl: './login.css',
 })
 export class LoginComponent {
   isLoading = false;

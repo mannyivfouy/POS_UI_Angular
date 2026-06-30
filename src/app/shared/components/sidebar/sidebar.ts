@@ -7,8 +7,8 @@ import { AuthService } from '../../../core/services/auth.service';
   selector: 'app-sidebar',
   imports: [CommonModule, RouterModule],
   standalone: true,
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css',
+  templateUrl: './sidebar.html',
+  styleUrl: './sidebar.css',
 })
 export class SidebarComponent {
   @Input() isOpen = true;
