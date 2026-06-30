@@ -3,9 +3,10 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar';
+import { Header } from "../../shared/components/header/header";
 @Component({
   selector: 'app-main-layout.component',
-  imports: [CommonModule, RouterModule, SidebarComponent],
+  imports: [CommonModule, RouterModule, SidebarComponent, Header],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',
 })
