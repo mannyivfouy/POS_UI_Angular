@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { LucideAngularModule, LayoutDashboard, ShoppingCart, History, Warehouse } from 'lucide-angular';
+import { LucideAngularModule, LayoutDashboard, ShoppingCart, History, Archive, Boxes, ArchiveRestore, ShoppingBag, ReceiptText, Users, ShieldCheck, UserCircle } from 'lucide-angular';
 import { LucideWarehouse } from '@lucide/angular';
 
 @Component({
@@ -19,13 +19,14 @@ export class SidebarComponent {
     { label: 'Dashboard', route: '/dashboard', icon: LayoutDashboard, roles: ['Admin'] },
     { label: 'Sales', route: '/sales', icon: ShoppingCart, roles: ['Admin'] },
     { label: 'Sales History', route: '/sales-history', icon: History, roles: ['Admin'] },
-    // { label: 'Stock', route: '/stock', icon: '📦', roles: ['Admin'] },
-    // { label: 'Product Categories', route: '/categories', icon: '🏷️', roles: ['Admin'] },
-    // { label: 'Purchase Management', route: '/purchase', icon: '🧾', roles: ['Admin'] },
-    // { label: 'Purchase History', route: '/purchase-history', icon: '📜', roles: ['Admin'] },
-    // { label: 'User Management', route: '/users', icon: '👤', roles: ['Admin'] },
-    // { label: 'Role Management', route: '/roles', icon: '🛡️', roles: ['Admin'] },
-    // { label: 'Customer Management', route: '/customers', icon: '👥', roles: ['Admin'] },
+    { label: 'Stock', route: '/stock', icon: Archive, roles: ['Admin'] },
+    { label: 'Categories Management', route: '/categories', icon: Boxes, roles: ['Admin'] },
+    { label: 'Purchase Management', route: '/purchase', icon: ShoppingBag, roles: ['Admin'] },
+    { label: 'Purchase History', route: '/purchase-history', icon: ReceiptText, roles: ['Admin'] },
+    { label: 'User Management', route: '/users', icon: Users, roles: ['Admin'] },
+    { label: 'Role Management', route: '/roles', icon: ShieldCheck, roles: ['Admin'] },
+    { label: 'Customer Management', route: '/customers', icon: UserCircle, roles: ['Admin'] },
+    {label : 'Supplier', route: '/supplier', icon: ArchiveRestore, roles: ['Admin']}
   ];
 
   constructor(private authService: AuthService) {}
