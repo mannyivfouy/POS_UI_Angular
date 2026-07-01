@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { LucideAngularModule, LayoutDashboard, ShoppingCart, History } from 'lucide-angular';
+import { LucideAngularModule, LayoutDashboard, ShoppingCart, History, Warehouse } from 'lucide-angular';
+import { LucideWarehouse } from '@lucide/angular';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule, RouterModule, LucideAngularModule],
+  imports: [CommonModule, RouterModule, LucideAngularModule, LucideWarehouse],
   standalone: true,
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
