@@ -1,0 +1,14 @@
+<div class="flex justify-center mt-4 gap-2">
+  @for (p of pages; track p) {
+    <button
+      (click)="changePage(p)"
+      class="px-3 py-1 rounded border text-sm transition"
+      [ngClass]="{
+        'bg-indigo-500 text-white border-indigo-500': page === p,
+        'bg-white text-gray-700 hover:bg-gray-100': page !== p,
+      }"
+    >
+      {{ p }}
+    </button>
+  }
+</div>
