@@ -1,0 +1,14 @@
+<div *ngIf="data" class="bg-white rounded-xl shadow p-4 flex items-center justify-between">
+  <!-- LEFT -->
+  <div>
+    <p class="text-sm text-gray-500">{{ data.title }}</p>
+    <h2 class="text-2xl font-bold text-gray-800">
+      {{ data.value }}
+    </h2>
+  </div>
+
+  <!-- ICON -->
+  <div class="w-12 h-12 rounded-lg flex items-center justify-center">
+    <lucide-angular [img]="data.icon" class="w-7 h-7"></lucide-angular>
+  </div>
+</div>
