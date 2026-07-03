@@ -10,7 +10,7 @@ import { UserStats } from '../models/stats.model';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = `${environment.apiUrl}/users`;
 
   constructor(private http: HttpClient) {}
 
@@ -59,7 +59,7 @@ export class UserService {
 
   // STATS
   getUserStats(): Observable<UserStats> {
-    return this.http.get<UserStats>(`${this.apiUrl}/users/stats`);
+    return this.http.get<UserStats>(`${this.apiUrl}/stats`);
   }
 
   // PROFILE

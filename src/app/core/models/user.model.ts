@@ -7,6 +7,8 @@ export interface User {
   email: string;
   phone: string;
   avatar?: string;
-  role: Role;
+  roleId: Role;
   status: 'active' | 'inactive' | string;
+  createdAt: Date;
+  updatedAt: Date
 }
