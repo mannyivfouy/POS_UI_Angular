@@ -1,11 +1,16 @@
-<div class="space-y-6">
+<div class="space-y-4">
+  <div>
+    <h1 class="text-2xl font-semibold text-gray-800">User List</h1>
+    <p class="text-sm text-gray-500">Manage all system users</p>
+  </div>
+
   <!-- Stats -->
   <app-stats-grid [stats]="stats"></app-stats-grid>
 
-  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-6">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
     <!-- Left: Search -->
     <div class="flex items-center gap-3">
-      <app-search placeholder="Search users..." (search)="onSearch($event)"> </app-search>
+      <app-search placeholder="Search Users..." (search)="onSearch($event)"> </app-search>
     </div>
 
     <!-- Right: Action -->
@@ -68,7 +73,7 @@
           @for (user of users; track user._id; let i = $index) {
             <tr class="hover:bg-gray-50 transition">
               <td class="px-6 py-3 text-sm text-gray-600">
-                {{ (page - 1 ) * limit + i + 1  }}
+                {{ (page - 1) * limit + i + 1 }}
               </td>
 
               <!-- User -->
