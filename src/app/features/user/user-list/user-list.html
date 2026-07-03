@@ -17,6 +17,7 @@
     <div class="flex items-center justify-end">
       <button
         class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition flex items-center gap-2"
+        (click)="openCreateUser()"
       >
         <lucide-icon [img]="icons.Plus" class="w-4 h-4"></lucide-icon>
         Add User
@@ -164,6 +165,19 @@
           (pageChange)="changePage($event)"
         ></app-pagination>
       </div>
+
+      <!-- Drawer -->
+      <app-drawer
+        [open]="isDrawerOpen"
+        [title]="selectedUser ? 'Edit User' : 'Create User'"
+        (close)="closeDrawer()"
+      >
+        <app-user-form
+          [user]="selectedUser"
+          (saved)="onSaved()"
+          (cancel)="closeDrawer()"
+        ></app-user-form>
+      </app-drawer>
     </div>
   </div>
 </div>
