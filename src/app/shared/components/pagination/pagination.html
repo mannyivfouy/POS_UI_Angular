@@ -1,14 +1,45 @@
-<div class="flex justify-center mt-4 gap-2">
-  @for (p of pages; track p) {
+<div class="flex items-center justify-between gap-4">
+  <!-- Info text -->
+  <div class="text-sm text-gray-500">
+    Show
+    <span class="font-semibold text-gray-900">{{ startItem }}</span> -
+    <span class="font-semibold text-gray-900">{{ endItem }}</span>
+    of
+    <span class="font-semibold text-gray-900">{{ totalItems }}</span>
+    users
+  </div>
+
+  <!-- Pagination controls -->
+  <div class="flex items-center gap-1">
+    <!-- Prev icon -->
     <button
-      (click)="changePage(p)"
-      class="px-3 py-1 rounded border text-sm transition"
-      [ngClass]="{
-        'bg-indigo-500 text-white border-indigo-500': page === p,
-        'bg-white text-gray-700 hover:bg-gray-100': page !== p,
-      }"
+      (click)="changePage(page - 1)"
+      [disabled]="page === 1"
+      class="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 disabled:opacity-40"
     >
-      {{ p }}
+      <lucide-icon [img]="icons.ChevronLeft" class="w-4 h-4"></lucide-icon>
     </button>
-  }
+
+    <!-- Page numbers -->
+    @for (p of pages; track p) {
+      <button
+        (click)="changePage(p)"
+        class="h-8 w-8 rounded-lg text-sm font-medium transition-colors"
+        [ngClass]="
+          page === p ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'
+        "
+      >
+        {{ p }}
+      </button>
+    }
+
+    <!-- Next icon -->
+    <button
+      (click)="changePage(page + 1)"
+      [disabled]="page === totalPage"
+      class="h-8 w-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 disabled:opacity-40"
+    >
+      <lucide-icon [img]="icons.ChevronRight" class="w-4 h-4"></lucide-icon>
+    </button>
+  </div>
 </div>
