@@ -1,0 +1,14 @@
+import { Component, Input } from '@angular/core';
+import { StatsCardModel } from '../../models/stats-card.model';
+import { CommonModule } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
+
+@Component({
+  selector: 'app-stats-card',
+  imports: [CommonModule, LucideAngularModule],
+  templateUrl: './stats-card.html',
+  styleUrl: './stats-card.css',
+})
+export class StatsCard {
+  @Input() data!: StatsCardModel
+}
