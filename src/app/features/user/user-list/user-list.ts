@@ -8,11 +8,12 @@ import { Pagination } from '../../../shared/components/pagination/pagination';
 import { CommonModule } from '@angular/common';
 import { Search } from '../../../shared/components/search/search';
 import { environment } from '../../../../environments/environment';
-
+import { Drawer } from '../../../shared/components/drawer/drawer';
+import { UserForm } from '../user-form/user-form';
 
 @Component({
   selector: 'app-user-list',
-  imports: [StatsGrid, Pagination, CommonModule, Search, LucideAngularModule],
+  imports: [StatsGrid, Pagination, CommonModule, Search, LucideAngularModule, Drawer, UserForm],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
 })
@@ -20,10 +21,10 @@ export class UserList {
   icons = {
     Plus,
     Pencil,
-    Trash2
-  }
+    Trash2,
+  };
 
-  environment = environment
+  environment = environment;
 
   users: User[] = [];
   stats: StatsCardModel[] = [];
@@ -31,11 +32,14 @@ export class UserList {
   page = 1;
   limit = 10;
   totalPage = 1;
-  totalItems = 0
+  totalItems = 0;
 
   searchKeyword = '';
 
   loading = false;
+
+  isDrawerOpen = false;
+  selectedUser: User | null = null;
 
   constructor(
     private userService: UserService,
@@ -69,7 +73,7 @@ export class UserList {
           // this.page = res.pagination.page;
           this.limit = res.pagination.limit;
           this.totalPage = res.pagination.totalPage;
-          this.totalItems = res.pagination.total
+          this.totalItems = res.pagination.total;
 
           this.loading = false;
           this.cdr.detectChanges();
@@ -97,6 +101,23 @@ export class UserList {
     });
   }
 
-  edit(user: any) {}
+  openCreateUser() {
+    this.selectedUser = null;
+    this.isDrawerOpen = true;
+  }
+
+  closeDrawer() {
+    this.isDrawerOpen = false;
+  }
+
+  onSaved() {
+    this.closeDrawer();
+    this.loadUsers();
+  }
+
+  edit(user: User) {
+    this.selectedUser = user;
+    this.isDrawerOpen = true;
+  }
   delete(user: any) {}
 }

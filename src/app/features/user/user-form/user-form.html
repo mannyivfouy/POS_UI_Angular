@@ -1,1 +1,50 @@
-<p>user-form works!</p>
+<form class="space-y-4" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label class="text-sm font-medium">Full Name</label>
+    <input
+      type="text"
+      class="w-full border rounded-lg px-3 py-2"
+      [(ngModel)]="userData.fullname"
+      name="fullname"
+    />
+  </div>
+
+  <div>
+    <label class="text-sm font-medium">Username</label>
+    <input
+      type="text"
+      class="w-full border rounded-lg px-3 py-2"
+      [(ngModel)]="userData.username"
+      name="username"
+    />
+  </div>
+
+  <div>
+    <label class="text-sm font-medium">Phone</label>
+    <input
+      type="text"
+      class="w-full border rounded-lg px-3 py-2"
+      [(ngModel)]="userData.phone"
+      name="phone"
+    />
+  </div>
+
+  <div class="flex justify-end gap-2 pt-4">
+    <button
+      type="button"
+      class="px-4 py-2 border rounded-lg"
+      (click)="cancel.emit()"
+    >
+      Cancel
+    </button>
+
+    <button
+      type="submit"
+      class="px-4 py-2 bg-indigo-600 text-white rounded-lg"
+    >
+      Save
+    </button>
+  </div>
+
+</form>
