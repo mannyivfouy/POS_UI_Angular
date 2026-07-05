@@ -10,10 +10,11 @@ import { Search } from '../../../shared/components/search/search';
 import { environment } from '../../../../environments/environment';
 import { Drawer } from '../../../shared/components/drawer/drawer';
 import { UserForm } from '../user-form/user-form';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-list',
-  imports: [StatsGrid, Pagination, CommonModule, Search, LucideAngularModule, Drawer, UserForm],
+  imports: [StatsGrid, Pagination, CommonModule, Search, LucideAngularModule, Drawer, UserForm, TranslatePipe],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
 })
@@ -89,9 +90,9 @@ export class UserList {
       next: (res) => {
         const stats = res.data;
         this.stats = [
-          { title: 'Total Users', value: stats.totalUser, icon: Users },
-          { title: 'Active Users', value: stats.activeUser, icon: UserCheck },
-          { title: 'Inactive Users', value: stats.inactiveUser, icon: UserX },
+          { titleKey: 'user.stats.total', value: stats.totalUser, icon: Users },
+          { titleKey: 'user.stats.active', value: stats.activeUser, icon: UserCheck },
+          { titleKey: 'user.stats.inactive', value: stats.inactiveUser, icon: UserX },
         ];
         this.cdr.detectChanges();
       },

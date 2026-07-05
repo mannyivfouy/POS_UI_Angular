@@ -1,7 +1,13 @@
 {
-  "menu" : {
-    "dashboard" : "Dashboard",
-    "sale" : "Sale",
+  "commom": {},
+  "pagination": {
+    "show": "Show",
+    "of": "of",
+    "result": "Results"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "sale": "Sale",
     "sale_history": "Sale History",
     "stock": "Stock",
     "category": "Category",
@@ -11,5 +17,28 @@
     "role": "Role",
     "customer": "Customer",
     "supplier": "Supplier"
+  },
+  "user": {
+    "table": {
+      "user": "User",
+      "username": "Username",
+      "phone": "Phone",
+      "role": "Role",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Actions"
+    },
+    "stats": {
+      "total": "Total Users",
+      "active": "Active Users",
+      "inactive": "Inactive Users"
+    },
+    "list": {
+      "title": "User Management",
+      "subtitle": "Manage all system users",
+      "search": "Search user...",
+      "add": "Add User"
+    }
   }
 }

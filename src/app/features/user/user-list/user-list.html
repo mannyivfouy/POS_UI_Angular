@@ -1,7 +1,7 @@
 <div class="space-y-4">
   <div>
-    <h1 class="text-2xl font-semibold text-gray-800">User List</h1>
-    <p class="text-sm text-gray-500">Manage all system users</p>
+    <h1 class="text-2xl font-semibold text-gray-800">{{ 'user.list.title' | translate }}</h1>
+    <p class="text-sm text-gray-500">{{ 'user.list.subtitle' | translate }}</p>
   </div>
 
   <!-- Stats -->
@@ -10,17 +10,18 @@
   <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
     <!-- Left: Search -->
     <div class="flex items-center gap-3">
-      <app-search placeholder="Search Users..." (search)="onSearch($event)"> </app-search>
+      <app-search [placeholder]="'user.list.search' | translate" (search)="onSearch($event)">
+      </app-search>
     </div>
 
     <!-- Right: Action -->
     <div class="flex items-center justify-end">
       <button
-        class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition flex items-center gap-2"
+        class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition flex items-center gap-2 cursor-pointer"
         (click)="openCreateUser()"
       >
         <lucide-icon [img]="icons.Plus" class="w-4 h-4"></lucide-icon>
-        Add User
+        {{ 'user.list.add' | translate }}
       </button>
     </div>
   </div>
@@ -40,31 +41,35 @@
             <th
               class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
             >
-              User
+              {{ 'user.table.user' | translate }}
             </th>
 
             <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
-              Username
-            </th>
-
-            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Phone</th>
-
-            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Role</th>
-
-            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
-              Status
+              {{ 'user.table.username' | translate }}
             </th>
 
             <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
-              Created At
+              {{ 'user.table.phone' | translate }}
             </th>
 
             <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
-              Updated At
+              {{ 'user.table.role' | translate }}
+            </th>
+
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
+              {{ 'user.table.status' | translate }}
+            </th>
+
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
+              {{ 'user.table.createdAt' | translate }}
+            </th>
+
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">
+              {{ 'user.table.updatedAt' | translate }}
             </th>
 
             <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">
-              Actions
+              {{ 'user.table.action' | translate }}
             </th>
           </tr>
         </thead>
