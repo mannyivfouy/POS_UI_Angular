@@ -1,7 +1,7 @@
 <div *ngIf="data" class="bg-white rounded-xl shadow p-3 flex items-center justify-between">
   <!-- LEFT -->
   <div>
-    <p class="text-sm text-gray-500">{{ data.title }}</p>
+    <p class="text-sm text-gray-500">{{ data.titleKey | translate }}</p>
     <h2 class="text-2xl font-bold text-gray-800">
       {{ data.value }}
     </h2>

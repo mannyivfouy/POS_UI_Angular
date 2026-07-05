@@ -2,12 +2,12 @@
   <!-- Info text -->
 
   <div class="text-sm text-gray-500">
-    Show
+    {{ 'pagination.show' | translate }}
     <span class="font-semibold text-gray-900">{{ startItem }}</span> -
     <span class="font-semibold text-gray-900">{{ endItem }}</span>
-    of
+    {{ 'pagination.of' | translate }}
     <span class="font-semibold text-gray-900">{{ totalItems }}</span>
-    Results
+    {{ 'pagination.result' | translate }}
   </div>
 
   <!-- Pagination controls -->

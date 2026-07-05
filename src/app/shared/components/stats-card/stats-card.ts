@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import { StatsCardModel } from '../../models/stats-card.model';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-stats-card',
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, TranslatePipe],
   templateUrl: './stats-card.html',
   styleUrl: './stats-card.css',
 })

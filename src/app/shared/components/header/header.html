@@ -1,6 +1,38 @@
-<header class="h-10 bg-[#F7F9FB] border-b border-gray-200 flex items-center justify-between px-6">
+<header class="h-11 bg-[#F7F9FB] border-b border-gray-200 flex items-center justify-between px-6">
+  <!-- LEFT (you can add title/search later) -->
+  <div class="flex items-center">
 
+  </div>
 
-  <!-- Right side -->
-  <!-- <div class="flex items-center gap-4"></div> -->
+  <!-- RIGHT -->
+  <div class="flex items-center gap-2">
+    <!-- Notification Button -->
+    <button
+      class="relative flex items-center justify-center w-9 h-9 cursor-pointer"
+    >
+      <lucide-icon [img]="icons.Bell" class="w-5 h-5 text-gray-600 hover:text-indigo-600"></lucide-icon>
+
+      <!-- Notification dot -->
+      <!-- <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span> -->
+    </button>
+
+    <!-- Language Button -->
+    <button
+      (click)="toggleLanguage()"
+      class="flex items-center gap-2 rounded-lg border-2 border-gray-200 bg-white px-3 py-1 hover:border-indigo-600 transition cursor-pointer"
+    >
+      <img
+        [src]="
+          languageService.getCurrentLanguage() === 'en'
+            ? 'assets/icons/en.png'
+            : 'assets/icons/kh.png'
+        "
+        class="w-5 h-5 object-cover rounded-full"
+      />
+
+      <span class="text-xs font-semibold uppercase text-gray-700">
+        {{ languageService.getCurrentLanguage() }}
+      </span>
+    </button>
+  </div>
 </header>

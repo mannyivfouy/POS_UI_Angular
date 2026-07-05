@@ -1,7 +1,7 @@
 import { LucideIconData } from "lucide-angular";
 
 export interface StatsCardModel {
-  title: string;
+  titleKey: string;
   value: number | string;
   icon: LucideIconData
 }
