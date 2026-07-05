@@ -1,0 +1,15 @@
+{
+  "menu" : {
+    "dashboard" : "Dashboard",
+    "sale" : "Sale",
+    "sale_history": "Sale History",
+    "stock": "Stock",
+    "category": "Category",
+    "purchase": "Purchase",
+    "purchase_history": "Purchase History",
+    "user": "User",
+    "role": "Role",
+    "customer": "Customer",
+    "supplier": "Supplier"
+  }
+}

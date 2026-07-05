@@ -18,7 +18,7 @@ export class AuthService {
 
   saveSession(token: string, user: any) {
     user.avatar = `${environment.fileUrl}${user.avatar}`;
-    
+
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
   }
