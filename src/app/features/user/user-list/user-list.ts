@@ -14,7 +14,16 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-list',
-  imports: [StatsGrid, Pagination, CommonModule, Search, LucideAngularModule, Drawer, UserForm, TranslatePipe],
+  imports: [
+    StatsGrid,
+    Pagination,
+    CommonModule,
+    Search,
+    LucideAngularModule,
+    Drawer,
+    UserForm,
+    TranslatePipe,
+  ],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
 })

@@ -19,6 +19,17 @@
     "supplier": "Supplier"
   },
   "user": {
+    "list": {
+      "title": "User Management",
+      "subtitle": "Manage all system users",
+      "search": "Search user...",
+      "add": "Add User"
+    },
+    "stats": {
+      "total": "Total Users",
+      "active": "Active Users",
+      "inactive": "Inactive Users"
+    },
     "table": {
       "user": "User",
       "username": "Username",
@@ -28,17 +39,20 @@
       "createdAt": "Created At",
       "updatedAt": "Updated At",
       "action": "Actions"
+    }
+  },
+  "product": {
+    "list": {
+      "title": "Stock Management",
+      "subtitle": "Manage all system stocks",
+      "search": "search product...",
+      "add": "Add Product"
     },
     "stats": {
-      "total": "Total Users",
-      "active": "Active Users",
-      "inactive": "Inactive Users"
+      "total": "Total Product In Stock",
+      "active": "Total Product Active In Stock",
+      "inactive": "Total Product Inactive In Stock"
     },
-    "list": {
-      "title": "User Management",
-      "subtitle": "Manage all system users",
-      "search": "Search user...",
-      "add": "Add User"
-    }
+    "table": {}
   }
 }
