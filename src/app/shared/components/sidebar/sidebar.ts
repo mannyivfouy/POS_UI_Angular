@@ -20,7 +20,7 @@ export class SidebarComponent {
     { labelKey: 'menu.dashboard', route: '/dashboard', icon: LayoutDashboard, roles: ['Admin'] },
     { labelKey: 'menu.sale', route: '/sales', icon: ShoppingCart, roles: ['Admin', 'Cashier'] },
     { labelKey: 'menu.sale_history', route: '/sales-history', icon: History, roles: ['Admin', 'Manager'] },
-    { labelKey: 'menu.stock', route: '/stock', icon: Archive, roles: ['Admin', 'Cashier', 'Manager'] },
+    { labelKey: 'menu.stock', route: '/stocks', icon: Archive, roles: ['Admin', 'Cashier', 'Manager'] },
     { labelKey: 'menu.category', route: '/categories', icon: Boxes, roles: ['Admin', 'Cashier', 'Manager'] },
     { labelKey: 'menu.purchase', route: '/purchase', icon: ShoppingBag, roles: ['Admin', 'Manager'] },
     { labelKey: 'menu.purchase_history', route: '/purchase-history', icon: ReceiptText, roles: ['Admin', 'Manager'] },

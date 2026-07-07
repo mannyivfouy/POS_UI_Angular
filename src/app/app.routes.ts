@@ -26,7 +26,16 @@ export const routes: Routes = [
         loadComponent: () => import('./features/user/user-list/user-list').then((m) => m.UserList),
         canActivate: [roleGuard],
         data: {
-          roles: ['Admin', 'Manager']
+          roles: ['Admin'],
+        },
+      },
+      {
+        path: 'stocks',
+        loadComponent: () =>
+          import('./features/product/product-list/product-list').then((m) => m.ProductList),
+        canActivate: [roleGuard],
+        data: {
+          roles: ['Admin', 'Manager', 'Cashier']
         }
       },
     ],

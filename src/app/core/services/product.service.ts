@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResponse } from '../models/paginated-response.model';
 import { Product } from '../models/product.model';
+import { ProductStats } from '../models/stats.model';
 
 @Injectable({
   providedIn: 'root',
@@ -25,11 +26,11 @@ export class ProductService {
     }
 
     if (params.page != null) {
-      httpParams = httpParams.set('limit', String(params.page));
+      httpParams = httpParams.set('limit', String(params.limit));
     }
 
     if (params.page != null) {
-      httpParams = httpParams.set('search', String(params.page));
+      httpParams = httpParams.set('search', String(params.search));
     }
 
     return this.http.get<PaginatedResponse<Product>>(this.apiUrl, {
@@ -37,7 +38,7 @@ export class ProductService {
     });
   }
 
-  // getProductStats(): Observable<> {
-  //     return this.http.get<UserStats>(`${this.apiUrl}/stats`);
-  //   }
+  getProductStats(): Observable<ProductStats> {
+    return this.http.get<ProductStats>(`${this.apiUrl}/stats`);
+  }
 }

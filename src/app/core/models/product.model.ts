@@ -15,4 +15,6 @@ export interface Product {
   supplierId: Supplier;
   image?: string;
   status: 'active' | 'inactive' | string;
+  createdAt: Date;
+  updatedAt: Date;
 }
