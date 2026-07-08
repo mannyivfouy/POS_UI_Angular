@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoadingScreenService } from '../../core/services/loading.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
+  constructor(private loadingScreenService: LoadingScreenService){}
 
+  ngOnInit(): void{
+    this.loadingScreenService.show()
+
+    setTimeout(() => {
+      this.loadingScreenService.hide()
+    }, 1000);
+  }
 }

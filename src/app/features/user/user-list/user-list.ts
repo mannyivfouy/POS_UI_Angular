@@ -11,6 +11,7 @@ import { environment } from '../../../../environments/environment';
 import { Drawer } from '../../../shared/components/drawer/drawer';
 import { UserForm } from '../user-form/user-form';
 import { TranslatePipe } from '@ngx-translate/core';
+import { LoadingScreenService } from '../../../core/services/loading.service';
 
 @Component({
   selector: 'app-user-list',
@@ -54,11 +55,17 @@ export class UserList {
   constructor(
     private userService: UserService,
     private cdr: ChangeDetectorRef,
+    private loadingScreenService: LoadingScreenService,
   ) {}
 
   ngOnInit(): void {
-    this.loadUsers();
-    this.loadStats();
+    this.loadingScreenService.show();
+
+    setTimeout(() => {
+      this.loadingScreenService.hide();
+      this.loadUsers();
+      this.loadStats();
+    }, 1000);
   }
 
   changePage(page: number): void {

@@ -18,11 +18,11 @@ import { StatsGrid } from "../../../shared/components/stats-grid/stats-grid";
 import { Search } from '../../../shared/components/search/search';
 import { Pagination } from '../../../shared/components/pagination/pagination';
 import { Drawer } from '../../../shared/components/drawer/drawer';
-import { ProductForm } from "../product-form/product-form";
+import { LoadingScreenService } from '../../../core/services/loading.service';
 
 @Component({
   selector: 'app-product-list',
-  imports: [LucideAngularModule, CommonModule, TranslatePipe, StatsGrid, Search, Pagination, Drawer, ProductForm],
+  imports: [LucideAngularModule, CommonModule, TranslatePipe, StatsGrid, Search, Pagination, Drawer],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
@@ -56,11 +56,17 @@ export class ProductList {
   constructor(
     private productService: ProductService,
     private cdr: ChangeDetectorRef,
+    private loadingScreenService: LoadingScreenService
   ) {}
 
   ngOnInit(): void {
-    this.loadProducts();
-    this.loadStats()
+    this.loadingScreenService.show()
+
+    setTimeout(() => {
+      this.loadingScreenService.hide()
+      this.loadProducts();
+      this.loadStats()
+    }, 1000);
   }
 
   changePage(page: number): void {

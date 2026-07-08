@@ -1,0 +1,7 @@
+<div
+  class="fixed inset-0 z-9999 flex items-center justify-center bg-black/30 backdrop-blur-sm transition-opacity duration-150"
+  [class.opacity-0]="!(loadingService.loading$ | async)"
+  [class.pointer-events-none]="!(loadingService.loading$ | async)"
+>
+  <div id="loading-animation" class="w-40 h-40"></div>
+</div>
