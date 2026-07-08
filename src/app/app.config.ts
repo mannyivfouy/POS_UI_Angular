@@ -6,28 +6,13 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(
-      withInterceptors([
-        (req, next) => {
-          const token = localStorage.getItem('token');
-
-          if (token) {
-            req = req.clone({
-              setHeaders: {
-                Authorization: `Bearer ${token}`,
-              },
-            });
-          }
-
-          return next(req);
-        },
-      ]),
-    ),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideTranslateService({
       fallbackLang: 'en',
       lang: localStorage.getItem('lang') ?? 'en',
