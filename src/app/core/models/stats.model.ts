@@ -11,3 +11,10 @@ export interface ProductStats {
   inactiveProduct: number;
   data: any;
 }
+
+export interface SupplierStats {
+  totalProduct: number;
+  activeProduct: number;
+  inactiveProduct: number;
+  data: any;
+}
