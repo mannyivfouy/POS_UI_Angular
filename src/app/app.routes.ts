@@ -38,6 +38,15 @@ export const routes: Routes = [
           roles: ['Admin', 'Manager', 'Cashier']
         }
       },
+      {
+        path: 'suppliers',
+        loadComponent: () =>
+          import('./features/supplier/supplier-list/supplier-list').then((m) => m.SupplierList),
+        canActivate: [roleGuard],
+        data: {
+          roles: ['Admin', 'Manager']
+        }
+      }
     ],
   },
   {

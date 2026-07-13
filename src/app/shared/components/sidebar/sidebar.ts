@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { LucideAngularModule, LayoutDashboard, ShoppingCart, History, Archive, Boxes, ArchiveRestore, ShoppingBag, ReceiptText, Users, ShieldCheck, UserCircle } from 'lucide-angular';
+import { LucideAngularModule, LayoutDashboard, ShoppingCart, History, Archive, Boxes, ArchiveRestore, ShoppingBag, ReceiptText, Users, ShieldCheck, UserCircle, Contact } from 'lucide-angular';
 import { LucideWarehouse } from '@lucide/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -27,7 +27,7 @@ export class SidebarComponent {
     { labelKey: 'menu.user', route: '/users', icon: Users, roles: ['Admin'] },
     { labelKey: 'menu.role', route: '/roles', icon: ShieldCheck, roles: ['Admin'] },
     { labelKey: 'menu.customer', route: '/customers', icon: UserCircle, roles: ['Admin', 'Cashier'] },
-    {labelKey : 'menu.supplier', route: '/supplier', icon: ArchiveRestore, roles: ['Admin', 'Manager']}
+    {labelKey : 'menu.supplier', route: '/suppliers', icon: Contact, roles: ['Admin', 'Manager']}
   ];
 
   constructor(private authService: AuthService) {}
