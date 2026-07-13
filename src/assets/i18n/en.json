@@ -1,5 +1,5 @@
 {
-  "commom": {},
+  "common": {},
   "pagination": {
     "show": "Show",
     "of": "of",
@@ -53,6 +53,40 @@
       "active": "Total Product Active In Stock",
       "inactive": "Total Product Inactive In Stock"
     },
-    "table": {}
+    "table": {
+      "product": "Product",
+      "stock_qty" : "Stock Quantity",
+      "cost" : "Cost",
+      "price": "Price",
+      "description": "Description",
+      "supplier": "Supplier",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Actions"
+    }
+  },
+  "supplier": {
+    "list": {
+      "title": "Supplier Management",
+      "subtitle": "Manage all system suppliers",
+      "search": "search supplier...",
+      "add": "Add Supplier"
+    },
+    "stats": {
+      "total": "Total Suppliers",
+      "active": "Active Suppliers",
+      "inactive": "Active Suppliers"
+    },
+    "table": {
+      "name" : "Name",
+      "contact_person": "Contact Person",
+      "phone" : "Phone",
+      "status": "Status",
+      "note": "Note",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Actions"
+    }
   }
 }
