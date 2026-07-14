@@ -5,8 +5,8 @@ import { StatsCardModel } from '../../../shared/models/stats-card.model';
 import { SupplierService } from '../../../core/services/supplier.service';
 import { LoadingScreenService } from '../../../core/services/loading.service';
 import { TranslatePipe } from '@ngx-translate/core';
-import { StatsGrid } from "../../../shared/components/stats-grid/stats-grid";
-import { Search } from "../../../shared/components/search/search";
+import { StatsGrid } from '../../../shared/components/stats-grid/stats-grid';
+import { Search } from '../../../shared/components/search/search';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -20,7 +20,7 @@ export class SupplierList {
     Plus,
     Contact,
     Pencil,
-    Trash2
+    Trash2,
   };
 
   suppliers: Supplier[] = [];
@@ -44,13 +44,8 @@ export class SupplierList {
   ) {}
 
   ngOnInit(): void {
-    this.loadingScreenService.show();
-
-    setTimeout(() => {
-      this.loadingScreenService.hide();
-      this.loadSuppliers();
-      this.loadStats();
-    }, 1000);
+    this.loadSuppliers();
+    this.loadStats();
   }
 
   changePage(page: number): void {
@@ -74,7 +69,7 @@ export class SupplierList {
       })
       .subscribe({
         next: (res) => {
-          console.log(res)
+          console.log(res);
           this.suppliers = res.data;
 
           this.limit = res.pagination.limit;
@@ -99,7 +94,7 @@ export class SupplierList {
           // { titleKey: 'supplier.stats.active', value: stats.activeProduct, icon: ArchiveRestore },
           // { titleKey: 'supplier.stats.inactive', value: stats.inactiveProduct, icon: ArchiveX },
         ];
-        this.cdr.detectChanges()
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
