@@ -59,13 +59,8 @@ export class UserList {
   ) {}
 
   ngOnInit(): void {
-    this.loadingScreenService.show();
-
-    setTimeout(() => {
-      this.loadingScreenService.hide();
-      this.loadUsers();
-      this.loadStats();
-    }, 1000);
+    this.loadUsers();
+    this.loadStats();
   }
 
   changePage(page: number): void {

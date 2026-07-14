@@ -9,12 +9,4 @@ import { LoadingScreenService } from '../../core/services/loading.service';
 })
 export class Dashboard {
   constructor(private loadingScreenService: LoadingScreenService){}
-
-  ngOnInit(): void{
-    this.loadingScreenService.show()
-
-    setTimeout(() => {
-      this.loadingScreenService.hide()
-    }, 1000);
-  }
 }

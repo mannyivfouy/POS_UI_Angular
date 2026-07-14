@@ -14,7 +14,7 @@ import { Product } from '../../../core/models/product.model';
 import { StatsCardModel } from '../../../shared/models/stats-card.model';
 import { ProductService } from '../../../core/services/product.service';
 import { TranslatePipe } from '@ngx-translate/core';
-import { StatsGrid } from "../../../shared/components/stats-grid/stats-grid";
+import { StatsGrid } from '../../../shared/components/stats-grid/stats-grid';
 import { Search } from '../../../shared/components/search/search';
 import { Pagination } from '../../../shared/components/pagination/pagination';
 import { Drawer } from '../../../shared/components/drawer/drawer';
@@ -22,7 +22,15 @@ import { LoadingScreenService } from '../../../core/services/loading.service';
 
 @Component({
   selector: 'app-product-list',
-  imports: [LucideAngularModule, CommonModule, TranslatePipe, StatsGrid, Search, Pagination, Drawer],
+  imports: [
+    LucideAngularModule,
+    CommonModule,
+    TranslatePipe,
+    StatsGrid,
+    Search,
+    Pagination,
+    Drawer,
+  ],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
@@ -56,17 +64,12 @@ export class ProductList {
   constructor(
     private productService: ProductService,
     private cdr: ChangeDetectorRef,
-    private loadingScreenService: LoadingScreenService
+    private loadingScreenService: LoadingScreenService,
   ) {}
 
   ngOnInit(): void {
-    this.loadingScreenService.show()
-
-    setTimeout(() => {
-      this.loadingScreenService.hide()
-      this.loadProducts();
-      this.loadStats()
-    }, 1000);
+    this.loadProducts();
+    this.loadStats();
   }
 
   changePage(page: number): void {
@@ -123,23 +126,23 @@ export class ProductList {
   }
 
   openCreateProduct() {
-      this.selectedProduct = null;
-      this.isDrawerOpen = true;
-    }
+    this.selectedProduct = null;
+    this.isDrawerOpen = true;
+  }
 
-    closeDrawer() {
-      this.isDrawerOpen = false;
-    }
+  closeDrawer() {
+    this.isDrawerOpen = false;
+  }
 
-    onSaved() {
-      this.closeDrawer();
-      this.loadProducts();
-    }
+  onSaved() {
+    this.closeDrawer();
+    this.loadProducts();
+  }
 
-    edit(product: Product) {
-      this.selectedProduct = product;
-      this.isDrawerOpen = true;
-    }
+  edit(product: Product) {
+    this.selectedProduct = product;
+    this.isDrawerOpen = true;
+  }
 
-    delete(product: any) {}
+  delete(product: any) {}
 }

@@ -8,14 +8,24 @@ export class LoadingScreenService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
 
   loading$ = this.loadingSubject.asObservable();
+  private requestCount = 0;
 
   constructor() {}
 
   show() {
-    this.loadingSubject.next(true);
+    this.requestCount++;
+
+    if (this.requestCount === 1) {
+      this.loadingSubject.next(true);
+    }
   }
 
   hide() {
-    this.loadingSubject.next(false);
+    this.requestCount--;
+
+    if (this.requestCount <= 0){
+      this.requestCount = 0;
+      this.loadingSubject.next(false);
+    }
   }
 }
