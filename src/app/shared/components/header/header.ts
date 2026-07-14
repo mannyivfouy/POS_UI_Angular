@@ -4,6 +4,7 @@ import { SearchService } from '../../../core/services/search.service';
 import { LanguageService } from '../../../core/services/language.service';
 import { CommonModule } from '@angular/common';
 import { Bell, CircleQuestionMark, LucideAngularModule } from 'lucide-angular';
+import { LoadingScreenService } from '../../../core/services/loading.service';
 @Component({
   selector: 'app-header',
   imports: [CommonModule, LucideAngularModule],
@@ -13,14 +14,14 @@ import { Bell, CircleQuestionMark, LucideAngularModule } from 'lucide-angular';
 export class Header {
   icons = {
     Bell,
-    CircleQuestionMark
-  }
-
+    CircleQuestionMark,
+  };
 
   constructor(
     private authService: AuthService,
     private searchService: SearchService,
     public languageService: LanguageService,
+    private loadingScreenService: LoadingScreenService,
   ) {}
 
   get user() {
@@ -32,12 +33,28 @@ export class Header {
   }
 
   changeLanguage(lang: string) {
-    this.languageService.setLanguage(lang);
+    this.loadingScreenService.show();
+
+    setTimeout(() => {
+      this.languageService.setLanguage(lang);
+
+      setTimeout(() => {
+        this.loadingScreenService.hide();
+      }, 300);
+    }, 100);
   }
 
   toggleLanguage() {
     const nextLang = this.languageService.getCurrentLanguage() === 'en' ? 'kh' : 'en';
 
-    this.languageService.setLanguage(nextLang);
+    this.loadingScreenService.show();
+
+    setTimeout(() => {
+      this.languageService.setLanguage(nextLang);
+
+      setTimeout(() => {
+        this.loadingScreenService.hide();
+      }, 300);
+    }, 100);
   }
 }
