@@ -18,6 +18,8 @@ export class UserService {
     page?: number;
     limit?: number;
     search?: string;
+    status?: string;
+    roleId?: string;
   }): Observable<PaginatedResponse<User>> {
     let httpParams = new HttpParams();
 
@@ -31,6 +33,14 @@ export class UserService {
 
     if (params.search) {
       httpParams = httpParams.set('search', params.search);
+    }
+
+    if (params.status) {
+      httpParams = httpParams.set('status', params.status);
+    }
+
+    if (params.roleId) {
+      httpParams = httpParams.set('roleId', params.roleId);
     }
 
     let options: {

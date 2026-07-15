@@ -3,7 +3,16 @@ import { User } from '../../../core/models/user.model';
 import { StatsCardModel } from '../../../shared/models/stats-card.model';
 import { UserService } from '../../../core/services/user.service';
 import { StatsGrid } from '../../../shared/components/stats-grid/stats-grid';
-import { Users, UserCheck, UserX, LucideAngularModule, Plus, Pencil, Trash2 } from 'lucide-angular';
+import {
+  Users,
+  UserCheck,
+  UserX,
+  LucideAngularModule,
+  Plus,
+  Pencil,
+  Trash2,
+  ChevronDown,
+} from 'lucide-angular';
 import { Pagination } from '../../../shared/components/pagination/pagination';
 import { CommonModule } from '@angular/common';
 import { Search } from '../../../shared/components/search/search';
@@ -11,7 +20,8 @@ import { environment } from '../../../../environments/environment';
 import { Drawer } from '../../../shared/components/drawer/drawer';
 import { UserForm } from '../user-form/user-form';
 import { TranslatePipe } from '@ngx-translate/core';
-import { LoadingScreenService } from '../../../core/services/loading.service';
+import { Role } from '../../../core/models/role.model';
+import { RoleService } from '../../../core/services/role.service';
 
 @Component({
   selector: 'app-user-list',
@@ -33,12 +43,14 @@ export class UserList {
     Plus,
     Pencil,
     Trash2,
+    ChevronDown,
   };
 
   environment = environment;
 
   users: User[] = [];
   stats: StatsCardModel[] = [];
+  roles: Role[] = [];
 
   page = 1;
   limit = 10;
@@ -46,21 +58,27 @@ export class UserList {
   totalItems = 0;
 
   searchKeyword = '';
+  statusFilter = '';
+  roleFilter = '';
 
   loading = false;
 
   isDrawerOpen = false;
+  statusDropdownOpen = false;
+  roleDropdownOpen = false;
+
   selectedUser: User | null = null;
 
   constructor(
     private userService: UserService,
     private cdr: ChangeDetectorRef,
-    private loadingScreenService: LoadingScreenService,
+    private roleService: RoleService,
   ) {}
 
   ngOnInit(): void {
     this.loadUsers();
     this.loadStats();
+    this.loadRoles();
   }
 
   changePage(page: number): void {
@@ -74,10 +92,40 @@ export class UserList {
     this.loadUsers();
   }
 
+  toggleStatusDropdown() {
+    this.statusDropdownOpen = !this.statusDropdownOpen;
+  }
+
+  onStatusFilter(status: string) {
+    this.statusFilter = status;
+    this.statusDropdownOpen = false;
+    this.page = 1;
+    this.loadUsers();
+  }
+
+  toggleRoleDropdown() {
+    this.roleDropdownOpen = !this.roleDropdownOpen;
+  }
+
+  onRoleFilter(roleId: string) {
+    // console.log('Selected role:', roleId);
+
+    this.roleFilter = roleId;
+    this.roleDropdownOpen = false;
+    this.page = 1;
+    this.loadUsers();
+  }
+
   loadUsers(): void {
     this.loading = true;
     this.userService
-      .getUsers({ page: this.page, limit: this.limit, search: this.searchKeyword })
+      .getUsers({
+        page: this.page,
+        limit: this.limit,
+        search: this.searchKeyword,
+        status: this.statusFilter,
+        roleId: this.roleFilter,
+      })
       .subscribe({
         next: (res) => {
           this.users = res.data;
@@ -109,6 +157,15 @@ export class UserList {
       },
       error: () => {
         this.loading = false;
+      },
+    });
+  }
+
+  loadRoles(): void {
+    this.roleService.getRoles().subscribe({
+      next: (res: any) => {
+        this.roles = Array.isArray(res) ? res : (res.data ?? []);
+        this.cdr.detectChanges();
       },
     });
   }
