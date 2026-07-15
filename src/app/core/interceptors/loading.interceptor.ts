@@ -6,12 +6,17 @@ import { finalize } from "rxjs";
 
 export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const loadingScreenService = inject(LoadingScreenService);
+  const skipLoading = req.headers.has('skip-loading');
 
-  loadingScreenService.show();
+  if (!skipLoading){
+    loadingScreenService.show();
+  }
 
   return next(req).pipe(
     finalize(() => {
-      loadingScreenService.hide()
+      if (!skipLoading){
+        loadingScreenService.hide()
+      }
     })
   )
 }
