@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, flatMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,8 @@ export class LoadingScreenService {
 
   loading$ = this.loadingSubject.asObservable();
   private requestCount = 0;
+  private loadingStartTime = 0;
+  private minDisplayTime = 300;
 
   constructor() {}
 
@@ -16,6 +18,7 @@ export class LoadingScreenService {
     this.requestCount++;
 
     if (this.requestCount === 1) {
+      this.loadingStartTime = Date.now();
       this.loadingSubject.next(true);
     }
   }
@@ -25,7 +28,17 @@ export class LoadingScreenService {
 
     if (this.requestCount <= 0){
       this.requestCount = 0;
-      this.loadingSubject.next(false);
+
+      const elapsedTime = Date.now() - this.loadingStartTime;
+      const remainingTime = this.minDisplayTime - elapsedTime;
+
+      if (remainingTime > 0) {
+        setTimeout(() => {
+          this.loadingSubject.next(false)
+        }, remainingTime)
+      } else {
+        this.loadingSubject.next(false)
+      }
     }
   }
 }

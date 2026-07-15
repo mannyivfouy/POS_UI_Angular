@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResponse } from '../models/paginated-response.model';
 import { User } from '../models/user.model';
@@ -33,9 +33,21 @@ export class UserService {
       httpParams = httpParams.set('search', params.search);
     }
 
-    return this.http.get<PaginatedResponse<User>>(this.apiUrl, {
+    let options: {
+      params: HttpParams;
+      headers?: HttpHeaders;
+    } = {
       params: httpParams,
-    });
+    };
+
+    // Skip full loading screen when searching
+    if (params.search) {
+      options.headers = new HttpHeaders({
+        'skip-loading': 'true',
+      });
+    }
+
+    return this.http.get<PaginatedResponse<User>>(this.apiUrl, options);
   }
 
   getUserById(id: string): Observable<User> {
