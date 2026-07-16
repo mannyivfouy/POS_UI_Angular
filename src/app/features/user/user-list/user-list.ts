@@ -22,6 +22,7 @@ import { UserForm } from '../user-form/user-form';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Role } from '../../../core/models/role.model';
 import { RoleService } from '../../../core/services/role.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -73,23 +74,32 @@ export class UserList {
     private userService: UserService,
     private cdr: ChangeDetectorRef,
     private roleService: RoleService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.route.queryParams.subscribe((param) => {
+      ((this.page = +(param['page'] ?? 1)),
+        (this.limit = +(param['limit'] ?? 10)),
+        (this.searchKeyword = param['search'] ?? ''),
+        (this.statusFilter = param['status'] ?? ''),
+        (this.roleFilter = param['roleId'] ?? ''),
+        this.loadUsers());
+    });
     this.loadStats();
     this.loadRoles();
   }
 
   changePage(page: number): void {
     this.page = page;
-    this.loadUsers();
+    this.updateQueryParams();
   }
 
   onSearch(keyword: string) {
     this.searchKeyword = keyword;
     this.page = 1;
-    this.loadUsers();
+    this.updateQueryParams();
   }
 
   toggleStatusDropdown() {
@@ -100,7 +110,7 @@ export class UserList {
     this.statusFilter = status;
     this.statusDropdownOpen = false;
     this.page = 1;
-    this.loadUsers();
+    this.updateQueryParams();
   }
 
   toggleRoleDropdown() {
@@ -108,12 +118,24 @@ export class UserList {
   }
 
   onRoleFilter(roleId: string) {
-    // console.log('Selected role:', roleId);
-
     this.roleFilter = roleId;
     this.roleDropdownOpen = false;
     this.page = 1;
-    this.loadUsers();
+    this.updateQueryParams();
+  }
+
+  private updateQueryParams(): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        page: this.page,
+        limit: this.limit,
+        search: this.searchKeyword || null,
+        status: this.statusFilter || null,
+        roleId: this.roleFilter || null,
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 
   loadUsers(): void {

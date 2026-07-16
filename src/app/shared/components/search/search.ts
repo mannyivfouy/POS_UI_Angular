@@ -9,6 +9,7 @@ import { debounceTime, Subject } from 'rxjs';
   styleUrl: './search.css',
 })
 export class Search {
+  @Input() value = ''
   @Input() placeholder = 'Search...';
   @Output() search = new EventEmitter<string>();
 
