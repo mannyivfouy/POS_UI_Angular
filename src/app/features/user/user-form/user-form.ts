@@ -18,9 +18,10 @@ import {
   X,
 } from 'lucide-angular';
 import { Role } from '../../../core/models/role.model';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-user-form',
-  imports: [CommonModule, FormsModule, LucideAngularModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, LucideAngularModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './user-form.html',
   styleUrl: './user-form.css',
 })
@@ -76,7 +77,7 @@ export class UserForm implements OnChanges {
   }
 
   loadUser() {
-     console.log('Edit user data:', this.userData);
+    console.log('Edit user data:', this.userData);
     console.log('Avatar:', this.userData.avatar);
 
     if (this.userData) {
@@ -168,6 +169,6 @@ export class UserForm implements OnChanges {
   }
 
   onCancel() {
-    this.cancel.emit();
+    this.cancel.emit()
   }
 }

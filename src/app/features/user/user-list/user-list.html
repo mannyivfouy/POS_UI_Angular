@@ -262,7 +262,11 @@
       <!-- Drawer -->
       <app-drawer
         [open]="isDrawerOpen"
-        [title]="selectedUser ? 'Edit User' : 'Create User'"
+        [title]="
+          selectedUser
+            ? ('user.form.edit_title' | translate)
+            : ('user.form.create_title' | translate)
+        "
         (close)="closeDrawer()"
       >
         <app-user-form

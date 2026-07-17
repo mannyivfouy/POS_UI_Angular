@@ -25,9 +25,13 @@
     </div>
 
     <div>
-      <p class="text-sm font-medium text-gray-600">Upload avatar</p>
+      <p class="text-sm font-medium text-gray-600">
+        {{ 'user.form.upload_avatar' | translate }}
+      </p>
 
-      <p class="text-xs text-gray-400">PNG or JPG, up to 2MB.</p>
+      <p class="text-xs text-gray-400">
+        {{ 'user.form.avatar_hint' | translate }}
+      </p>
 
       <input
         type="file"
@@ -44,7 +48,9 @@
   <!-- Full Name -->
   <div>
     <span class="text-red-600">* </span>
-    <label class="text-sm font-medium text-gray-700">Full name</label>
+    <label class="text-sm font-medium text-gray-700">
+      {{ 'user.form.fullname' | translate }}
+    </label>
 
     <div class="mt-1">
       <input
@@ -66,14 +72,16 @@
       *ngIf="userForm.get('fullname')?.touched && userForm.get('fullname')?.errors"
       class="mt-1 text-sm text-red-600"
     >
-      <span *ngIf="userForm.get('fullname')?.hasError('required')"> Fullname is required. </span>
+      <span *ngIf="userForm.get('fullname')?.hasError('required')">
+        {{ 'user.validation.fullname_required' | translate }}
+      </span>
 
       <span *ngIf="userForm.get('fullname')?.hasError('minlength')">
-        Fullname must be at least 3 characters.
+        {{ 'user.validation.fullname_min' | translate }}
       </span>
 
       <span *ngIf="userForm.get('fullname')?.hasError('maxlength')">
-        Fullname cannot exceed 50 characters.
+        {{ 'user.validation.fullname_max' | translate }}
       </span>
     </p>
   </div>
@@ -82,7 +90,9 @@
   <div class="grid grid-cols-2 gap-3">
     <div>
       <span class="text-red-600">* </span>
-      <label class="text-sm font-medium text-gray-700">Username</label>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'user.form.username' | translate }}
+      </label>
 
       <div class="mt-1">
         <input
@@ -104,14 +114,16 @@
         *ngIf="userForm.get('username')?.touched && userForm.get('username')?.errors"
         class="mt-1 text-sm text-red-600"
       >
-        <span *ngIf="userForm.get('username')?.hasError('required')"> Username is required. </span>
+        <span *ngIf="userForm.get('username')?.hasError('required')">
+          {{ 'user.validation.username_required' | translate }}
+        </span>
 
         <span *ngIf="userForm.get('username')?.hasError('minlength')">
-          Username must be at least 3 characters.
+          {{ 'user.validation.username_min' | translate }}
         </span>
 
         <span *ngIf="userForm.get('username')?.hasError('maxlength')">
-          Username cannot exceed 20 characters.
+          {{ 'user.validation.username_max' | translate }}
         </span>
       </p>
     </div>
@@ -119,7 +131,9 @@
     <!-- Password -->
     <div>
       <span class="text-red-600">* </span>
-      <label class="text-sm font-medium text-gray-700">Password</label>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'user.form.password' | translate }}
+      </label>
 
       <div class="mt-1 relative">
         <input
@@ -139,7 +153,7 @@
         <button
           type="button"
           (click)="togglePassword()"
-          class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+          class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer"
         >
           <lucide-icon [img]="isPasswordVisible ? icons.EyeOff : icons.Eye" class="h-4 w-4" />
         </button>
@@ -149,14 +163,16 @@
         *ngIf="userForm.get('password')?.touched && userForm.get('password')?.errors"
         class="mt-1 text-sm text-red-600"
       >
-        <span *ngIf="userForm.get('password')?.hasError('required')"> Password is required. </span>
+        <span *ngIf="userForm.get('password')?.hasError('required')">
+          {{ 'user.validation.password_required' | translate }}
+        </span>
 
         <span *ngIf="userForm.get('password')?.hasError('minlength')">
-          Password must be at least 6 characters.
+          {{ 'user.validation.password_min' | translate }}
         </span>
 
         <span *ngIf="userForm.get('password')?.hasError('maxlength')">
-          Password cannot exceed 20 characters.
+          {{ 'user.validation.password_max' | translate }}
         </span>
       </p>
     </div>
@@ -166,7 +182,9 @@
   <div class="grid grid-cols-2 gap-3">
     <div>
       <span class="text-red-600">* </span>
-      <label class="text-sm font-medium text-gray-700">Email</label>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'user.form.email' | translate }}
+      </label>
 
       <div class="mt-1">
         <input
@@ -186,14 +204,16 @@
         *ngIf="userForm.get('email')?.touched && userForm.get('email')?.errors"
         class="mt-1 text-sm text-red-600"
       >
-        <span *ngIf="userForm.get('email')?.hasError('required')"> Email is required. </span>
+        <span *ngIf="userForm.get('email')?.hasError('required')">
+          {{ 'user.validation.email_required' | translate }}
+        </span>
 
         <span *ngIf="userForm.get('email')?.hasError('email')">
-          Please enter a valid email address.
+          {{ 'user.validation.email_min' | translate }}
         </span>
 
         <span *ngIf="userForm.get('email')?.hasError('maxlength')">
-          Email cannot exceed 100 characters.
+          {{ 'user.validation.email_max' | translate }}
         </span>
       </p>
     </div>
@@ -201,7 +221,9 @@
     <!-- Phone -->
     <div>
       <span class="text-red-600">* </span>
-      <label class="text-sm font-medium text-gray-700">Phone</label>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'user.form.phone' | translate }}
+      </label>
 
       <div class="mt-1">
         <input
@@ -221,14 +243,16 @@
         *ngIf="userForm.get('phone')?.touched && userForm.get('phone')?.errors"
         class="mt-1 text-sm text-red-600"
       >
-        <span *ngIf="userForm.get('phone')?.hasError('required')"> Phone is required. </span>
+        <span *ngIf="userForm.get('phone')?.hasError('required')">
+          {{ 'user.validation.phone_required' | translate }}
+        </span>
 
         <span *ngIf="userForm.get('phone')?.hasError('minlength')">
-          Phone must be at least 9 characters.
+          {{ 'user.validation.phone_min' | translate }}
         </span>
 
         <span *ngIf="userForm.get('phone')?.hasError('maxlength')">
-          Phone cannot exceed 15 characters.
+          {{ 'user.validation.phone_max' | translate }}
         </span>
       </p>
     </div>
@@ -238,7 +262,9 @@
 
   <div>
     <span class="text-red-600">* </span>
-    <label class="text-sm font-medium text-gray-700">Role</label>
+    <label class="text-sm font-medium text-gray-700">
+      {{ 'user.form.role' | translate }}
+    </label>
 
     <div class="mt-1 relative">
       <select
@@ -270,7 +296,9 @@
       *ngIf="userForm.get('roleId')?.touched && userForm.get('roleId')?.errors"
       class="mt-1 text-sm text-red-600"
     >
-      <span *ngIf="userForm.get('roleId')?.hasError('required')"> Role is required. </span>
+      <span *ngIf="userForm.get('roleId')?.hasError('required')">
+        {{ 'user.validation.role_required' | translate }}
+      </span>
     </p>
   </div>
 
@@ -278,15 +306,20 @@
   <div class="flex items-center justify-between rounded-lg border border-gray-200 p-3">
     <div>
       <p class="text-sm font-medium text-gray-600">
-        Status
-        {{ userForm.get('status')?.value === 'active' ? 'Active' : 'Inactive' }}
+        {{ 'user.form.status' | translate }}
+
+        {{
+          userForm.get('status')?.value === 'active'
+            ? ('user.form.active' | translate)
+            : ('user.form.inactive' | translate)
+        }}
       </p>
 
       <p class="text-xs text-gray-400">
         {{
           userForm.get('status')?.value === 'active'
-            ? 'User can sign in and access the system.'
-            : 'User is disabled and cannot sign in.'
+            ? ('user.form.active_description' | translate)
+            : ('user.form.inactive_description' | translate)
         }}
       </p>
     </div>
@@ -318,14 +351,14 @@
       (click)="onCancel()"
       class="rounded-lg px-5 py-2 text-sm text-white bg-pink-600 hover:bg-pink-700 font-semibold cursor-pointer transition"
     >
-      Cancel
+      {{ 'user.form.cancel' | translate }}
     </button>
 
     <button
       type="submit"
       class="rounded-lg px-5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 cursor-pointer transition"
     >
-      {{ isEditingMode ? 'Update user' : 'Create user' }}
+      {{ isEditingMode ? ('user.form.update' | translate) : ('user.form.create' | translate) }}
     </button>
   </div>
 </form>
