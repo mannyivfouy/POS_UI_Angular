@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { User } from '../../../core/models/user.model';
 import { StatsCardModel } from '../../../shared/models/stats-card.model';
 import { UserService } from '../../../core/services/user.service';
@@ -40,6 +40,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './user-list.css',
 })
 export class UserList {
+  @ViewChild(Drawer)
+  drawer?: Drawer;
+
   icons = {
     Plus,
     Pencil,
@@ -199,6 +202,10 @@ export class UserList {
 
   closeDrawer() {
     this.isDrawerOpen = false;
+  }
+
+  onCancel() {
+    this.drawer?.onClose();
   }
 
   onSaved() {

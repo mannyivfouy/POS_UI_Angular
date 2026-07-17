@@ -17,7 +17,19 @@ export class Drawer {
     X,
   }
 
+  closing = false
+
   onClose() {
-    this.close.emit();
+    if (this.closing) return;
+
+    this.closing = true;
   }
+
+  animationFinished() {
+    if (this.closing) {
+      this.closing = false;
+      this.close.emit();
+    }
+  }
+
 }

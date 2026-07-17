@@ -1,13 +1,13 @@
 @if (open) {
   <!-- Overlay -->
-  <div
-    class="fixed inset-0 bg-gray-900/30 backdrop-blur-sm z-40 animate__animated animate__fadeInRight"
-    (click)="onClose()"
-  ></div>
+  <div class="fixed inset-0 bg-gray-900/30 backdrop-blur-sm z-40" (click)="onClose()"></div>
 
   <!-- Drawer -->
   <aside
-    class="fixed top-0 right-0 h-screen w-full sm:w-300 bg-white shadow-2xl rounded-l-3xl z-50 flex flex-col animate__animated animate__fadeInRight animate__faster"
+    class="fixed top-0 right-0 h-screen w-full sm:w-300 bg-white shadow-2xl rounded-l-3xl z-50 flex flex-col animate__animated [--animate-duration:500ms]"
+    [class.animate__fadeInRight]="!closing"
+    [class.animate__fadeOutRight]="closing"
+    (animationend)="animationFinished()"
   >
     <!-- Header -->
     <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
