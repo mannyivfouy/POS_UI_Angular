@@ -1,5 +1,8 @@
 {
   "common": {},
+  "drawer": {
+    "manage_information": "Manage information"
+  },
   "pagination": {
     "show": "Show",
     "of": "of",
@@ -39,6 +42,45 @@
       "createdAt": "Created At",
       "updatedAt": "Updated At",
       "action": "Actions"
+    },
+    "form": {
+      "create_title": "Create User",
+      "edit_title": "Edit User",
+      "upload_avatar": "Upload avatar",
+      "avatar_hint": "PNG or JPG, up to 2MB.",
+      "fullname": "Full name",
+      "username": "Username",
+      "password": "Password",
+      "email": "Email",
+      "phone": "Phone",
+      "role": "Role",
+      "select_role": "Select role",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "active_description": "User can sign in and access the system.",
+      "inactive_description": "User is disabled and cannot sign in.",
+      "cancel": "Cancel",
+      "create": "Create User",
+      "update": "Update User"
+    },
+    "validation": {
+      "fullname_required": "Fullname is required.",
+      "fullname_min": "Fullname must be at least 3 characters.",
+      "fullname_max": "Fullname cannot exceed 50 characters.",
+      "username_required": "Username is required.",
+      "username_min": "Username must be at least 3 characters.",
+      "username_max": "Username cannot exceed 20 characters.",
+      "password_required": "Password is required.",
+      "password_min": "Password must be at least 6 characters.",
+      "password_max": "Password cannot exceed 20 characters.",
+      "email_required": "Email is required.",
+      "email_invalid": "Please enter a valid email address.",
+      "email_max": "Email cannot exceed 100 characters.",
+      "phone_required": "Phone is required.",
+      "phone_min": "Phone must be at least 9 characters.",
+      "phone_max": "Phone cannot exceed 15 characters.",
+      "role_required": "Role is required."
     }
   },
   "product": {
@@ -55,8 +97,8 @@
     },
     "table": {
       "product": "Product",
-      "stock_qty" : "Stock Quantity",
-      "cost" : "Cost",
+      "stock_qty": "Stock Quantity",
+      "cost": "Cost",
       "price": "Price",
       "description": "Description",
       "supplier": "Supplier",
@@ -79,9 +121,9 @@
       "inactive": "Active Suppliers"
     },
     "table": {
-      "name" : "Name",
+      "name": "Name",
       "contact_person": "Contact Person",
-      "phone" : "Phone",
+      "phone": "Phone",
       "status": "Status",
       "note": "Note",
       "createdAt": "Created At",

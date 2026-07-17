@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule, X } from 'lucide-angular';
 
 @Component({
   selector: 'app-drawer',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, TranslatePipe],
   templateUrl: './drawer.html',
   styleUrl: './drawer.css',
 })
@@ -15,9 +16,9 @@ export class Drawer {
 
   icons = {
     X,
-  }
+  };
 
-  closing = false
+  closing = false;
 
   onClose() {
     if (this.closing) return;
@@ -31,5 +32,4 @@ export class Drawer {
       this.close.emit();
     }
   }
-
 }
