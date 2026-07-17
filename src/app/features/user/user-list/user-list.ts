@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { User } from '../../../core/models/user.model';
 import { StatsCardModel } from '../../../shared/models/stats-card.model';
 import { UserService } from '../../../core/services/user.service';
@@ -40,6 +40,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './user-list.css',
 })
 export class UserList {
+  @ViewChild(Drawer)
+  drawer?: Drawer;
+
   icons = {
     Plus,
     Pencil,
@@ -201,9 +204,38 @@ export class UserList {
     this.isDrawerOpen = false;
   }
 
-  onSaved() {
-    this.closeDrawer();
-    this.loadUsers();
+  onCancel() {
+    this.drawer?.onClose();
+  }
+
+  onSave(formData: FormData) {
+    if (this.selectedUser) {
+      // UPDATE
+      this.userService.updateUser(this.selectedUser._id, formData).subscribe({
+        next: (res) => {
+          console.log('User updated', res);
+
+          this.loadUsers();
+          this.onCancel();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+    } else {
+      // CREATE
+      this.userService.createUser(formData).subscribe({
+        next: (res) => {
+          console.log('User created', res);
+
+          this.loadUsers();
+          this.onCancel();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+    }
   }
 
   edit(user: User) {
