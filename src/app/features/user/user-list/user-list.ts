@@ -208,9 +208,34 @@ export class UserList {
     this.drawer?.onClose();
   }
 
-  onSaved() {
-    this.closeDrawer();
-    this.loadUsers();
+  onSave(formData: FormData) {
+    if (this.selectedUser) {
+      // UPDATE
+      this.userService.updateUser(this.selectedUser._id, formData).subscribe({
+        next: (res) => {
+          console.log('User updated', res);
+
+          this.loadUsers();
+          this.onCancel();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+    } else {
+      // CREATE
+      this.userService.createUser(formData).subscribe({
+        next: (res) => {
+          console.log('User created', res);
+
+          this.loadUsers();
+          this.onCancel();
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+    }
   }
 
   edit(user: User) {

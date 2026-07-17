@@ -65,13 +65,13 @@ export class UserService {
   }
 
   // CREATE
-  createUser(data: any): Observable<User> {
-    return this.http.post<User>(this.apiUrl, data);
+  createUser(data: FormData): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/create`, data);
   }
 
   // UPDATE
-  updateUser(id: string, data: any): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${id}`, data);
+  updateUser(id: string, data: FormData): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/update/${id}`, data);
   }
 
   // DELETE

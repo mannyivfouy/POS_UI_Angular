@@ -4,7 +4,7 @@
 
   <!-- Drawer -->
   <aside
-    class="fixed top-0 right-0 h-screen w-full sm:w-300 bg-white shadow-2xl rounded-l-3xl z-50 flex flex-col animate__animated [--animate-duration:500ms]"
+    class="fixed top-0 right-0 h-screen w-full sm:w-220 bg-white shadow-2xl rounded-l-3xl z-50 flex flex-col animate__animated [--animate-duration:500ms]"
     [class.animate__fadeInRight]="!closing"
     [class.animate__fadeOutRight]="closing"
     (animationend)="animationFinished()"
@@ -31,7 +31,7 @@
       <!-- Close Button -->
       <button
         type="button"
-        class="w-9 h-9 rounded-xl text-red-500 bg-red-100 hover:bg-red-200 transition flex items-center justify-center cursor-pointer"
+        class="w-9 h-9 rounded-xl text-red-600 bg-red-100 hover:bg-red-200 transition flex items-center justify-center cursor-pointer"
         (click)="onClose()"
       >
         <lucide-icon [img]="icons.X"></lucide-icon>
