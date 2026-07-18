@@ -43,6 +43,9 @@ export class UserList {
   @ViewChild(Drawer)
   drawer?: Drawer;
 
+  @ViewChild(UserForm)
+  userForm?: UserForm;
+
   icons = {
     Plus,
     Pencil,
@@ -201,7 +204,13 @@ export class UserList {
   }
 
   closeDrawer() {
+    this.userForm?.resetForm();
+
     this.isDrawerOpen = false;
+
+    setTimeout(() => {
+      this.selectedUser = null;
+    }, 500);
   }
 
   onCancel() {
@@ -213,8 +222,6 @@ export class UserList {
       // UPDATE
       this.userService.updateUser(this.selectedUser._id, formData).subscribe({
         next: (res) => {
-          console.log('User updated', res);
-
           this.loadUsers();
           this.onCancel();
         },
@@ -226,8 +233,6 @@ export class UserList {
       // CREATE
       this.userService.createUser(formData).subscribe({
         next: (res) => {
-          console.log('User created', res);
-
           this.loadUsers();
           this.onCancel();
         },
