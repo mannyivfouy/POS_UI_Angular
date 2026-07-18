@@ -23,6 +23,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { Role } from '../../../core/models/role.model';
 import { RoleService } from '../../../core/services/role.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmDialog } from '../../../shared/components/confirm-dialog/confirm-dialog';
 
 @Component({
   selector: 'app-user-list',
@@ -35,6 +36,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     Drawer,
     UserForm,
     TranslatePipe,
+    ConfirmDialog,
   ],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
@@ -73,6 +75,7 @@ export class UserList {
   isDrawerOpen = false;
   statusDropdownOpen = false;
   roleDropdownOpen = false;
+  showDeleteDialog = false;
 
   selectedUser: User | null = null;
 
@@ -247,5 +250,34 @@ export class UserList {
     this.selectedUser = user;
     this.isDrawerOpen = true;
   }
-  delete(user: any) {}
+
+  delete(user: User) {
+    this.selectedUser = user;
+    this.showDeleteDialog = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteDialog = false;
+    this.selectedUser = null;
+  }
+
+  confirmDelete() {
+    this.showDeleteDialog = false;
+    if (!this.selectedUser) return;
+
+    this.userService.deleteUser(this.selectedUser._id).subscribe({
+      next: () => {
+
+        this.selectedUser = null;
+
+        this.loadUsers();
+
+        this.loadStats();
+      },
+
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
 }

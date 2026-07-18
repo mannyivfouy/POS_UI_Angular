@@ -279,3 +279,15 @@
     </div>
   </div>
 </div>
+
+<app-confirm-dialog
+  [open]="showDeleteDialog"
+  title="Delete User"
+  [message]="'Are you sure you want to delete ' + selectedUser?.fullname + '?'"
+  confirmText="Delete"
+  cancelText="Cancel"
+  type="danger"
+  (confirm)="confirmDelete()"
+  (cancel)="cancelDelete()"
+>
+</app-confirm-dialog>
