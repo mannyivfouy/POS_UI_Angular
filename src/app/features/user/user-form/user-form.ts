@@ -19,6 +19,7 @@ import {
 } from 'lucide-angular';
 import { Role } from '../../../core/models/role.model';
 import { TranslatePipe } from '@ngx-translate/core';
+import { TmplAstHostElement } from '@angular/compiler';
 @Component({
   selector: 'app-user-form',
   imports: [CommonModule, FormsModule, LucideAngularModule, ReactiveFormsModule, TranslatePipe],
@@ -63,53 +64,45 @@ export class UserForm implements OnChanges {
       status: ['active', Validators.required],
     });
 
-    if (this.userData) {
+    this.loadUser();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['userData'] && this.userForm) {
       this.loadUser();
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['userData']) {
-      if (this.userForm) {
-        this.loadUser();
-      }
-    }
-  }
-
   loadUser() {
-    console.log('Edit user data:', this.userData);
-    console.log('Avatar:', this.userData.avatar);
-
-    if (this.userData) {
-      this.isEditingMode = true;
-
-      this.userForm.patchValue({
-        username: this.userData.username,
-        fullname: this.userData.fullname,
-        roleId: this.userData.roleId?._id || this.userData.roleId,
-        phone: this.userData.phone,
-        email: this.userData.email,
-        status: this.userData.status,
-      });
-
-      // Show existing avatar
-      if (this.userData.avatar) {
-        this.avatarPreview = `http://localhost:5000${this.userData.avatar}`;
-      } else {
-        this.avatarPreview = null;
-      }
-
-      const passwordControl = this.userForm.get('password');
-      passwordControl?.removeValidators(Validators.required);
-      passwordControl?.updateValueAndValidity();
-    } else {
+    if (!this.userData) {
       this.isEditingMode = false;
       this.avatarPreview = null;
 
       this.userForm.reset({
         status: 'active',
       });
+
+      return;
     }
+
+    this.isEditingMode = true;
+
+    this.userForm.patchValue({
+      username: this.userData.username,
+      fullname: this.userData.fullname,
+      roleId: this.userData.roleId?._id || this.userData.roleId,
+      phone: this.userData.phone,
+      email: this.userData.email,
+      status: this.userData.status,
+    });
+
+    this.avatarPreview = this.userData.avatar
+      ? `http://localhost:5000${this.userData.avatar}`
+      : null;
+
+    const passwordControl = this.userForm.get('password');
+    passwordControl?.removeValidators(Validators.required);
+    passwordControl?.updateValueAndValidity();
   }
 
   onAvatarChange(event: Event) {
@@ -169,6 +162,34 @@ export class UserForm implements OnChanges {
   }
 
   onCancel() {
-    this.cancel.emit()
+    this.cancel.emit();
+  }
+
+  resetForm() {
+    this.isEditingMode = false;
+    this.avatarPreview = null;
+    this.avatarFile = undefined;
+    this.isPasswordVisible = false;
+
+    this.userForm.reset({
+      username: '',
+      fullname: '',
+      avatar: null,
+      password: '',
+      roleId: '',
+      phone: '',
+      email: '',
+      status: 'active',
+    });
+
+    const passwordControl = this.userForm.get('password');
+
+    passwordControl?.setValidators([
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(20),
+    ]);
+
+    passwordControl?.updateValueAndValidity();
   }
 }
