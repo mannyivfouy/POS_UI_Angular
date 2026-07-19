@@ -1,7 +1,7 @@
 {
   "common": {
-    "delete" : "Delete",
-    "cancel" : "Cancel"
+    "delete": "Delete",
+    "cancel": "Cancel"
   },
   "drawer": {
     "manage_information": "Manage information"
@@ -51,7 +51,7 @@
       "edit_title": "Edit User",
       "upload_avatar": "Upload avatar",
       "avatar_hint": "PNG or JPG, up to 2MB.",
-      "fullname": "Full name",
+      "fullname": "Fullname",
       "username": "Username",
       "password": "Password",
       "email": "Email",
@@ -85,9 +85,9 @@
       "phone_max": "Phone cannot exceed 15 characters.",
       "role_required": "Role is required."
     },
-    "delete" : {
-      "title" : "Delete User",
-      "message" : "Are you sure you want to delete {{name}}?"
+    "delete": {
+      "title": "Delete User",
+      "message": "Are you sure you want to delete {{name}}?"
     }
   },
   "product": {
@@ -136,6 +136,49 @@
       "createdAt": "Created At",
       "updatedAt": "Updated At",
       "action": "Actions"
+    },
+    "form": {
+      "create_title": "Create Supplier",
+      "edit_title": "Edit Supplier",
+      "name": "Name",
+      "contactPerson": "Contact Person",
+      "email": "Email",
+      "phone": "Phone",
+      "address" : "Address",
+      "status": "Status",
+      "note": "Note",
+      "note_placeholder": "Additional information about this supplier...",
+      "active": "Active",
+      "inactive": "Inactive",
+      "active_description": "Supplier is available and can be used for business transactions.",
+      "inactive_description": "Supplier is disabled and cannot be selected for transactions.",
+      "cancel": "Cancel",
+      "create": "Create Supplier",
+      "update": "Update Supplier"
+
+    },
+    "validation": {
+      "name_required": "Supplier name is required.",
+      "name_min": "Supplier name must be at least 3 characters.",
+      "name_max": "Supplier name cannot exceed 100 characters.",
+      "contactPerson_required": "Contact person is required.",
+      "contactPerson_min": "Contact person must be at least 3 characters.",
+      "contactPerson_max": "Contact person cannot exceed 50 characters.",
+      "email_required": "Email is required.",
+      "email_invalid": "Please enter a valid email address.",
+      "email_max": "Email cannot exceed 100 characters.",
+      "phone_required": "Phone is required.",
+      "phone_min": "Phone must be at least 9 characters.",
+      "phone_max": "Phone cannot exceed 15 characters.",
+      "address_required": "Address is required.",
+      "address_min": "Address must be at least 5 characters.",
+      "address_max": "Address cannot exceed 100 characters.",
+      "note_max": "Note cannot exceed 100 characters.",
+      "status_required": "Status is required."
+    },
+    "delete": {
+      "title": "Delete Supplier",
+      "message": "Are you sure you want to delete {{name}}?"
     }
   }
 }

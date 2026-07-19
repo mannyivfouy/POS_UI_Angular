@@ -1,1 +1,307 @@
-<p>supplier-form works!</p>
+<form [formGroup]="supplierForm" (ngSubmit)="submit()" class="space-y-5">
+  <!-- Name -->
+  <div>
+    <span class="text-red-600">* </span>
+    <label class="text-sm font-medium text-gray-700">
+      {{ 'supplier.form.name' | translate }}
+    </label>
+
+    <div class="mt-1">
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="Coca Cola Company"
+        class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        [ngClass]="{
+          'border-red-500 bg-red-50 text-red-600':
+            supplierForm.get('name')?.touched && supplierForm.get('name')?.invalid,
+          'border-gray-200': !(
+            supplierForm.get('name')?.touched && supplierForm.get('name')?.invalid
+          ),
+        }"
+      />
+    </div>
+
+    <p
+      *ngIf="supplierForm.get('name')?.touched && supplierForm.get('name')?.errors"
+      class="mt-1 text-sm text-red-600"
+    >
+      <span *ngIf="supplierForm.get('name')?.hasError('required')">
+        {{ 'supplier.validation.name_required' | translate }}
+      </span>
+
+      <span *ngIf="supplierForm.get('name')?.hasError('minlength')">
+        {{ 'supplier.validation.name_min' | translate }}
+      </span>
+
+      <span *ngIf="supplierForm.get('name')?.hasError('maxlength')">
+        {{ 'supplier.validation.name_max' | translate }}
+      </span>
+    </p>
+  </div>
+
+  <!-- Contact Person and Email -->
+  <div class="grid grid-cols-2 gap-3">
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'supplier.form.contactPerson' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="text"
+          formControlName="contactPerson"
+          placeholder="Johnson"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              supplierForm.get('contactPerson')?.touched &&
+              supplierForm.get('contactPerson')?.invalid,
+            'border-gray-200': !(
+              supplierForm.get('contactPerson')?.touched &&
+              supplierForm.get('contactPerson')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="
+          supplierForm.get('contactPerson')?.touched && supplierForm.get('contactPerson')?.errors
+        "
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="supplierForm.get('contactPerson')?.hasError('required')">
+          {{ 'supplier.validation.contactPerson_required' | translate }}
+        </span>
+
+        <span *ngIf="supplierForm.get('contactPerson')?.hasError('minlength')">
+          {{ 'supplier.validation.contactPerson_min' | translate }}
+        </span>
+
+        <span *ngIf="supplierForm.get('contactPerson')?.hasError('maxlength')">
+          {{ 'supplier.validation.contactPerson_max' | translate }}
+        </span>
+      </p>
+    </div>
+
+    <!-- Email -->
+
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'supplier.form.email' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="text"
+          formControlName="email"
+          placeholder="Johnson@gmail.com"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              supplierForm.get('email')?.touched && supplierForm.get('email')?.invalid,
+            'border-gray-200': !(
+              supplierForm.get('email')?.touched && supplierForm.get('email')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="supplierForm.get('email')?.touched && supplierForm.get('email')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="supplierForm.get('email')?.hasError('required')">
+          {{ 'supplier.validation.email_required' | translate }}
+        </span>
+
+        <span *ngIf="supplierForm.get('email')?.hasError('email')">
+          {{ 'supplier.validation.email_invalid' | translate }}
+        </span>
+
+        <span *ngIf="supplierForm.get('email')?.hasError('maxlength')">
+          {{ 'supplier.validation.email_max' | translate }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Phone & Address -->
+  <div class="grid grid-cols-2 gap-3">
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'supplier.form.phone' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="text"
+          formControlName="phone"
+          placeholder="092828373"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              supplierForm.get('phone')?.touched && supplierForm.get('phone')?.invalid,
+            'border-gray-200': !(
+              supplierForm.get('phone')?.touched && supplierForm.get('phone')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="supplierForm.get('phone')?.touched && supplierForm.get('phone')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="supplierForm.get('phone')?.hasError('required')">
+          {{ 'supplier.validation.phone_required' | translate }}
+        </span>
+
+        <span *ngIf="supplierForm.get('phone')?.hasError('minlength')">
+          {{ 'supplier.validation.phone_min' | translate }}
+        </span>
+
+        <span *ngIf="supplierForm.get('phone')?.hasError('maxlength')">
+          {{ 'supplier.validation.phone_max' | translate }}
+        </span>
+      </p>
+    </div>
+
+    <!-- Address -->
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'supplier.form.address' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="text"
+          formControlName="address"
+          placeholder="Phnom Penh, Cambodia"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              supplierForm.get('address')?.touched && supplierForm.get('address')?.invalid,
+            'border-gray-200': !(
+              supplierForm.get('address')?.touched && supplierForm.get('address')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="supplierForm.get('address')?.touched && supplierForm.get('address')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="supplierForm.get('address')?.hasError('required')">
+          {{ 'supplier.validation.address_required' | translate }}
+        </span>
+
+        <span *ngIf="supplierForm.get('address')?.hasError('minlength')">
+          {{ 'supplier.validation.address_min' | translate }}
+        </span>
+
+        <span *ngIf="supplierForm.get('address')?.hasError('maxlength')">
+          {{ 'supplier.validation.address_max' | translate }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Note -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">
+      {{ 'supplier.form.note' | translate }}
+    </label>
+
+    <div class="mt-1">
+      <textarea
+        formControlName="note"
+        rows="4"
+        [placeholder]="'supplier.form.note_placeholder' | translate"
+        class="w-full rounded-lg border bg-gray-100 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        [ngClass]="{
+          'border-red-500 bg-red-50 text-red-600':
+            supplierForm.get('note')?.touched && supplierForm.get('note')?.invalid,
+          'border-gray-200': !(
+            supplierForm.get('note')?.touched && supplierForm.get('note')?.invalid
+          ),
+        }"
+      ></textarea>
+    </div>
+
+    <p
+      *ngIf="supplierForm.get('note')?.touched && supplierForm.get('note')?.errors"
+      class="mt-1 text-sm text-red-600"
+    >
+      <span *ngIf="supplierForm.get('note')?.hasError('maxlength')">
+        {{ 'supplier.validation.note_max' | translate }}
+      </span>
+    </p>
+  </div>
+
+  <!-- Status -->
+  <div class="flex items-center justify-between rounded-lg border border-gray-200 p-3">
+    <div>
+      <p class="text-sm font-medium text-gray-600">
+        {{ 'supplier.form.status' | translate }}
+
+        {{
+          supplierForm.get('status')?.value === 'active'
+            ? ('supplier.form.active' | translate)
+            : ('supplier.form.inactive' | translate)
+        }}
+      </p>
+
+      <p class="text-xs text-gray-400">
+        {{
+          supplierForm.get('status')?.value === 'active'
+            ? ('supplier.form.active_description' | translate)
+            : ('supplier.form.inactive_description' | translate)
+        }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      (click)="toggleStatus()"
+      class="relative h-6 w-11 rounded-full transition-colors duration-300 ease-in-out cursor-pointer"
+      [ngClass]="{
+        'bg-indigo-600': supplierForm.get('status')?.value === 'active',
+        'bg-gray-300': supplierForm.get('status')?.value === 'inactive',
+      }"
+    >
+      <span
+        class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow transition-transform duration-300 ease-in-out"
+        [ngClass]="{
+          'translate-x-5': supplierForm.get('status')?.value === 'active',
+          'translate-x-0': supplierForm.get('status')?.value === 'inactive',
+        }"
+      ></span>
+    </button>
+  </div>
+
+  <!-- Buttons -->
+
+  <div class="flex justify-end gap-3">
+    <button
+      type="button"
+      (click)="onCancel()"
+      class="rounded-lg px-5 py-2 text-sm text-white bg-pink-600 hover:bg-pink-700 font-semibold cursor-pointer transition"
+    >
+      {{ 'supplier.form.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="rounded-lg px-5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 cursor-pointer transition"
+    >
+      {{ isEditingMode ? ('supplier.form.update' | translate) : ('supplier.form.create' | translate) }}
+    </button>
+  </div>
+</form>
