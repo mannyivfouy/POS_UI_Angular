@@ -282,10 +282,10 @@
 
 <app-confirm-dialog
   [open]="showDeleteDialog"
-  title="Delete User"
-  [message]="'Are you sure you want to delete ' + selectedUser?.fullname + '?'"
-  confirmText="Delete"
-  cancelText="Cancel"
+  [title]="'user.delete.title' | translate"
+  [message]="'user.delete.message' | translate: { name: selectedUser?.fullname }"
+  [confirmText]="'common.delete' | translate"
+  [cancelText]="'common.cancel' | translate"
   type="danger"
   (confirm)="confirmDelete()"
   (cancel)="cancelDelete()"
