@@ -1,5 +1,8 @@
 {
-  "common": {},
+  "common": {
+    "delete" : "Delete",
+    "cancel" : "Cancel"
+  },
   "drawer": {
     "manage_information": "Manage information"
   },
@@ -81,6 +84,10 @@
       "phone_min": "Phone must be at least 9 characters.",
       "phone_max": "Phone cannot exceed 15 characters.",
       "role_required": "Role is required."
+    },
+    "delete" : {
+      "title" : "Delete User",
+      "message" : "Are you sure you want to delete {{name}}?"
     }
   },
   "product": {

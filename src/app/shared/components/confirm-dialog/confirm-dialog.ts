@@ -37,7 +37,7 @@ export class ConfirmDialog {
       this.closing = false;
 
       callback();
-    }, 700);
+    }, 300);
   }
 
   get confirmButtonClass() {

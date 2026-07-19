@@ -209,7 +209,7 @@
         </span>
 
         <span *ngIf="userForm.get('email')?.hasError('email')">
-          {{ 'user.validation.email_min' | translate }}
+          {{ 'user.validation.email_invalid' | translate }}
         </span>
 
         <span *ngIf="userForm.get('email')?.hasError('maxlength')">
