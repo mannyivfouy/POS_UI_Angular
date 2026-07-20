@@ -125,6 +125,10 @@
         <span *ngIf="supplierForm.get('email')?.hasError('maxlength')">
           {{ 'supplier.validation.email_max' | translate }}
         </span>
+
+        <span *ngIf="supplierForm.get('email')?.hasError('server')">
+          {{ 'supplier.validation.email_exists' | translate }}
+        </span>
       </p>
     </div>
   </div>
@@ -167,6 +171,10 @@
 
         <span *ngIf="supplierForm.get('phone')?.hasError('maxlength')">
           {{ 'supplier.validation.phone_max' | translate }}
+        </span>
+
+        <span *ngIf="supplierForm.get('phone')?.hasError('server')">
+          {{ 'supplier.validation.phone_exists' | translate }}
         </span>
       </p>
     </div>
