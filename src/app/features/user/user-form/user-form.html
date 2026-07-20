@@ -125,6 +125,10 @@
         <span *ngIf="userForm.get('username')?.hasError('maxlength')">
           {{ 'user.validation.username_max' | translate }}
         </span>
+
+        <span *ngIf="userForm.get('username')?.hasError('server')">
+          {{ 'user.validation.username_exists' | translate }}
+        </span>
       </p>
     </div>
 
@@ -215,6 +219,10 @@
         <span *ngIf="userForm.get('email')?.hasError('maxlength')">
           {{ 'user.validation.email_max' | translate }}
         </span>
+
+        <span *ngIf="userForm.get('email')?.hasError('server')">
+          {{ 'user.validation.email_exists' | translate }}
+        </span>
       </p>
     </div>
 
@@ -253,6 +261,10 @@
 
         <span *ngIf="userForm.get('phone')?.hasError('maxlength')">
           {{ 'user.validation.phone_max' | translate }}
+        </span>
+
+        <span *ngIf="userForm.get('phone')?.hasError('server')">
+          {{ 'user.validation.phone_exists' | translate }}
         </span>
       </p>
     </div>

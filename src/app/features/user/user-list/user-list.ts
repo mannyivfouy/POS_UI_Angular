@@ -229,6 +229,11 @@ export class UserList {
           this.onCancel();
         },
         error: (err) => {
+          if (err.status === 409) {
+            this.userForm?.setServerError(err.error.field, err.error.message);
+            return;
+          }
+
           console.error(err);
         },
       });
@@ -240,6 +245,11 @@ export class UserList {
           this.onCancel();
         },
         error: (err) => {
+          if (err.status === 409) {
+            this.userForm?.setServerError(err.error.field, err.error.message);
+            return;
+          }
+
           console.error(err);
         },
       });
@@ -267,7 +277,6 @@ export class UserList {
 
     this.userService.deleteUser(this.selectedUser._id).subscribe({
       next: () => {
-
         this.selectedUser = null;
 
         this.loadUsers();

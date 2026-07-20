@@ -106,4 +106,17 @@ export class SupplierForm implements OnChanges {
       note: '',
     });
   }
+
+  setServerError(field: string, message: string){
+    const control = this.supplierForm.get(field);
+
+    if (!control) return;
+
+    control.setErrors({
+      ...control.errors,
+      server: message
+    })
+
+    control.markAllAsTouched()
+  }
 }
