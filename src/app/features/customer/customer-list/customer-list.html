@@ -1,1 +1,153 @@
-<p>customer-list works!</p>
+<div class="space-y-4">
+  <div>
+    <h1 class="text-2xl font-semibold text-gray-800">
+      {{ 'customer.list.title' | translate }}
+    </h1>
+    <p class="text-sm text-gray-500">
+      {{ 'supplier.list.subtitle' | translate }}
+    </p>
+  </div>
+
+  <app-stats-grid [stats]="stats"></app-stats-grid>
+
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4">
+    <div class="flex items-center gap-3">
+      <app-search
+        [placeholder]="'customer.list.search' | translate"
+        (search)="onSearch($event)"
+      ></app-search>
+    </div>
+
+    <!-- button -->
+    <div class="flex items-center justify-end">
+      <button
+        class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition flex items-center gap-2 cursor-pointer"
+        (click)="openCreateCustomer()"
+      >
+        <lucide-angular [img]="icons.Plus" class="w-4 h-4"></lucide-angular>
+        {{ 'customer.list.add' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50 border-b border-gray-200">
+          <tr>
+            <th
+              class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+            >
+              #
+            </th>
+
+            <th
+              class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+            >
+              {{ 'customer.table.name' | translate }}
+            </th>
+
+            <th
+              class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+            >
+              {{ 'customer.table.phone' | translate }}
+            </th>
+
+            <th
+              class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+            >
+              {{ 'supplier.table.createdAt' | translate }}
+            </th>
+
+            <th
+              class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+            >
+              {{ 'supplier.table.updatedAt' | translate }}
+            </th>
+
+            <th
+              class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider"
+            >
+              {{ 'supplier.table.action' | translate }}
+            </th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-gray-100">
+          @for (customer of customers; track customer._id; let i = $index) {
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-3 text-sm text-gray-600">
+                {{ (page - 1) * limit + i + 1 }}
+              </td>
+
+              <td class="px-6 py-3 text-sm text-gray-600">
+                {{ customer.name }}
+              </td>
+
+              <td class="px-6 py-3 text-sm text-gray-600">
+                {{ customer.phone }}
+              </td>
+
+              <td class="px-6 py-3 text-sm text-gray-600">
+                {{ customer.createdAt | date }}
+              </td>
+
+              <td class="px-6 py-3 text-sm text-gray-600">
+                {{ customer.updatedAt | date }}
+              </td>
+
+              <td class="px-6 py-3 text-right">
+                <div class="flex justify-end gap-2">
+                  <button
+                    class="text-gray-600 hover:text-indigo-600 px-3 py-1 rounded-md text-sm cursor-pointer"
+                    (click)="edit(customer)"
+                  >
+                    <lucide-icon [img]="icons.Pencil" class="w-4 h-4"></lucide-icon>
+                  </button>
+
+                  <button
+                    class="text-gray-600 hover:text-red-600 px-3 py-1 rounded-md text-sm cursor-pointer"
+                    (click)="delete(customer)"
+                  >
+                    <lucide-icon [img]="icons.Trash2" class="w-4 h-4"></lucide-icon>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+      <div class="flex border-t border-gray-100 px-4 py-3">
+        <app-pagination
+          [page]="page"
+          [totalPage]="totalPage"
+          [limit]="limit"
+          [totalItems]="totalItems"
+          (pageChange)="changePage($event)"
+        ></app-pagination>
+      </div>
+
+      <app-drawer
+        [open]="isDrawerOpen"
+        [title]="
+          selectedCustomer
+            ? ('customer.form.edit_title' | translate)
+            : ('customer.form.create_title' | translate)
+        "
+        (close)="closeDrawer()"
+      >
+      </app-drawer>
+    </div>
+  </div>
+</div>
+
+<app-confirm-dialog
+  [open]="showDeleteDialog"
+  [title]="'customer.delete.title' | translate"
+  [message]="'customer.delete.message' | translate: { name: selectedCustomer?.name }"
+  [confirmText]="'common.delete' | translate"
+  [cancelText]="'common.cancel' | translate"
+  type="danger"
+  (confirm)="confirmDelete()"
+  (cancel)="cancelDelete()"
+></app-confirm-dialog>

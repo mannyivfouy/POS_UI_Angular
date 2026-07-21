@@ -21,4 +21,5 @@ export interface SupplierStats {
 
 export interface CustomerStats {
   totalCustomer: number;
+  data: any
 }

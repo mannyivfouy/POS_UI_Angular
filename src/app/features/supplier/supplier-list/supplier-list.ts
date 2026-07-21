@@ -86,8 +86,8 @@ export class SupplierList {
     this.updateQueryParams();
   }
 
-  onSearch(keyboard: string) {
-    this.searchKeyword = keyboard;
+  onSearch(keyword: string) {
+    this.searchKeyword = keyword;
     this.page = 1;
     this.updateQueryParams();
   }
