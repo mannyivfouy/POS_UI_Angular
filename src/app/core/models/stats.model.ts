@@ -18,3 +18,7 @@ export interface SupplierStats {
   inactiveProduct: number;
   data: any;
 }
+
+export interface CustomerStats {
+  totalCustomer: number;
+}
