@@ -136,6 +136,11 @@
         "
         (close)="closeDrawer()"
       >
+        <app-customer-form
+          [customerData]="selectedCustomer"
+          (saved)="onSave($event)"
+          (cancel)="onCancel()"
+        ></app-customer-form>
       </app-drawer>
     </div>
   </div>

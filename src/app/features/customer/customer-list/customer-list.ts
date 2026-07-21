@@ -12,7 +12,6 @@ import { Search } from '../../../shared/components/search/search';
 import { CommonModule } from '@angular/common';
 import { Pagination } from '../../../shared/components/pagination/pagination';
 import { ConfirmDialog } from "../../../shared/components/confirm-dialog/confirm-dialog";
-import { SupplierForm } from "../../supplier/supplier-form/supplier-form";
 
 @Component({
   selector: 'app-customer-list',
@@ -25,7 +24,6 @@ import { SupplierForm } from "../../supplier/supplier-form/supplier-form";
     Pagination,
     Drawer,
     ConfirmDialog,
-    SupplierForm,
     CustomerForm
 ],
   templateUrl: './customer-list.html',
