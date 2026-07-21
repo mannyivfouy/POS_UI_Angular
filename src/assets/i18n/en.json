@@ -74,18 +74,18 @@
       "username_required": "Username is required.",
       "username_min": "Username must be at least 3 characters.",
       "username_max": "Username cannot exceed 20 characters.",
-      "username_exists" : "Username already exists",
+      "username_exists": "Username already exists",
       "password_required": "Password is required.",
       "password_min": "Password must be at least 6 characters.",
       "password_max": "Password cannot exceed 20 characters.",
       "email_required": "Email is required.",
       "email_invalid": "Please enter a valid email address.",
       "email_max": "Email cannot exceed 100 characters.",
-      "email_exists" : "Email already exists",
+      "email_exists": "Email already exists",
       "phone_required": "Phone is required.",
       "phone_min": "Phone must be at least 9 characters.",
       "phone_max": "Phone cannot exceed 15 characters.",
-      "phone_exists" : "Phone already exists",
+      "phone_exists": "Phone already exists",
       "role_required": "Role is required."
     },
     "delete": {
@@ -147,7 +147,7 @@
       "contactPerson": "Contact Person",
       "email": "Email",
       "phone": "Phone",
-      "address" : "Address",
+      "address": "Address",
       "status": "Status",
       "note": "Note",
       "note_placeholder": "Additional information about this supplier...",
@@ -158,7 +158,6 @@
       "cancel": "Cancel",
       "create": "Create Supplier",
       "update": "Update Supplier"
-
     },
     "validation": {
       "name_required": "Supplier name is required.",
@@ -170,11 +169,11 @@
       "email_required": "Email is required.",
       "email_invalid": "Please enter a valid email address.",
       "email_max": "Email cannot exceed 100 characters.",
-      "email_exists" : "Email already exists",
+      "email_exists": "Email already exists",
       "phone_required": "Phone is required.",
       "phone_min": "Phone must be at least 9 characters.",
       "phone_max": "Phone cannot exceed 15 characters.",
-      "phone_exists" : "Phone already exists",
+      "phone_exists": "Phone already exists",
       "address_required": "Address is required.",
       "address_min": "Address must be at least 5 characters.",
       "address_max": "Address cannot exceed 100 characters.",
@@ -211,7 +210,15 @@
       "cancel": "Cancel",
       "create": "Create Customer",
       "update": "Update Customer"
-
+    },
+    "validation": {
+      "name_required": "Customer name is required.",
+      "name_min": "Customer name must be at least 3 characters.",
+      "name_max": "Customer name cannot exceed 100 characters.",
+      "phone_required": "Phone is required.",
+      "phone_min": "Phone must be at least 9 characters.",
+      "phone_max": "Phone cannot exceed 15 characters.",
+      "phone_exists": "Phone already exists"
     },
     "delete": {
       "title": "Delete Customer",
