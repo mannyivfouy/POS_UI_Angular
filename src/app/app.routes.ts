@@ -35,8 +35,8 @@ export const routes: Routes = [
           import('./features/product/product-list/product-list').then((m) => m.ProductList),
         canActivate: [roleGuard],
         data: {
-          roles: ['Admin', 'Manager', 'Cashier']
-        }
+          roles: ['Admin', 'Manager', 'Cashier'],
+        },
       },
       {
         path: 'suppliers',
@@ -44,9 +44,18 @@ export const routes: Routes = [
           import('./features/supplier/supplier-list/supplier-list').then((m) => m.SupplierList),
         canActivate: [roleGuard],
         data: {
-          roles: ['Admin', 'Manager']
-        }
-      }
+          roles: ['Admin', 'Manager'],
+        },
+      },
+      {
+        path: 'customers',
+        loadComponent: () =>
+          import('./features/customer/customer-list/customer-list').then((m) => m.CustomerList),
+        canActivate: [roleGuard],
+        data: {
+          roles: ['Admin', 'Manager', 'Cashier'],
+        },
+      },
     ],
   },
   {
