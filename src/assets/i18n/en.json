@@ -97,7 +97,7 @@
     "list": {
       "title": "Stock Management",
       "subtitle": "Manage all system stocks",
-      "search": "search product...",
+      "search": "Search product...",
       "add": "Add Product"
     },
     "stats": {
@@ -122,7 +122,7 @@
     "list": {
       "title": "Supplier Management",
       "subtitle": "Manage all system suppliers",
-      "search": "search supplier...",
+      "search": "Search supplier...",
       "add": "Add Supplier"
     },
     "stats": {
@@ -183,6 +183,38 @@
     },
     "delete": {
       "title": "Delete Supplier",
+      "message": "Are you sure you want to delete {{name}}?"
+    }
+  },
+  "customer": {
+    "list": {
+      "title": "Customer Management",
+      "subtitle": "Manage all system customers",
+      "search": "Search customer...",
+      "add": "Add Customer"
+    },
+    "stats": {
+      "total": "Total Customer"
+    },
+    "table": {
+      "name": "Name",
+      "phone": "Phone",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Actions"
+    },
+    "form": {
+      "create_title": "Create Customer",
+      "edit_title": "Edit Customer",
+      "name": "Name",
+      "phone": "Phone",
+      "cancel": "Cancel",
+      "create": "Create Customer",
+      "update": "Update Customer"
+
+    },
+    "delete": {
+      "title": "Delete Customer",
       "message": "Are you sure you want to delete {{name}}?"
     }
   }
