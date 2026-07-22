@@ -28,7 +28,7 @@
     "list": {
       "title": "User Management",
       "subtitle": "Manage all system users",
-      "search": "Search user...",
+      "search": "Search user   ",
       "add": "Add User"
     },
     "stats": {
@@ -50,7 +50,7 @@
       "create_title": "Create User",
       "edit_title": "Edit User",
       "upload_avatar": "Upload avatar",
-      "avatar_hint": "PNG or JPG, up to 2MB.",
+      "avatar_hint": "PNG or JPG, up to 2MB ",
       "fullname": "Fullname",
       "username": "Username",
       "password": "Password",
@@ -61,32 +61,32 @@
       "status": "Status",
       "active": "Active",
       "inactive": "Inactive",
-      "active_description": "User can sign in and access the system.",
-      "inactive_description": "User is disabled and cannot sign in.",
+      "active_description": "User can sign in and access the system ",
+      "inactive_description": "User is disabled and cannot sign in ",
       "cancel": "Cancel",
       "create": "Create User",
       "update": "Update User"
     },
     "validation": {
-      "fullname_required": "Fullname is required.",
-      "fullname_min": "Fullname must be at least 3 characters.",
-      "fullname_max": "Fullname cannot exceed 50 characters.",
-      "username_required": "Username is required.",
-      "username_min": "Username must be at least 3 characters.",
-      "username_max": "Username cannot exceed 20 characters.",
+      "fullname_required": "Fullname is required ",
+      "fullname_min": "Fullname must be at least 3 characters ",
+      "fullname_max": "Fullname cannot exceed 50 characters ",
+      "username_required": "Username is required ",
+      "username_min": "Username must be at least 3 characters ",
+      "username_max": "Username cannot exceed 20 characters ",
       "username_exists": "Username already exists",
-      "password_required": "Password is required.",
-      "password_min": "Password must be at least 6 characters.",
-      "password_max": "Password cannot exceed 20 characters.",
-      "email_required": "Email is required.",
-      "email_invalid": "Please enter a valid email address.",
-      "email_max": "Email cannot exceed 100 characters.",
+      "password_required": "Password is required ",
+      "password_min": "Password must be at least 6 characters ",
+      "password_max": "Password cannot exceed 20 characters ",
+      "email_required": "Email is required ",
+      "email_invalid": "Please enter a valid email address ",
+      "email_max": "Email cannot exceed 100 characters ",
       "email_exists": "Email already exists",
-      "phone_required": "Phone is required.",
-      "phone_min": "Phone must be at least 9 characters.",
-      "phone_max": "Phone cannot exceed 15 characters.",
+      "phone_required": "Phone is required ",
+      "phone_min": "Phone must be at least 9 characters ",
+      "phone_max": "Phone cannot exceed 15 characters ",
       "phone_exists": "Phone already exists",
-      "role_required": "Role is required."
+      "role_required": "Role is required "
     },
     "delete": {
       "title": "Delete User",
@@ -97,7 +97,7 @@
     "list": {
       "title": "Stock Management",
       "subtitle": "Manage all system stocks",
-      "search": "Search product...",
+      "search": "Search product   ",
       "add": "Add Product"
     },
     "stats": {
@@ -122,13 +122,13 @@
     "list": {
       "title": "Supplier Management",
       "subtitle": "Manage all system suppliers",
-      "search": "Search supplier...",
+      "search": "Search supplier   ",
       "add": "Add Supplier"
     },
     "stats": {
       "total": "Total Suppliers",
       "active": "Active Suppliers",
-      "inactive": "Active Suppliers"
+      "inactive": "Inactive Suppliers"
     },
     "table": {
       "name": "Name",
@@ -153,32 +153,32 @@
       "note_placeholder": "Additional information about this supplier...",
       "active": "Active",
       "inactive": "Inactive",
-      "active_description": "Supplier is available and can be used for business transactions.",
-      "inactive_description": "Supplier is disabled and cannot be selected for transactions.",
+      "active_description": "Supplier is available and can be used for business transactions ",
+      "inactive_description": "Supplier is disabled and cannot be selected for transactions ",
       "cancel": "Cancel",
       "create": "Create Supplier",
       "update": "Update Supplier"
     },
     "validation": {
-      "name_required": "Supplier name is required.",
-      "name_min": "Supplier name must be at least 3 characters.",
-      "name_max": "Supplier name cannot exceed 100 characters.",
-      "contactPerson_required": "Contact person is required.",
-      "contactPerson_min": "Contact person must be at least 3 characters.",
-      "contactPerson_max": "Contact person cannot exceed 50 characters.",
-      "email_required": "Email is required.",
-      "email_invalid": "Please enter a valid email address.",
-      "email_max": "Email cannot exceed 100 characters.",
+      "name_required": "Supplier name is required ",
+      "name_min": "Supplier name must be at least 3 characters ",
+      "name_max": "Supplier name cannot exceed 20 characters ",
+      "contactPerson_required": "Contact person is required ",
+      "contactPerson_min": "Contact person must be at least 3 characters ",
+      "contactPerson_max": "Contact person cannot exceed 20 characters ",
+      "email_required": "Email is required ",
+      "email_invalid": "Please enter a valid email address ",
+      "email_max": "Email cannot exceed 100 characters ",
       "email_exists": "Email already exists",
-      "phone_required": "Phone is required.",
-      "phone_min": "Phone must be at least 9 characters.",
-      "phone_max": "Phone cannot exceed 15 characters.",
+      "phone_required": "Phone is required ",
+      "phone_min": "Phone must be at least 9 characters ",
+      "phone_max": "Phone cannot exceed 15 characters ",
       "phone_exists": "Phone already exists",
-      "address_required": "Address is required.",
-      "address_min": "Address must be at least 5 characters.",
-      "address_max": "Address cannot exceed 100 characters.",
-      "note_max": "Note cannot exceed 100 characters.",
-      "status_required": "Status is required."
+      "address_required": "Address is required ",
+      "address_min": "Address must be at least 5 characters ",
+      "address_max": "Address cannot exceed 100 characters ",
+      "note_max": "Note cannot exceed 100 characters ",
+      "status_required": "Status is required "
     },
     "delete": {
       "title": "Delete Supplier",
@@ -189,7 +189,7 @@
     "list": {
       "title": "Customer Management",
       "subtitle": "Manage all system customers",
-      "search": "Search customer...",
+      "search": "Search customer   ",
       "add": "Add Customer"
     },
     "stats": {
@@ -212,16 +212,63 @@
       "update": "Update Customer"
     },
     "validation": {
-      "name_required": "Customer name is required.",
-      "name_min": "Customer name must be at least 3 characters.",
-      "name_max": "Customer name cannot exceed 100 characters.",
-      "phone_required": "Phone is required.",
-      "phone_min": "Phone must be at least 9 characters.",
-      "phone_max": "Phone cannot exceed 15 characters.",
+      "name_required": "Customer name is required ",
+      "name_min": "Customer name must be at least 3 characters ",
+      "name_max": "Customer name cannot exceed 20 characters ",
+      "phone_required": "Phone is required ",
+      "phone_min": "Phone must be at least 9 characters ",
+      "phone_max": "Phone cannot exceed 15 characters ",
       "phone_exists": "Phone already exists"
     },
     "delete": {
       "title": "Delete Customer",
+      "message": "Are you sure you want to delete {{name}}?"
+    }
+  },
+  "category": {
+    "list": {
+      "title": "Category Management",
+      "subtitle": "Manage all system categories",
+      "search": "Search category...",
+      "add": "Add Category"
+    },
+    "stats": {
+      "total": "Total Categories",
+      "active": "Active Categories",
+      "inactive": "Inactive Categories"
+    },
+    "table": {
+      "name": "Name",
+      "description": "Description",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "action": "Actions"
+    },
+    "form": {
+      "create_title": "Create Category",
+      "edit_title": "Edit Category",
+      "name": "Name",
+      "description": "Description",
+      "description_placeholder": "Enter category description or details...",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "active_description": "Category is active and products under it can be selected for sale.",
+      "inactive_description": "Category is disabled and products under it will be hidden from the sales screen.",
+      "cancel": "Cancel",
+      "create": "Create Category",
+      "update": "Update Category"
+    },
+    "validation": {
+      "name_required": "Category name is required.",
+      "name_min": "Category name must be at least 3 characters.",
+      "name_max": "Category name cannot exceed 50 characters.",
+      "description_max": "Description cannot exceed 100 characters.",
+      "status_required": "Status is required."
+    },
+    "delete": {
+      "title": "Delete Category",
       "message": "Are you sure you want to delete {{name}}?"
     }
   }
