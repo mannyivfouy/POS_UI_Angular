@@ -21,5 +21,12 @@ export interface SupplierStats {
 
 export interface CustomerStats {
   totalCustomer: number;
-  data: any
+  data: any;
+}
+
+export interface CategoryStats {
+  totalCategory: number;
+  activeCategory: number;
+  inactiveCategory: number;
+  data: any;
 }

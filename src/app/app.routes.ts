@@ -56,6 +56,15 @@ export const routes: Routes = [
           roles: ['Admin', 'Manager', 'Cashier'],
         },
       },
+      {
+        path: 'categories',
+        loadComponent: () =>
+          import('./features/category/category-list/category-list').then((m) => m.CategoryList),
+        canActivate: [roleGuard],
+        data: {
+          roles: ['Admin', 'Manager', 'Cashier'],
+        },
+      },
     ],
   },
   {
