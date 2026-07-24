@@ -264,6 +264,7 @@
       "name_required": "Category name is required.",
       "name_min": "Category name must be at least 3 characters.",
       "name_max": "Category name cannot exceed 50 characters.",
+      "name_exists": "Category already exists",
       "description_max": "Description cannot exceed 100 characters.",
       "status_required": "Status is required."
     },

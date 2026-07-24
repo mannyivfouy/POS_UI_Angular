@@ -197,7 +197,11 @@
         "
         (close)="closeDrawer()"
       >
-        <app-category-form></app-category-form>
+        <app-category-form
+          [categoryData]="selectedCategory"
+          (saved)="onSave($event)"
+          (cancel)="onCancel()"
+        ></app-category-form>
       </app-drawer>
     </div>
   </div>
