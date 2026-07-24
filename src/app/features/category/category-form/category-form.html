@@ -1,1 +1,139 @@
-<p>category-form works!</p>
+<form [formGroup]="categoryForm" (ngSubmit)="submit()" class="space-y-5">
+  <div>
+    <span class="text-red-600">* </span>
+    <label class="text-sm font-medium text-gray-700">
+      {{ 'category.form.name' | translate }}
+    </label>
+
+    <div class="mt-1">
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="Electronic"
+        class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        [ngClass]="{
+          'border-red-500 bg-red-50 text-red-600':
+            categoryForm.get('name')?.touched && categoryForm.get('name')?.invalid,
+          'border-gray-200': !(
+            categoryForm.get('name')?.touched && categoryForm.get('name')?.invalid
+          ),
+        }"
+      />
+    </div>
+
+    <p
+      *ngIf="categoryForm.get('name')?.touched && categoryForm.get('name')?.errors"
+      class="mt-1 text-sm text-red-600"
+    >
+      <span *ngIf="categoryForm.get('name')?.hasError('required')">
+        {{ 'category.validation.name_required' | translate }}
+      </span>
+
+      <span *ngIf="categoryForm.get('name')?.hasError('minlength')">
+        {{ 'category.validation.name_min' | translate }}
+      </span>
+
+      <span *ngIf="categoryForm.get('name')?.hasError('maxlength')">
+        {{ 'category.validation.name_max' | translate }}
+      </span>
+
+       <span *ngIf="categoryForm.get('name')?.hasError('server')">
+        {{ 'category.validation.name_exists' | translate }}
+      </span>
+    </p>
+  </div>
+
+  <!-- Description -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">
+      {{ 'category.form.description' | translate }}
+    </label>
+
+    <div class="mt-1">
+      <textarea
+        formControlName="description"
+        rows="4"
+        [placeholder]="'category.form.description_placeholder' | translate"
+        class="w-full rounded-lg border bg-gray-100 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        [ngClass]="{
+          'border-red-500 bg-red-50 text-red-600':
+            categoryForm.get('description')?.touched && categoryForm.get('description')?.invalid,
+          'border-gray-200': !(
+            categoryForm.get('description')?.touched && categoryForm.get('description')?.invalid
+          ),
+        }"
+      ></textarea>
+    </div>
+
+    <p
+      *ngIf="categoryForm.get('description')?.touched && categoryForm.get('description')?.errors"
+      class="mt-1 text-sm text-red-600"
+    >
+      <span *ngIf="categoryForm.get('description')?.hasError('maxlength')">
+        {{ 'category.validation.description_max' | translate }}
+      </span>
+    </p>
+  </div>
+
+  <!-- status -->
+  <div class="flex items-center justify-between rounded-lg border border-gray-200 p-3">
+    <div>
+      <p class="text-sm font-medium text-gray-600">
+        {{ 'category.form.status' | translate }}
+
+        {{
+          categoryForm.get('status')?.value === 'active'
+            ? ('category.form.active' | translate)
+            : ('category.form.inactive' | translate)
+        }}
+      </p>
+
+      <p class="text-xs text-gray-400">
+        {{
+          categoryForm.get('status')?.value === 'active'
+            ? ('category.form.active_description' | translate)
+            : ('category.form.inactive_description' | translate)
+        }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      (click)="toggleStatus()"
+      class="relative h-6 w-11 rounded-full transition-colors duration-300 ease-in-out cursor-pointer"
+      [ngClass]="{
+        'bg-indigo-600': categoryForm.get('status')?.value === 'active',
+        'bg-gray-300': categoryForm.get('status')?.value === 'inactive',
+      }"
+    >
+      <span
+        class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow transition-transform duration-300 ease-in-out"
+        [ngClass]="{
+          'translate-x-5': categoryForm.get('status')?.value === 'active',
+          'translate-x-0': categoryForm.get('status')?.value === 'inactive',
+        }"
+      ></span>
+    </button>
+  </div>
+
+  <!-- Buttons -->
+
+  <div class="flex justify-end gap-3">
+    <button
+      type="button"
+      (click)="onCancel()"
+      class="rounded-lg px-5 py-2 text-sm text-white bg-pink-600 hover:bg-pink-700 font-semibold cursor-pointer transition"
+    >
+      {{ 'category.form.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="rounded-lg px-5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 cursor-pointer transition"
+    >
+      {{
+        isEditingMode ? ('category.form.update' | translate) : ('category.form.create' | translate)
+      }}
+    </button>
+  </div>
+</form>

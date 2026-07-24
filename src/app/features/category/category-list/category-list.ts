@@ -1,13 +1,6 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import {
-  Boxes,
-  ChevronDown,
-  LucideAngularModule,
-  Pencil,
-  Plus,
-  Trash2,
-} from 'lucide-angular';
+import { Boxes, ChevronDown, LucideAngularModule, Pencil, Plus, Trash2 } from 'lucide-angular';
 import { Drawer } from '../../../shared/components/drawer/drawer';
 import { CategoryForm } from '../category-form/category-form';
 import { Category } from '../../../core/models/category.model';
@@ -17,12 +10,22 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StatsGrid } from '../../../shared/components/stats-grid/stats-grid';
 import { Search } from '../../../shared/components/search/search';
 import { CommonModule } from '@angular/common';
-import { Pagination } from "../../../shared/components/pagination/pagination";
-import { ConfirmDialog } from "../../../shared/components/confirm-dialog/confirm-dialog";
+import { Pagination } from '../../../shared/components/pagination/pagination';
+import { ConfirmDialog } from '../../../shared/components/confirm-dialog/confirm-dialog';
 
 @Component({
   selector: 'app-category-list',
-  imports: [LucideAngularModule, TranslatePipe, CommonModule, StatsGrid, Search, Pagination, Drawer, CategoryForm, ConfirmDialog],
+  imports: [
+    LucideAngularModule,
+    TranslatePipe,
+    CommonModule,
+    StatsGrid,
+    Search,
+    Pagination,
+    Drawer,
+    CategoryForm,
+    ConfirmDialog,
+  ],
   templateUrl: './category-list.html',
   styleUrl: './category-list.css',
 })
@@ -159,7 +162,7 @@ export class CategoryList {
   }
 
   closeDrawer() {
-    // this.categoryForm?.resetForm();
+    this.categoryForm?.resetForm();
 
     this.isDrawerOpen = false;
 
@@ -176,9 +179,10 @@ export class CategoryList {
           this.onCancel();
         },
         error: (err) => {
-          // this.categoryForm?.setServerError(err.error.field, err.error.message);
-          // return;
-
+          if (err.status === 409) {
+            this.categoryForm?.setServerError(err.error.field, err.error.message);
+            return;
+          }
           console.error(err);
         },
       });
@@ -189,10 +193,11 @@ export class CategoryList {
           this.onCancel();
         },
         error: (err) => {
-          // this.categoryForm?.setServerError(err.error.field, err.error.message);
-          // return;
-
-          console.error(err);
+          console.error(err); 
+          if (err.status === 409) {
+            this.categoryForm?.setServerError(err.error.field, err.error.message);
+            return;
+          }
         },
       });
     }
