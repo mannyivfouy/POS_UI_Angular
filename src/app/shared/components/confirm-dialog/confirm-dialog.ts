@@ -12,9 +12,11 @@ export class ConfirmDialog {
   @Input() message = 'Are you sure you want to continue?';
   @Input() confirmText = 'Confirm';
   @Input() cancelText = 'Cancel';
+  @Input() showCancel = true
   @Input() type: 'danger' | 'warning' | 'info' = 'danger';
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
+
 
   closing = false;
 
@@ -43,7 +45,7 @@ export class ConfirmDialog {
   get confirmButtonClass() {
     switch (this.type) {
       case 'warning':
-        return 'bg-yellow-500 hover:bg-yellow-600';
+        return 'bg-indigo-500 hover:bg-indigo-600';
 
       case 'info':
         return 'bg-indigo-600 hover:bg-indigo-700';

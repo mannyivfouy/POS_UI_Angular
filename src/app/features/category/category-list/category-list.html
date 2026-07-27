@@ -217,3 +217,13 @@
   (confirm)="confirmDelete()"
   (cancel)="cancelDelete()"
 ></app-confirm-dialog>
+
+<app-confirm-dialog
+  [open]="showAlertDialog"
+  [title]="'category.delete.cannot_title' | translate"
+  [message]="'category.delete.cannot_message' | translate"
+  [confirmText]="'common.ok' | translate"
+  [showCancel]="false"
+  type="warning"
+  (confirm)="showAlertDialog = false"
+/>

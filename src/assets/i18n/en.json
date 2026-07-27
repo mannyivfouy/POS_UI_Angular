@@ -1,7 +1,8 @@
 {
   "common": {
     "delete": "Delete",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "ok": "OK"
   },
   "drawer": {
     "manage_information": "Manage information"
@@ -270,7 +271,9 @@
     },
     "delete": {
       "title": "Delete Category",
-      "message": "Are you sure you want to delete {{name}}?"
+      "message": "Are you sure you want to delete {{name}}?",
+      "cannot_title": "Cannot Delete Category",
+      "cannot_message": "This category cannot be deleted because it is assigned to one or more products"
     }
   }
 }
