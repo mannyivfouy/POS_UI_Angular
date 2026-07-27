@@ -18,13 +18,15 @@
       </p>
 
       <div class="mt-6 flex justify-end gap-3">
-        <button
-          type="button"
-          (click)="onCancel()"
-          class="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 cursor-pointer"
-        >
-          {{ cancelText }}
-        </button>
+        @if (showCancel) {
+          <button
+            type="button"
+            (click)="onCancel()"
+            class="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 cursor-pointer"
+          >
+            {{ cancelText }}
+          </button>
+        }
 
         <button
           type="button"

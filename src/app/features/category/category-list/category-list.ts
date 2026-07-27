@@ -60,6 +60,10 @@ export class CategoryList {
   isDrawerOpen = false;
   statusDropdownOpen = false;
   showDeleteDialog = false;
+  showAlertDialog = false;
+
+  alertTitle = '';
+  alertMessage = '';
 
   selectedCategory: Category | null = null;
 
@@ -193,7 +197,7 @@ export class CategoryList {
           this.onCancel();
         },
         error: (err) => {
-          console.error(err); 
+          console.error(err);
           if (err.status === 409) {
             this.categoryForm?.setServerError(err.error.field, err.error.message);
             return;
@@ -220,14 +224,17 @@ export class CategoryList {
   confirmDelete() {
     this.showDeleteDialog = false;
     if (!this.selectedCategory) return;
-
     this.categoryService.deleteCategory(this.selectedCategory._id).subscribe({
-      next: (res) => {
+      next: () => {
         this.selectedCategory = null;
         this.loadCategories();
         this.loadStats();
       },
       error: (err) => {
+        if (err.status === 409) {
+          this.showAlertDialog = true;
+          return;
+        }
         console.error(err);
       },
     });
