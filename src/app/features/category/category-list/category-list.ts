@@ -12,6 +12,7 @@ import { Search } from '../../../shared/components/search/search';
 import { CommonModule } from '@angular/common';
 import { Pagination } from '../../../shared/components/pagination/pagination';
 import { ConfirmDialog } from '../../../shared/components/confirm-dialog/confirm-dialog';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-category-list',
@@ -69,6 +70,7 @@ export class CategoryList {
 
   constructor(
     private categoryService: CategoryService,
+    private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute,
@@ -243,5 +245,9 @@ export class CategoryList {
   cancelDelete() {
     this.showDeleteDialog = false;
     this.selectedCategory = null;
+  }
+
+  canManageCategory(): boolean {
+    return this.authService.hasRole(['Admin', 'Manager']);
   }
 }

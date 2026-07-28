@@ -18,15 +18,17 @@
       ></app-search>
     </div>
 
-    <div class="flex items-center justify-end">
-      <button
-        class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition flex items-center gap-2 cursor-pointer"
-        (click)="openCreateCategory()"
-      >
-        <lucide-angular [img]="icons.Plus" class="w-4 h-4"></lucide-angular>
-        {{ 'category.list.add' | translate }}
-      </button>
-    </div>
+    @if (canManageCategory()) {
+      <div class="flex items-center justify-end">
+        <button
+          class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 transition flex items-center gap-2 cursor-pointer"
+          (click)="openCreateCategory()"
+        >
+          <lucide-angular [img]="icons.Plus" class="w-4 h-4"></lucide-angular>
+          {{ 'category.list.add' | translate }}
+        </button>
+      </div>
+    }
   </div>
 
   <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
@@ -116,7 +118,9 @@
             <th
               class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider"
             >
-              {{ 'supplier.table.action' | translate }}
+              @if (canManageCategory()) {
+                {{ 'supplier.table.action' | translate }}
+              }
             </th>
           </tr>
         </thead>
@@ -159,19 +163,21 @@
 
               <td class="px-6 py-3 text-right">
                 <div class="flex justify-end gap-2">
-                  <button
-                    class="text-gray-600 hover:text-indigo-600 px-3 py-1 rounded-md text-sm cursor-pointer"
-                    (click)="edit(category)"
-                  >
-                    <lucide-icon [img]="icons.Pencil" class="w-4 h-4"></lucide-icon>
-                  </button>
+                  @if (canManageCategory()) {
+                    <button
+                      class="text-gray-600 hover:text-indigo-600 px-3 py-1 rounded-md text-sm cursor-pointer"
+                      (click)="edit(category)"
+                    >
+                      <lucide-icon [img]="icons.Pencil" class="w-4 h-4"></lucide-icon>
+                    </button>
 
-                  <button
-                    class="text-gray-600 hover:text-red-600 px-3 py-1 rounded-md text-sm cursor-pointer"
-                    (click)="delete(category)"
-                  >
-                    <lucide-icon [img]="icons.Trash2" class="w-4 h-4"></lucide-icon>
-                  </button>
+                    <button
+                      class="text-gray-600 hover:text-red-600 px-3 py-1 rounded-md text-sm cursor-pointer"
+                      (click)="delete(category)"
+                    >
+                      <lucide-icon [img]="icons.Trash2" class="w-4 h-4"></lucide-icon>
+                    </button>
+                  }
                 </div>
               </td>
             </tr>
