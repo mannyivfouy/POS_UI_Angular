@@ -36,4 +36,14 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   }
+
+  hasRole(roles: string[]): boolean {
+    const user = this.getUser();
+
+    if (!user || !user.roleId) {
+      return false;
+    }
+
+    return roles.includes(user.roleId.name);
+  }
 }
