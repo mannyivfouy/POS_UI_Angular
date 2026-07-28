@@ -275,5 +275,13 @@
       "cannot_title": "Cannot Delete Category",
       "cannot_message": "This category cannot be deleted because it is assigned to one or more products"
     }
+  },
+  "purchase" : {
+    "list" : {
+      "title" : "Purchase History Management",
+      "subtitle": "Manage all system purchase history",
+      "search" : "Search purchase history...",
+      "add" : "Create New Purchase"
+    }
   }
 }
