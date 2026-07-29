@@ -19,10 +19,20 @@ export class PurchaseDetailDialog {
 
   icons = {
     X,
-    Printer
+    Printer,
   };
 
-  onClose() {
-    this.close.emit();
+  closing = false;
+
+  closingDialog() {
+    this.closing = true;
+  }
+
+  animationEnd() {
+    if (this.closing) {
+      this.closing = false;
+      this.open = false;
+      this.close.emit();
+    }
   }
 }

@@ -1,10 +1,13 @@
 @if (open && purchase) {
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
-    (click)="onClose()"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate__animated"
+    [ngClass]="closing ? 'animate__fadeOut' : 'animate__fadeIn'"
+    (animationend)="animationEnd()"
+    (click)="closingDialog()"
   >
     <div
-      class="w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-2xl bg-white shadow-2xl animate__animated animate__zoomIn animate__faster"
+      class="w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-2xl bg-white shadow-2xl animate__animated animate__faster"
+      [ngClass]="closing ? 'animate__zoomOut' : 'animate__zoomIn'"
       (click)="$event.stopPropagation()"
     >
       <!-- Header -->
@@ -21,7 +24,7 @@
 
         <button
           class="w-9 h-9 rounded-xl text-red-600 bg-red-100 hover:bg-red-200 transition flex items-center justify-center cursor-pointer"
-          (click)="onClose()"
+          (click)="closingDialog()"
         >
           <lucide-icon [img]="icons.X"></lucide-icon>
         </button>
@@ -197,16 +200,16 @@
       <div class="flex items-center justify-end gap-3 border-t border-gray-200 px-6 py-4">
         <button
           class="rounded-lg bg-pink-600 px-5 py-2 text-sm font-semibold text-white hover:bg-pink-700 transition cursor-pointer"
-          (click)="onClose()"
+          (click)="closingDialog()"
         >
-          {{'common.close' | translate}}
+          {{ 'common.close' | translate }}
         </button>
 
         <button
           class="rounded-lg bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-700 transition cursor-pointer"
-          (click)="onClose()"
+          (click)="closingDialog()"
         >
-          {{'common.print' | translate}}
+          {{ 'common.print' | translate }}
         </button>
       </div>
     </div>
