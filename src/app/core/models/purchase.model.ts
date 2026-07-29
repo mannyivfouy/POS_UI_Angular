@@ -6,15 +6,15 @@ export interface Purchase {
   _id: string;
   invoiceNo: string;
   supplierId: Supplier;
-  purchaseData: Date;
+  purchaseDate: Date;
   subtotal: number;
   discount: number;
   tax: number;
   shipping: number;
   total: number;
-  paymentStatus: string;
+  paymentStatus: 'pending' | 'paid'| string;
   note?: string;
-  createdBy: User;
+  createdBy?: User;
 }
 
 export interface PurchaseItem {
