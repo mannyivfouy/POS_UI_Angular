@@ -2,7 +2,9 @@
   "common": {
     "delete": "Delete",
     "cancel": "Cancel",
-    "ok": "OK"
+    "ok": "OK",
+    "close" : "Close",
+    "print" : "Print"
   },
   "drawer": {
     "manage_information": "Manage information"
@@ -288,9 +290,28 @@
       "supplier": "Supplier",
       "purchase_date": "Purchase Date",
       "total": "Total",
-      "status": "Status",
+      "payment_status": "Payment Status",
       "created_by": "Created By",
-      "action" : "Actions"
+      "action": "Actions"
+    },
+    "detail_dialog": {
+      "title": "Purchase Detail",
+      "invoice_no" : "Invoice No",
+      "purchase_items" : "Purchase Items",
+      "subtotal" : "Subtotal",
+      "discount" : "Discount",
+      "tax" : "Tax",
+      "shipping" : "Shipping",
+      "total": "Total",
+      "product" : "Product",
+      "qty" : "Quantity",
+      "cost_price" : "Cost Price",
+      "note" : "Note",
+      "supplier" : "Supplier",
+      "purchase_date": "Purchase Date",
+      "created_by" : "Created By",
+      "payment_status" : "Payment Status",
+      "items" : "Items"
     }
   }
 }

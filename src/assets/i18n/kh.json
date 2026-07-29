@@ -2,7 +2,9 @@
   "common": {
     "delete": "លុប",
     "cancel": "បោះបង់",
-    "ok": "យល់ព្រម"
+    "ok": "យល់ព្រម",
+    "close" : "បិទ",
+    "print" : "បោះពុម្ព"
   },
   "drawer": {
     "manage_information": "គ្រប់គ្រងព័ត៌មាន"
@@ -290,9 +292,28 @@
       "supplier": "អ្នកផ្គត់ផ្គង់",
       "purchase_date": "កាលបរិច្ឆេទទិញចូល",
       "total": "សរុប",
-      "status": "ស្ថានភាព",
+      "payment_status": "ស្ថានភាពការទូទាត់",
       "created_by": "បង្កើតដោយ",
       "action": "សកម្មភាព"
+    },
+    "detail_dialog": {
+      "title": "ព័ត៌មានលម្អិតនៃការទិញចូល",
+      "invoice_no": "លេខវិក្កយបត្រ",
+      "purchase_items": "មុខទំនិញទិញចូល",
+      "subtotal": "សរុបរង",
+      "discount": "ការបញ្ចុះតម្លៃ",
+      "tax": "ពន្ធ",
+      "shipping": "ថ្លៃដឹកជញ្ជូន",
+      "total": "សរុប",
+      "product": "ផលិតផល",
+      "qty": "បរិមាណ",
+      "cost_price": "តម្លៃទិញចូល",
+      "note": "កំណត់សម្គាល់",
+      "supplier": "អ្នកផ្គត់ផ្គង់",
+      "purchase_date": "កាលបរិច្ឆេទទិញចូល",
+      "created_by": "បង្កើតដោយ",
+      "payment_status": "ស្ថានភាពការទូទាត់",
+      "items" : "មុខទំនិញ"
     }
   }
 }

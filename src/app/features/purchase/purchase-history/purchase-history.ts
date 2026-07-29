@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ChevronDown, LucideAngularModule, Plus, Printer, ReceiptText } from 'lucide-angular';
 import { Search } from '../../../shared/components/search/search';
-import { Purchase } from '../../../core/models/purchase.model';
+import { Purchase, PurchaseItem } from '../../../core/models/purchase.model';
 import { PurchaseService } from '../../../core/services/purchase.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Pagination } from '../../../shared/components/pagination/pagination';
@@ -11,10 +11,18 @@ import { SupplierService } from '../../../core/services/supplier.service';
 import { UserService } from '../../../core/services/user.service';
 import { Supplier } from '../../../core/models/supplier.model';
 import { User } from '../../../core/models/user.model';
+import { PurchaseDetailDialog } from '../purchase-detail-dialog/purchase-detail-dialog';
 
 @Component({
   selector: 'app-purchase-history',
-  imports: [LucideAngularModule, CommonModule, TranslatePipe, Search, Pagination],
+  imports: [
+    LucideAngularModule,
+    CommonModule,
+    TranslatePipe,
+    Search,
+    Pagination,
+    PurchaseDetailDialog,
+  ],
   templateUrl: './purchase-history.html',
   styleUrl: './purchase-history.css',
 })
@@ -23,7 +31,7 @@ export class PurchaseHistory {
     Plus,
     ChevronDown,
     ReceiptText,
-    Printer
+    Printer,
   };
 
   purchases: Purchase[] = [];
@@ -42,6 +50,8 @@ export class PurchaseHistory {
   paymentStatusDropdownOpen = false;
 
   selectedPurchase: Purchase | null = null;
+  purchaseItems: PurchaseItem[] = [];
+  isDetailOpen = false;
 
   constructor(
     private purchaseService: PurchaseService,
@@ -152,5 +162,24 @@ export class PurchaseHistory {
           this.users = res.data;
         },
       });
+  }
+
+  viewPurchase(id: string): void {
+    this.purchaseService.getPurchaseById(id).subscribe({
+      next: (res) => {
+        this.selectedPurchase = res.data.purchase;
+        this.purchaseItems = res.data.items;
+        this.isDetailOpen = true;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  closeDetail(): void {
+    this.isDetailOpen = false;
+    this.selectedPurchase = null;
+    this.purchaseItems = [];
   }
 }
