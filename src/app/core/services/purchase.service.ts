@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResponse } from '../models/paginated-response.model';
-import { Purchase } from '../models/purchase.model';
+import { Purchase, PurchaseDetailResponse } from '../models/purchase.model';
 
 @Injectable({
   providedIn: 'root',
@@ -54,8 +54,8 @@ export class PurchaseService {
     return this.http.get<PaginatedResponse<Purchase>>(this.apiUrl, options);
   }
 
-  getPurchaseById(id: string): Observable<Purchase> {
-    return this.http.get<Purchase>(`${this.apiUrl}/${id}`);
+  getPurchaseById(id: string): Observable<PurchaseDetailResponse> {
+    return this.http.get<PurchaseDetailResponse>(`${this.apiUrl}/${id}`);
   }
 
   createPurchase(data: FormData): Observable<Purchase> {

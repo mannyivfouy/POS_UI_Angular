@@ -1,0 +1,214 @@
+@if (open && purchase) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+    (click)="onClose()"
+  >
+    <div
+      class="w-full max-w-5xl max-h-[90vh] overflow-hidden rounded-2xl bg-white shadow-2xl animate__animated animate__zoomIn animate__faster"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Header -->
+      <div class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+        <div>
+          <h2 class="text-xl font-semibold text-gray-800">
+            {{ 'purchase.detail_dialog.title' | translate }}
+          </h2>
+          <p class="text-sm text-gray-500">
+            {{ 'purchase.detail_dialog.invoice_no' | translate }}.
+            {{ purchase.invoiceNo }}
+          </p>
+        </div>
+
+        <button
+          class="w-9 h-9 rounded-xl text-red-600 bg-red-100 hover:bg-red-200 transition flex items-center justify-center cursor-pointer"
+          (click)="onClose()"
+        >
+          <lucide-icon [img]="icons.X"></lucide-icon>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="max-h-[70vh] overflow-y-auto p-6 space-y-6">
+        <!-- Information -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="rounded-xl border border-gray-200 p-4">
+            <p class="text-xs uppercase text-gray-500">
+              {{ 'purchase.detail_dialog.supplier' | translate }}
+            </p>
+            <p class="mt-1 font-medium text-gray-800">
+              {{ purchase.supplierId.name }}
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-gray-200 p-4">
+            <p class="text-xs uppercase text-gray-500">
+              {{ 'purchase.detail_dialog.purchase_date' | translate }}
+            </p>
+            <p class="mt-1 font-medium text-gray-800">
+              {{ purchase.purchaseDate | date: 'mediumDate' }}
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-gray-200 p-4">
+            <p class="text-xs uppercase text-gray-500">
+              {{ 'purchase.detail_dialog.created_by' | translate }}
+            </p>
+            <p class="mt-1 font-medium text-gray-800">
+              {{ purchase.createdBy?.fullname ?? '-' }}
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-gray-200 p-4">
+            <p class="text-xs uppercase text-gray-500">
+              {{ 'purchase.detail_dialog.payment_status' | translate }}
+            </p>
+
+            <span
+              class="mt-2 inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize"
+              [ngClass]="
+                purchase.paymentStatus === 'paid'
+                  ? 'bg-green-100 text-green-600'
+                  : 'bg-orange-100 text-orange-600'
+              "
+            >
+              {{ purchase.paymentStatus }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Purchase Items -->
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-gray-800">
+              {{ 'purchase.detail_dialog.purchase_items' | translate }}
+            </h3>
+
+            <span class="text-sm text-gray-500">
+              {{ items.length }} {{ 'purchase.detail_dialog.items' | translate }}
+            </span>
+          </div>
+
+          <div class="overflow-hidden rounded-xl border border-gray-200">
+            <table class="min-w-full">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-5 py-3 text-left text-xs uppercase text-gray-500">#</th>
+
+                  <th class="px-5 py-3 text-left text-xs uppercase text-gray-500">
+                    {{ 'purchase.detail_dialog.product' | translate }}
+                  </th>
+
+                  <th class="px-5 py-3 text-center text-xs uppercase text-gray-500">
+                    {{ 'purchase.detail_dialog.qty' | translate }}
+                  </th>
+
+                  <th class="px-5 py-3 text-right text-xs uppercase text-gray-500">
+                    {{ 'purchase.detail_dialog.cost_price' | translate }}
+                  </th>
+
+                  <th class="px-5 py-3 text-right text-xs uppercase text-gray-500">
+                    {{ 'purchase.detail_dialog.total' | translate }}
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody class="divide-y divide-gray-100">
+                @for (item of items; track item._id; let i = $index) {
+                  <tr>
+                    <td class="px-5 py-3">
+                      {{ i + 1 }}
+                    </td>
+
+                    <td class="px-5 py-3">
+                      {{ item.productId.name }}
+                    </td>
+
+                    <td class="px-5 py-3 text-center">
+                      {{ item.quantity }}
+                    </td>
+
+                    <td class="px-5 py-3 text-right">
+                      {{ item.costPrice | currency }}
+                    </td>
+
+                    <td class="px-5 py-3 text-right font-medium">
+                      {{ item.total | currency }}
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Note -->
+        <div class="rounded-xl border border-gray-200 p-4">
+          <h3 class="font-semibold text-gray-700 mb-2">
+            {{ 'purchase.detail_dialog.note' | translate }}
+          </h3>
+
+          <p class="text-sm text-gray-600">
+            {{ purchase.note || '-' }}
+          </p>
+        </div>
+
+        <!-- Summary -->
+        <div class="flex justify-end">
+          <div class="w-full max-w-sm rounded-xl border border-gray-200">
+            <div class="flex justify-between px-5 py-3">
+              <span>
+                {{ 'purchase.detail_dialog.subtotal' | translate }}
+              </span>
+              <span>{{ purchase.subtotal | currency }}</span>
+            </div>
+
+            <div class="flex justify-between px-5 py-3 border-t">
+              <span>
+                {{ 'purchase.detail_dialog.discount' | translate }}
+              </span>
+              <span>{{ purchase.discount | currency }}</span>
+            </div>
+
+            <div class="flex justify-between px-5 py-3 border-t">
+              <span>
+                {{ 'purchase.detail_dialog.tax' | translate }}
+              </span>
+              <span>{{ purchase.tax | currency }}</span>
+            </div>
+
+            <div class="flex justify-between px-5 py-3 border-t">
+              <span>
+                {{ 'purchase.detail_dialog.shipping' | translate }}
+              </span>
+              <span>{{ purchase.shipping | currency }}</span>
+            </div>
+
+            <div class="flex justify-between border-t bg-gray-50 px-5 py-4 text-lg font-semibold">
+              <span>
+                {{ 'purchase.detail_dialog.total' | translate }}
+              </span>
+              <span>{{ purchase.total | currency }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex items-center justify-end gap-3 border-t border-gray-200 px-6 py-4">
+        <button
+          class="rounded-lg bg-pink-600 px-5 py-2 text-sm font-semibold text-white hover:bg-pink-700 transition cursor-pointer"
+          (click)="onClose()"
+        >
+          {{'common.close' | translate}}
+        </button>
+
+        <button
+          class="rounded-lg bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-700 transition cursor-pointer"
+          (click)="onClose()"
+        >
+          {{'common.print' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+}

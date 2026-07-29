@@ -65,7 +65,7 @@
             <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase relative">
               <div class="flex items-center gap-2">
                 <span>
-                  {{ 'user.table.status' | translate }}
+                  {{ 'purchase.table.payment_status' | translate }}
                 </span>
 
                 <!-- Filter Button -->
@@ -169,15 +169,11 @@
                 <div class="flex justify-end gap-2">
                   <button
                     class="text-gray-600 hover:text-indigo-600 px-3 py-1 rounded-md text-sm cursor-pointer"
+                    (click)="viewPurchase(purchase._id)"
                   >
                     <lucide-icon [img]="icons.ReceiptText" class="w-4 h-4"></lucide-icon>
                   </button>
 
-                  <button
-                    class="text-gray-600 hover:text-indigo-600 px-3 py-1 rounded-md text-sm cursor-pointer"
-                  >
-                    <lucide-icon [img]="icons.Printer" class="w-4 h-4"></lucide-icon>
-                  </button>
                 </div>
               </td>
             </tr>
@@ -196,3 +192,10 @@
     </div>
   </div>
 </div>
+
+<app-purchase-detail-dialog
+  [open]="isDetailOpen"
+  [purchase]="selectedPurchase"
+  [items]="purchaseItems"
+  (close)="closeDetail()"
+></app-purchase-detail-dialog>

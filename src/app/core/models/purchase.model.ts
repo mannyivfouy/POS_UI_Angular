@@ -12,7 +12,7 @@ export interface Purchase {
   tax: number;
   shipping: number;
   total: number;
-  paymentStatus: 'pending' | 'paid'| string;
+  paymentStatus: 'pending' | 'paid' | string;
   note?: string;
   createdBy?: User;
 }
@@ -24,4 +24,12 @@ export interface PurchaseItem {
   quantity: number;
   costPrice: number;
   total: number;
+}
+
+export interface PurchaseDetailResponse {
+  message: string;
+  data: {
+    purchase: Purchase;
+    items: PurchaseItem[];
+  };
 }
