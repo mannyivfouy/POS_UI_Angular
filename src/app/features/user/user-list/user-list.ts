@@ -180,9 +180,27 @@ export class UserList {
       next: (res) => {
         const stats = res.data;
         this.stats = [
-          { titleKey: 'user.stats.total', value: stats.totalUser, icon: Users },
-          { titleKey: 'user.stats.active', value: stats.activeUser, icon: UserCheck },
-          { titleKey: 'user.stats.inactive', value: stats.inactiveUser, icon: UserX },
+          {
+            titleKey: 'user.stats.total',
+            value: stats.totalUser,
+            icon: Users,
+            iconColor: 'indigo',
+            trend: stats.totalUserTrend,
+          },
+          {
+            titleKey: 'user.stats.active',
+            value: stats.activeUser,
+            icon: Users,
+            iconColor: 'green',
+            trend: stats.activeUserTrend,
+          },
+          {
+            titleKey: 'user.stats.inactive',
+            value: stats.inactiveUser,
+            icon: Users,
+            iconColor: 'red',
+            trend: stats.inactiveUserTrend,
+          },
         ];
         this.cdr.detectChanges();
       },
