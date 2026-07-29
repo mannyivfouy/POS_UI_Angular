@@ -65,6 +65,26 @@ export const routes: Routes = [
           roles: ['Admin', 'Manager', 'Cashier'],
         },
       },
+      {
+        path: 'purchases',
+        loadComponent: () =>
+          import('./features/purchase/purchase-form/purchase-form').then((m) => m.PurchaseForm),
+        canActivate: [roleGuard],
+        data: {
+          roles: ['Admin', 'Manager'],
+        },
+      },
+      {
+        path: 'purchases-history',
+        loadComponent: () =>
+          import('./features/purchase/purchase-history/purchase-history').then(
+            (m) => m.PurchaseHistory,
+          ),
+        canActivate: [roleGuard],
+        data: {
+          roles: ['Admin', 'Manager'],
+        },
+      },
     ],
   },
   {

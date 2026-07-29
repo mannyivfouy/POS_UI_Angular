@@ -275,5 +275,22 @@
       "cannot_title": "Cannot Delete Category",
       "cannot_message": "This category cannot be deleted because it is assigned to one or more products"
     }
+  },
+  "purchase": {
+    "list": {
+      "title": "Purchase History Management",
+      "subtitle": "Manage all system purchase history",
+      "search": "Search purchase history...",
+      "add": "Create New Purchase"
+    },
+    "table": {
+      "invoice_no": "Invoice No",
+      "supplier": "Supplier",
+      "purchase_date": "Purchase Date",
+      "total": "Total",
+      "status": "Status",
+      "created_by": "Created By",
+      "action" : "Actions"
+    }
   }
 }
