@@ -5,9 +5,10 @@
     [class.animate__fadeOut]="closing"
   >
     <div
-      class="w-full max-w-md rounded-xl bg-white p-6 shadow-xl animate__animated"
-      [class.animate__fadeInDown]="!closing"
-      [class.animate__fadeOutUp]="closing"
+      class="w-full max-w-md rounded-xl bg-white p-6 shadow-xl animate__animated animate__faster"
+      [class.animate__zoomIn]="!closing"
+      [class.animate__zoomOut]="closing"
+      (animationend)="onAnimationEnd()"
     >
       <h2 class="text-lg font-semibold text-gray-900">
         {{ title }}

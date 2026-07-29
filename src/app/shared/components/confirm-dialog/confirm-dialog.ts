@@ -12,34 +12,38 @@ export class ConfirmDialog {
   @Input() message = 'Are you sure you want to continue?';
   @Input() confirmText = 'Confirm';
   @Input() cancelText = 'Cancel';
-  @Input() showCancel = true
+  @Input() showCancel = true;
   @Input() type: 'danger' | 'warning' | 'info' = 'danger';
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
-
   closing = false;
+  private action: 'confirm' | 'cancel' | null = null;
 
   onConfirm() {
-    this.startCloseAnimation(() => {
-      this.confirm.emit();
-    });
+    this.action = 'confirm';
+    this.closing = true;
   }
 
   onCancel() {
-    this.startCloseAnimation(() => {
-      this.cancel.emit();
-    });
+    this.action = 'cancel';
+    this.closing = true;
   }
 
-  private startCloseAnimation(callback: () => void) {
-    this.closing = true;
+  onAnimationEnd() {
+    if (!this.closing) return;
 
-    setTimeout(() => {
-      this.closing = false;
+    this.closing = false;
 
-      callback();
-    }, 300);
+    if (this.action === 'confirm') {
+      this.confirm.emit();
+    }
+
+    if (this.action === 'cancel') {
+      this.cancel.emit();
+    }
+
+    this.action = null;
   }
 
   get confirmButtonClass() {
