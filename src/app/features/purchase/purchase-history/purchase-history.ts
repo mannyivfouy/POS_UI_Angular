@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { ChevronDown, LucideAngularModule, Plus, Printer, ReceiptText } from 'lucide-angular';
+import { Archive, Banknote, ChartNoAxesColumnIncreasing, ChevronDown, LucideAngularModule, Plus, Printer, ReceiptText } from 'lucide-angular';
 import { Search } from '../../../shared/components/search/search';
 import { Purchase, PurchaseItem } from '../../../core/models/purchase.model';
 import { PurchaseService } from '../../../core/services/purchase.service';
@@ -12,6 +12,9 @@ import { UserService } from '../../../core/services/user.service';
 import { Supplier } from '../../../core/models/supplier.model';
 import { User } from '../../../core/models/user.model';
 import { PurchaseDetailDialog } from '../purchase-detail-dialog/purchase-detail-dialog';
+import { PurchaseStats } from '../../../core/models/stats.model';
+import { StatsCardModel } from '../../../shared/models/stats-card.model';
+import { StatsGrid } from "../../../shared/components/stats-grid/stats-grid";
 
 @Component({
   selector: 'app-purchase-history',
@@ -22,7 +25,8 @@ import { PurchaseDetailDialog } from '../purchase-detail-dialog/purchase-detail-
     Search,
     Pagination,
     PurchaseDetailDialog,
-  ],
+    StatsGrid
+],
   templateUrl: './purchase-history.html',
   styleUrl: './purchase-history.css',
 })
@@ -30,13 +34,17 @@ export class PurchaseHistory {
   icons = {
     Plus,
     ChevronDown,
-    ReceiptText,
     Printer,
+    ReceiptText,
+    Banknote,
+    ChartNoAxesColumnIncreasing,
+    Archive
   };
 
   purchases: Purchase[] = [];
   suppliers: Supplier[] = [];
   users: User[] = [];
+  stats: StatsCardModel[] = []
 
   page = 1;
   limit = 10;
@@ -109,6 +117,7 @@ export class PurchaseHistory {
         (this.paymentStatusFilter = param['paymentStatus'] ?? ''),
         this.loadPurchaseHistory());
     });
+    this.loadPurchaseStats();
     this.loadSupplier();
     this.loadUser();
   }
@@ -136,6 +145,51 @@ export class PurchaseHistory {
           this.loading = false;
         },
       });
+  }
+
+  loadPurchaseStats(): void {
+    this.purchaseService.getPurchaseStats().subscribe({
+      next: (res) => {
+        const stats = res.data;
+        this.stats = [
+          {
+            titleKey: 'purchase.stats.total_purchases',
+            value: stats.totalPurchase,
+            icon: ReceiptText,
+            iconColor: 'indigo',
+            trend: stats.totalPurchaseTrend,
+            format: 'number'
+          },
+          {
+            titleKey: 'purchase.stats.total_amount',
+            value: stats.totalPurchaseAmount,
+            icon: Banknote,
+            iconColor: 'indigo',
+            trend: stats.totalPurchaseAmountTrend,
+            format: 'currency'
+          },
+          {
+            titleKey: 'purchase.stats.total_purchased_items',
+            value: stats.totalPurchaseItems,
+            icon: Archive,
+            iconColor: 'indigo',
+            trend: stats.totalPurchaseItemsTrend,
+            format: 'number'
+          },
+          {
+            titleKey: 'purchase.stats.average_purchase_amount',
+            value: stats.totalAveragePurchase,
+            icon: ChartNoAxesColumnIncreasing,
+            iconColor: 'indigo',
+            trend: stats.totalAveragePurchaseTrend,
+            format: 'currency'
+          },
+        ]
+      },
+      error: () => {
+        this.loading = false
+      }
+    })
   }
 
   loadSupplier(): void {

@@ -12,5 +12,5 @@ export interface StatsCardModel {
   icon: LucideIconData;
   trend?: TrendModel;
   iconColor?: "indigo" | "green" | "red" | "orange";
-  
+  format?: 'number' | 'currency' | 'percent';
 }

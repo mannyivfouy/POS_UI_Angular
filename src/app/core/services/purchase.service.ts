@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResponse } from '../models/paginated-response.model';
 import { Purchase, PurchaseDetailResponse } from '../models/purchase.model';
+import { PurchaseStats } from '../models/stats.model';
 
 @Injectable({
   providedIn: 'root',
@@ -60,5 +61,9 @@ export class PurchaseService {
 
   createPurchase(data: FormData): Observable<Purchase> {
     return this.http.post<Purchase>(`${this.apiUrl}/create`, data);
+  }
+
+  getPurchaseStats(): Observable<PurchaseStats> {
+    return this.http.get<PurchaseStats>(`${this.apiUrl}/stats`)
   }
 }
