@@ -290,7 +290,13 @@
       "total": "Total",
       "status": "Status",
       "created_by": "Created By",
-      "action" : "Actions"
+      "action": "Actions"
+    },
+    "stats": {
+      "total_purchases": "Total Purchases",
+      "total_amount": "Total Amount",
+      "total_purchased_items": "Total Purchased Items",
+      "average_purchase_amount": "Average Purchase Amount"
     }
   }
 }

@@ -293,6 +293,12 @@
       "status": "ស្ថានភាព",
       "created_by": "បង្កើតដោយ",
       "action": "សកម្មភាព"
+    },
+    "stats": {
+      "total_purchases": "ការទិញចូលសរុប",
+      "total_amount": "ទឹកប្រាក់សរុប",
+      "total_purchased_items": "មុខទំនិញទិញចូលសរុប",
+      "average_purchase_amount": "មធ្យមភាគទឹកប្រាក់ទិញចូល"
     }
   }
 }
