@@ -186,6 +186,7 @@ export class UserList {
             icon: Users,
             iconColor: 'indigo',
             trend: stats.totalUserTrend,
+            format: 'number'
           },
           {
             titleKey: 'user.stats.active',
@@ -193,6 +194,7 @@ export class UserList {
             icon: Users,
             iconColor: 'green',
             trend: stats.activeUserTrend,
+            format: 'number'
           },
           {
             titleKey: 'user.stats.inactive',
@@ -200,6 +202,7 @@ export class UserList {
             icon: Users,
             iconColor: 'red',
             trend: stats.inactiveUserTrend,
+            format: 'number'
           },
         ];
         this.cdr.detectChanges();

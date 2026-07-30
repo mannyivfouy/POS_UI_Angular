@@ -1,6 +1,12 @@
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div
+  class="grid gap-4"
+  [ngClass]="{
+    'md:grid-cols-3': stats.length === 3,
+    'md:grid-cols-4': stats.length === 4
+  }"
+>
   <app-stats-card
     *ngFor="let stat of stats"
-    [data]="stat"
-  ></app-stats-card>
+    [data]="stat">
+  </app-stats-card>
 </div>

@@ -11,18 +11,35 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './stats-card.css',
 })
 export class StatsCard {
-  @Input() data!: StatsCardModel
+  @Input() data!: StatsCardModel;
 
   getTrendIcon(direction?: string) {
-  switch (direction) {
-    case 'up':
-      return TrendingUp;
+    switch (direction) {
+      case 'up':
+        return TrendingUp;
 
-    case 'down':
-      return TrendingDown;
+      case 'down':
+        return TrendingDown;
 
+      default:
+        return Minus;
+    }
+  }
+
+  get formattedValue(): string {
+  if (!this.data) return '';
+
+  switch (this.data.format) {
+    case 'currency':
+      return `$${this.data.value.toLocaleString()}`;
+      // or: return `៛${this.data.value.toLocaleString()}`;
+
+    case 'percent':
+      return `${this.data.value}%`;
+
+    case 'number':
     default:
-      return Minus;
+      return this.data.value.toLocaleString();
   }
 }
 }

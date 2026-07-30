@@ -3,8 +3,9 @@
     "delete": "Delete",
     "cancel": "Cancel",
     "ok": "OK",
-    "close" : "Close",
-    "print" : "Print"
+    "close": "Close",
+    "print": "Print",
+    "compare_stats" : "Compare to last month"
   },
   "drawer": {
     "manage_information": "Manage information"
@@ -296,22 +297,28 @@
     },
     "detail_dialog": {
       "title": "Purchase Detail",
-      "invoice_no" : "Invoice No",
-      "purchase_items" : "Purchase Items",
-      "subtotal" : "Subtotal",
-      "discount" : "Discount",
-      "tax" : "Tax",
-      "shipping" : "Shipping",
+      "invoice_no": "Invoice No",
+      "purchase_items": "Purchase Items",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "tax": "Tax",
+      "shipping": "Shipping",
       "total": "Total",
-      "product" : "Product",
-      "qty" : "Quantity",
-      "cost_price" : "Cost Price",
-      "note" : "Note",
-      "supplier" : "Supplier",
+      "product": "Product",
+      "qty": "Quantity",
+      "cost_price": "Cost Price",
+      "note": "Note",
+      "supplier": "Supplier",
       "purchase_date": "Purchase Date",
-      "created_by" : "Created By",
-      "payment_status" : "Payment Status",
-      "items" : "Items"
+      "created_by": "Created By",
+      "payment_status": "Payment Status",
+      "items": "Items"
+    },
+    "stats": {
+      "total_purchases": "Total Purchases",
+      "total_amount": "Total Purchase Amount",
+      "total_purchased_items": "Total Purchased Items",
+      "average_purchase_amount": "Average Purchase Amount"
     }
   }
 }

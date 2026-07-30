@@ -30,3 +30,11 @@ export interface CategoryStats {
   inactiveCategory: number;
   data: any;
 }
+
+export interface PurchaseStats {
+  totalPurchase: number;
+  totalPurchaseAmount: number;
+  totalPurchaseItems: number;
+  totalAveragePurchase: number;
+  data: any;
+}
