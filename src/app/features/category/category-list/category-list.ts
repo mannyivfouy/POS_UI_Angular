@@ -151,9 +151,30 @@ export class CategoryList {
       next: (res) => {
         const stats = res.data;
         this.stats = [
-          { titleKey: 'category.stats.total', value: stats.totalCategory, icon: Boxes },
-          { titleKey: 'category.stats.active', value: stats.activeCategory, icon: Boxes },
-          { titleKey: 'category.stats.inactive', value: stats.inactiveCategory, icon: Boxes },
+          {
+            titleKey: 'category.stats.total',
+            value: stats.totalCategory,
+            icon: Boxes,
+            iconColor: 'indigo',
+            trend: stats.totalCategoryTrend,
+            format: 'number',
+          },
+          {
+            titleKey: 'category.stats.active',
+            value: stats.activeCategory,
+            icon: Boxes,
+            iconColor: 'green',
+            trend: stats.activeCategoryTrend,
+            format: 'number',
+          },
+          {
+            titleKey: 'category.stats.inactive',
+            value: stats.inactiveCategory,
+            icon: Boxes,
+            iconColor: 'red',
+            trend: stats.inactiveCategoryTrend,
+            format: 'number',
+          },
         ];
       },
       error: () => {
