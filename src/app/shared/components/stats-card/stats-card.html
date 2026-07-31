@@ -19,7 +19,7 @@
         [ngClass]="{
           'bg-green-100 text-green-600': data.trend.direction === 'up',
           'bg-red-100 text-red-600': data.trend.direction === 'down',
-          'bg-gray-100 text-gray-500': data.trend.direction === 'neutral',
+          'bg-indigo-100 text-indigo-600': data.trend.direction === 'neutral',
         }"
       >
         <lucide-angular [img]="getTrendIcon(data.trend.direction)" class="w-5 h-5">

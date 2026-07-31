@@ -147,9 +147,30 @@ export class SupplierList {
       next: (res) => {
         const stats = res.data;
         this.stats = [
-          { titleKey: 'supplier.stats.total', value: stats.totalSupplier, icon: Contact },
-          // { titleKey: 'supplier.stats.active', value: stats.activeProduct, icon: ArchiveRestore },
-          // { titleKey: 'supplier.stats.inactive', value: stats.inactiveProduct, icon: ArchiveX },
+          {
+            titleKey: 'supplier.stats.total',
+            value: stats.totalSupplier,
+            icon: Contact,
+            iconColor: 'indigo',
+            trend: stats.totalSupplierTrend,
+            format: 'number',
+          },
+          {
+            titleKey: 'supplier.stats.active',
+            value: stats.activeSupplier,
+            icon: Contact,
+            iconColor: 'green',
+            trend: stats.activeSupplierTrend,
+            format: 'number',
+          },
+          {
+            titleKey: 'supplier.stats.inactive',
+            value: stats.inactiveSupplier,
+            icon: Contact,
+            iconColor: 'red',
+            trend: stats.inactiveSupplierTrend,
+            format: 'number',
+          },
         ];
         this.cdr.detectChanges();
       },
