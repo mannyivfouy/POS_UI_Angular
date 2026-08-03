@@ -18,12 +18,12 @@ export class SidebarComponent {
 
   menu = [
     { labelKey: 'menu.dashboard', route: '/dashboard', icon: LayoutDashboard, roles: ['Admin'] },
-    { labelKey: 'menu.sale', route: '/sales', icon: ShoppingCart, roles: ['Admin', 'Cashier'] },
-    { labelKey: 'menu.sale_history', route: '/sales-history', icon: History, roles: ['Admin', 'Manager'] },
+    { labelKey: 'menu.sale', route: '/sales/create', icon: ShoppingCart, roles: ['Admin', 'Cashier'] },
+    { labelKey: 'menu.sale_history', route: '/sales/sales-history', icon: History, roles: ['Admin', 'Manager'] },
     { labelKey: 'menu.stock', route: '/stocks', icon: Archive, roles: ['Admin', 'Cashier', 'Manager'] },
     { labelKey: 'menu.category', route: '/categories', icon: Boxes, roles: ['Admin', 'Cashier', 'Manager'] },
-    { labelKey: 'menu.purchase', route: '/purchases', icon: ShoppingBag, roles: ['Admin', 'Manager'] },
-    { labelKey: 'menu.purchase_history', route: '/purchases-history', icon: ReceiptText, roles: ['Admin', 'Manager'] },
+    { labelKey: 'menu.purchase', route: '/purchases/create', icon: ShoppingBag, roles: ['Admin', 'Manager'] },
+    { labelKey: 'menu.purchase_history', route: '/purchases/purchases-history', icon: ReceiptText, roles: ['Admin', 'Manager'] },
     { labelKey: 'menu.user', route: '/users', icon: Users, roles: ['Admin'] },
     { labelKey: 'menu.role', route: '/roles', icon: ShieldCheck, roles: ['Admin'] },
     { labelKey: 'menu.customer', route: '/customers', icon: UserCircle, roles: ['Admin', 'Cashier'] },

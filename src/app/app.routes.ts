@@ -67,23 +67,51 @@ export const routes: Routes = [
       },
       {
         path: 'purchases',
-        loadComponent: () =>
-          import('./features/purchase/purchase-form/purchase-form').then((m) => m.PurchaseForm),
-        canActivate: [roleGuard],
-        data: {
-          roles: ['Admin', 'Manager'],
-        },
+        children: [
+          {
+            path: 'create',
+            loadComponent: () =>
+              import('./features/purchase/purchase-form/purchase-form').then((m) => m.PurchaseForm),
+            canActivate: [roleGuard],
+            data: {
+              roles: ['Admin', 'Manager'],
+            },
+          },
+          {
+            path: 'purchases-history',
+            loadComponent: () =>
+              import('./features/purchase/purchase-history/purchase-history').then(
+                (m) => m.PurchaseHistory,
+              ),
+            canActivate: [roleGuard],
+            data: {
+              roles: ['Admin', 'Manager'],
+            },
+          }
+        ],
       },
       {
-        path: 'purchases-history',
-        loadComponent: () =>
-          import('./features/purchase/purchase-history/purchase-history').then(
-            (m) => m.PurchaseHistory,
-          ),
-        canActivate: [roleGuard],
-        data: {
-          roles: ['Admin', 'Manager'],
-        },
+        path: 'sales',
+        children: [
+          {
+            path: 'create',
+            loadComponent: () =>
+              import('./features/sale/sale-form/sale-form').then((m) => m.SaleForm),
+            canActivate: [roleGuard],
+            data: {
+              roles: ['Admin', 'Cashier'],
+            },
+          },
+          {
+            path: 'sales-history',
+            loadComponent: () =>
+              import('./features/sale/sale-history/sale-history').then((m) => m.SaleHistory),
+            canActivate: [roleGuard],
+            data: {
+              roles: ['Admin', 'Manager'],
+            },
+          },
+        ],
       },
     ],
   },

@@ -38,3 +38,11 @@ export interface PurchaseStats {
   totalAveragePurchase: number;
   data: any;
 }
+
+export interface SaleStats {
+  totalSales: number;
+  totalSalesRevenue: number;
+  totalProductsSold: number;
+  totalAverageSale: number;
+  data: any;
+}
