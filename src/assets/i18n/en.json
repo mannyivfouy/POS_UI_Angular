@@ -281,8 +281,8 @@
   },
   "purchase": {
     "list": {
-      "title": "Purchase History Management",
-      "subtitle": "Manage all system purchase history",
+      "title": "Purchase History",
+      "subtitle": "All system purchase history",
       "search": "Search purchase history...",
       "add": "Create New Purchase"
     },
@@ -319,6 +319,19 @@
       "total_amount": "Total Purchase Amount",
       "total_purchased_items": "Total Purchased Items",
       "average_purchase_amount": "Average Purchase Amount"
+    }
+  },
+  "purchase_form" : {
+    "title" : "Purchase Management",
+    "subtitle" : "Create a new stock purchase",
+    "save_purchase" : "Save Purchase",
+    "purchase_info" : {
+      "title" : "Perchase Information",
+      "supplier" : "Supplier",
+      "supplier_placeholder" : "Select Supplier",
+      "purchase_date" : "Purchase Date",
+      "payment_status" : "Payment Status",
+      "invoice_no": "Invoice No"
     }
   }
 }

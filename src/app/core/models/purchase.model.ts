@@ -33,3 +33,30 @@ export interface PurchaseDetailResponse {
     items: PurchaseItem[];
   };
 }
+
+export interface CreatePurchase {
+  supplierId: string;
+  purchaseDate: Date;
+  paymentStatus: 'pending' | 'paid';
+
+  items: CreatePurchaseItem[];
+
+  subtotal: number;
+  discount: number;
+  tax: number;
+  shipping: number;
+  total: number;
+
+  note?: string;
+}
+
+export interface CreatePurchaseItem {
+  productId: string;
+  quantity: number;
+  costPrice: number;
+  total: number;
+}
+
+export interface PurchaseItemForm extends CreatePurchaseItem {
+  product: Product;
+}
