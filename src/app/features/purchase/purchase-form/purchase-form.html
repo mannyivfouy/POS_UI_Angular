@@ -1,1 +1,190 @@
-<p>purchase-form works!</p>
+<div class="space-y-4">
+  <!-- Header -->
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-800">
+        {{ 'purchase_form.title' | translate }}
+      </h1>
+
+      <p class="text-sm text-gray-500">
+        {{ 'purchase_form.subtitle' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Purchase Information -->
+  <div class="mb-6 rounded-xl bg-white p-6 shadow-sm">
+    <h2 class="mb-5 text-lg font-semibold text-gray-800">
+      {{ 'purchase_form.purchase_info.title' | translate }}
+    </h2>
+
+    <div class="grid grid-cols-4 gap-5">
+      <!-- Supplier -->
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700">
+          {{ 'purchase_form.purchase_info.supplier' | translate }}
+        </label>
+
+        <select
+          class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-indigo-500"
+        >
+          <option>
+            {{ 'purchase_form.purchase_info.supplier_placeholder' | translate }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Purchase Date -->
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700">
+          {{ 'purchase_form.purchase_info.purchase_date' | translate }}
+        </label>
+
+        <input
+          type="date"
+          class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-indigo-500"
+        />
+      </div>
+
+      <!-- Payment Status -->
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700">
+          {{ 'purchase_form.purchase_info.payment_status' | translate }}
+        </label>
+
+        <select
+          class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-indigo-500"
+        >
+          <option>Pending</option>
+
+          <option>Paid</option>
+        </select>
+      </div>
+
+      <!-- Invoice -->
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700">
+          {{ 'purchase_form.purchase_info.invoice_no' | translate }}
+        </label>
+
+        <input
+          readonly
+          value="AUTO-000125"
+          class="w-full rounded-lg border border-gray-300 px-3 py-2"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Search -->
+  <div class="mb-6 rounded-xl bg-white p-6 shadow-sm">
+    <h2 class="mb-4 text-lg font-semibold text-gray-800">Add Products</h2>
+
+    <div class="relative">
+      <input
+        type="text"
+        placeholder="Search product by name or barcode..."
+        class="w-full rounded-lg border border-gray-300 px-4 py-3 pl-10 outline-none focus:border-indigo-500"
+      />
+
+      <!-- Search Icon -->
+      <span class="absolute left-3 top-3.5 text-gray-400"> 🔍 </span>
+    </div>
+  </div>
+
+  <!-- Purchase Items Table -->
+  <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-sm">
+    <div class="border-b px-6 py-4">
+      <h2 class="font-semibold text-gray-800">Purchase Items</h2>
+    </div>
+
+    <table class="w-full">
+      <thead class="bg-gray-50">
+        <tr class="text-left text-sm text-gray-600">
+          <th class="px-6 py-4">Product</th>
+
+          <th class="px-6 py-4 text-center">Current Stock</th>
+
+          <th class="px-6 py-4 text-center">Quantity</th>
+
+          <th class="px-6 py-4 text-center">Cost Price</th>
+
+          <th class="px-6 py-4 text-center">Subtotal</th>
+
+          <th class="px-6 py-4 text-center">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- Example Row -->
+
+        <tr class="border-t">
+          <td class="px-6 py-4">
+            <div>
+              <p class="font-medium text-gray-800">Coca Cola 330ml</p>
+
+              <p class="text-sm text-gray-500">SKU: COKE330</p>
+            </div>
+          </td>
+
+          <td class="px-6 py-4 text-center">50</td>
+
+          <td class="px-6 py-4 text-center">
+            <input type="number" value="10" class="w-20 rounded-lg border px-2 py-1 text-center" />
+          </td>
+
+          <td class="px-6 py-4 text-center">
+            <input
+              type="number"
+              value="0.75"
+              class="w-24 rounded-lg border px-2 py-1 text-center"
+            />
+          </td>
+
+          <td class="px-6 py-4 text-center font-medium">$7.50</td>
+
+          <td class="px-6 py-4 text-center">
+            <button class="rounded-lg p-2 text-red-500 hover:bg-red-50">🗑</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Summary -->
+  <div class="flex justify-end mb-6">
+    <div class="w-96 rounded-xl bg-white p-6 shadow-sm">
+      <h2 class="mb-5 text-lg font-semibold text-gray-800">Summary</h2>
+
+      <div class="space-y-4">
+        <div class="flex justify-between text-gray-600">
+          <span> Total Products </span>
+
+          <span class="font-medium text-gray-800"> 3 </span>
+        </div>
+
+        <div class="flex justify-between text-gray-600">
+          <span> Total Quantity </span>
+
+          <span class="font-medium text-gray-800"> 35 </span>
+        </div>
+
+        <hr />
+
+        <div class="flex justify-between text-lg font-bold">
+          <span> Grand Total </span>
+
+          <span class="text-indigo-600"> $19.50 </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-end">
+    <button
+      class="rounded-lg bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-700 cursor-pointer"
+    >
+      {{ 'purchase_form.save_purchase' | translate }}
+    </button>
+  </div>
+</div>
