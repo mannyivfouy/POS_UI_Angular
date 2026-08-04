@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { Archive, Banknote, ChartNoAxesColumnIncreasing, ChevronDown, LucideAngularModule, Plus, Printer, ReceiptText } from 'lucide-angular';
+import { Archive, Banknote, ChartNoAxesColumnIncreasing, ChevronDown, LucideAngularModule, Package, Plus, Printer, Receipt, ReceiptText } from 'lucide-angular';
 import { Search } from '../../../shared/components/search/search';
 import { Purchase, PurchaseItem } from '../../../core/models/purchase.model';
 import { PurchaseService } from '../../../core/services/purchase.service';
@@ -35,10 +35,10 @@ export class PurchaseHistory {
     Plus,
     ChevronDown,
     Printer,
-    ReceiptText,
+    Receipt,
     Banknote,
     ChartNoAxesColumnIncreasing,
-    Archive
+    Package
   };
 
   purchases: Purchase[] = [];
@@ -84,7 +84,7 @@ export class PurchaseHistory {
   }
 
   routeToPurchase() {
-    this.router.navigate(['/purchases']);
+    this.router.navigate(['/purchases/create']);
   }
 
   changePage(page: number): void {
@@ -171,7 +171,7 @@ export class PurchaseHistory {
           {
             titleKey: 'purchase.stats.total_purchased_items',
             value: stats.totalPurchaseItems,
-            icon: Archive,
+            icon: Package,
             iconColor: 'indigo',
             trend: stats.totalPurchaseItemsTrend,
             format: 'number'
@@ -185,6 +185,7 @@ export class PurchaseHistory {
             format: 'currency'
           },
         ]
+        this.cdr.detectChanges()
       },
       error: () => {
         this.loading = false

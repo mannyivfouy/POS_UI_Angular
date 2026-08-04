@@ -29,17 +29,22 @@ export class StatsCard {
   get formattedValue(): string {
   if (!this.data) return '';
 
+  const value = this.data.value;
+
+  if (value === undefined || value === null) {
+    return '0';
+  }
+
   switch (this.data.format) {
     case 'currency':
-      return `$${this.data.value.toLocaleString()}`;
-      // or: return `៛${this.data.value.toLocaleString()}`;
+      return `$${Number(value).toLocaleString()}`;
 
     case 'percent':
-      return `${this.data.value}%`;
+      return `${value}%`;
 
     case 'number':
     default:
-      return this.data.value.toLocaleString();
+      return Number(value).toLocaleString();
   }
 }
 }
