@@ -5,7 +5,7 @@
     "ok": "យល់ព្រម",
     "close": "បិទ",
     "print": "បោះពុម្ព",
-    "compare_stats" : "ប្រៀបធៀបនឹងខែមុន"
+    "compare_stats": "ប្រៀបធៀបនឹងខែមុន"
   },
   "drawer": {
     "manage_information": "គ្រប់គ្រងព័ត៌មាន"
@@ -323,17 +323,40 @@
       "average_purchase_amount": "មធ្យមភាគទឹកប្រាក់ទិញចូល"
     }
   },
-  "purchase_form" : {
-    "title" : "ការគ្រប់គ្រងការទិញទំនិញចូល",
-    "subtitle" : "បង្កើតការទិញទំនិញចូលស្តុកថ្មី",
-    "save_purchase" : "រក្សាទុកការទិញទំនិញ",
-    "purchase_info" : {
-      "title" : "ព័ត៌មានការទិញទំនិញចូល",
-      "supplier" : "អ្នកផ្គត់ផ្គង់",
-      "supplier_placeholder" : "ជ្រើសរើសអ្នកផ្គត់ផ្គង់",
-      "purchase_date" : "កាលបរិច្ឆេទទិញចូល",
-      "payment_status" : "ស្ថានភាពការទូទាត់",
-      "invoice_no" : "លេខវិក្កយបត្រ"
+  "purchase_form": {
+    "title": "ការគ្រប់គ្រងការទិញទំនិញចូល",
+    "subtitle": "បង្កើតការទិញទំនិញចូលស្តុកថ្មី",
+    "save_purchase": "រក្សាទុកការទិញទំនិញ",
+    "purchase_info": {
+      "title": "ព័ត៌មានការទិញទំនិញចូល",
+      "supplier": "អ្នកផ្គត់ផ្គង់",
+      "supplier_placeholder": "ជ្រើសរើសអ្នកផ្គត់ផ្គង់",
+      "purchase_date": "កាលបរិច្ឆេទទិញចូល",
+      "payment_status": "ស្ថានភាពការទូទាត់",
+      "invoice_no": "លេខវិក្កយបត្រ"
+    }
+  },
+  "sale": {
+    "list": {
+      "title": "ប្រវត្តិនៃការលក់",
+      "subtitle": "ប្រវត្តិនៃការលក់ទាំងអស់",
+      "search": "ស្វែងរកប្រវត្តិនៃការលក់...",
+      "add": "បង្កើតការលក់"
+    },
+    "stats": {
+      "total_sale": "ការលក់សរុប",
+      "total_sale_revenue": "ចំណូលលក់សរុប",
+      "total_product_sold": "ចំនួនទំនិញលក់ចេញសរុប",
+      "average_sale_amount": "មធ្យមភាគទឹកប្រាក់លក់"
+    },
+    "table": {
+      "invoice_no": "លេខវិក្កយបត្រ",
+      "customer": "អតិថិជន",
+      "sale_date": "កាលបរិច្ឆេទលក់",
+      "total": "សរុប",
+      "payment_status": "ស្ថានភាពការទូទាត់",
+      "created_by": "បង្កើតដោយ",
+      "action": "សកម្មភាព"
     }
   }
 }

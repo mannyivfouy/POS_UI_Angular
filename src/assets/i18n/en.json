@@ -5,7 +5,7 @@
     "ok": "OK",
     "close": "Close",
     "print": "Print",
-    "compare_stats" : "Compare to last month"
+    "compare_stats": "Compare to last month"
   },
   "drawer": {
     "manage_information": "Manage information"
@@ -321,17 +321,40 @@
       "average_purchase_amount": "Average Purchase Amount"
     }
   },
-  "purchase_form" : {
-    "title" : "Purchase Management",
-    "subtitle" : "Create a new stock purchase",
-    "save_purchase" : "Save Purchase",
-    "purchase_info" : {
-      "title" : "Perchase Information",
-      "supplier" : "Supplier",
-      "supplier_placeholder" : "Select Supplier",
-      "purchase_date" : "Purchase Date",
-      "payment_status" : "Payment Status",
+  "purchase_form": {
+    "title": "Purchase Management",
+    "subtitle": "Create a new stock purchase",
+    "save_purchase": "Save Purchase",
+    "purchase_info": {
+      "title": "Perchase Information",
+      "supplier": "Supplier",
+      "supplier_placeholder": "Select Supplier",
+      "purchase_date": "Purchase Date",
+      "payment_status": "Payment Status",
       "invoice_no": "Invoice No"
+    }
+  },
+  "sale": {
+    "list": {
+      "title": "Sale History",
+      "subtitle": "All system sale history",
+      "search": "Seach sale history...",
+      "add": "Create New Sale"
+    },
+    "stats": {
+      "total_sale": "Total Sales",
+      "total_sale_revenue": "Total Sales Revenue",
+      "total_product_sold": "Total Products Sold",
+      "average_sale_amount": "Average Sale Amount"
+    },
+    "table": {
+      "invoice_no": "Invoice No",
+      "customer": "Customer",
+      "sale_date": "Purchase Date",
+      "total": "Total",
+      "payment_status": "Payment Status",
+      "created_by": "Created By",
+      "action": "Actions"
     }
   }
 }
