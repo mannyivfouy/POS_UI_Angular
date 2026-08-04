@@ -191,3 +191,10 @@
     </div>
   </div>
 </div>
+
+<app-sale-detail-dialog
+  [open]="isDetailOpen"
+  [sale]="selectedSale"
+  [items]="saleItems"
+  (close)="closeDetail()"
+></app-sale-detail-dialog>

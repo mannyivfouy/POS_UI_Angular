@@ -25,10 +25,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { StatsGrid } from '../../../shared/components/stats-grid/stats-grid';
 import { Search } from '../../../shared/components/search/search';
 import { Pagination } from '../../../shared/components/pagination/pagination';
+import { SaleDetailDialog } from "../sale-detail-dialog/sale-detail-dialog";
 
 @Component({
   selector: 'app-sale-history',
-  imports: [LucideAngularModule, CommonModule, TranslatePipe, StatsGrid, Search, Pagination],
+  imports: [LucideAngularModule, CommonModule, TranslatePipe, StatsGrid, Search, Pagination, SaleDetailDialog],
   templateUrl: './sale-history.html',
   styleUrl: './sale-history.css',
 })
