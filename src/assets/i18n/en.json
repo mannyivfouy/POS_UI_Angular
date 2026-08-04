@@ -355,6 +355,24 @@
       "payment_status": "Payment Status",
       "created_by": "Created By",
       "action": "Actions"
+    },
+    "detail_dialog": {
+      "title": "Sale Detail",
+      "invoice_no": "Invoice No",
+      "sale_items": "Sale Items",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "tax": "Tax",
+      "total": "Total",
+      "product": "Product",
+      "qty": "Quantity",
+      "selling_price": "Selling Price",
+      "note": "Note",
+      "customer": "Customer",
+      "sale_date": "Sale Date",
+      "created_by": "Created By",
+      "payment_status": "Payment Status",
+      "items": "Items"
     }
   }
 }
