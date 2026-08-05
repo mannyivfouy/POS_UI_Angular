@@ -87,7 +87,7 @@ export const routes: Routes = [
             data: {
               roles: ['Admin', 'Manager'],
             },
-          }
+          },
         ],
       },
       {
@@ -112,6 +112,14 @@ export const routes: Routes = [
             },
           },
         ],
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('./features/profile/profile').then((m) => m.Profile),
+        canActivate: [roleGuard],
+        data: {
+          roles: ['Admin', 'Manager', 'Cashier']
+        }
       },
     ],
   },
