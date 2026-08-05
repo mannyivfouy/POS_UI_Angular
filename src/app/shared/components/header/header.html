@@ -1,8 +1,17 @@
 <header class="h-11 bg-[#F7F9FB] border-b border-gray-200 flex items-center justify-between px-6">
   <!-- LEFT (you can add title/search later) -->
   <div class="flex items-center">
-
+    <button
+      (click)="toggleSidebar.emit()"
+      class="p-2 rounded-lg hover:text-indigo-600 cursor-pointer"
+    >
+      <lucide-icon
+        [img]="icons.Menu"
+        class="w-5 h-5"
+      ></lucide-icon>
+    </button>
   </div>
+
 
   <!-- RIGHT -->
   <div class="flex items-center gap-2">

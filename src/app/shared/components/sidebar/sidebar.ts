@@ -2,7 +2,22 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { LucideAngularModule, LayoutDashboard, ShoppingCart, History, Archive, Boxes, Package, ShoppingBag, ReceiptText, Users, ShieldCheck, UserCircle, Contact, PackagePlus, Truck, ContactRound } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  LayoutDashboard,
+  ShoppingCart,
+  Boxes,
+  Package,
+  ReceiptText,
+  Users,
+  ShieldCheck,
+  UserCircle,
+  PackagePlus,
+  Truck,
+  ContactRound,
+  LogOut,
+  Menu
+} from 'lucide-angular';
 import { LucideWarehouse } from '@lucide/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -16,19 +31,61 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class SidebarComponent {
   @Input() isOpen = true;
 
+  readonly LogOut = LogOut
+
   menu = [
     { labelKey: 'menu.dashboard', route: '/dashboard', icon: LayoutDashboard, roles: ['Admin'] },
-    { labelKey: 'menu.sale', route: '/sales/create', icon: ShoppingCart, roles: ['Admin', 'Cashier'] },
-    { labelKey: 'menu.sale_history', route: '/sales/sales-history', icon: ReceiptText, roles: ['Admin', 'Manager'] },
-    { labelKey: 'menu.stock', route: '/stocks', icon: Package, roles: ['Admin', 'Cashier', 'Manager'] },
-    { labelKey: 'menu.category', route: '/categories', icon: Boxes, roles: ['Admin', 'Cashier', 'Manager'] },
-    { labelKey: 'menu.purchase', route: '/purchases/create', icon: PackagePlus, roles: ['Admin', 'Manager'] },
-    { labelKey: 'menu.purchase_history', route: '/purchases/purchases-history', icon: ReceiptText, roles: ['Admin', 'Manager'] },
+    {
+      labelKey: 'menu.sale',
+      route: '/sales/create',
+      icon: ShoppingCart,
+      roles: ['Admin', 'Cashier'],
+    },
+    {
+      labelKey: 'menu.sale_history',
+      route: '/sales/sales-history',
+      icon: ReceiptText,
+      roles: ['Admin', 'Manager'],
+    },
+    {
+      labelKey: 'menu.stock',
+      route: '/stocks',
+      icon: Package,
+      roles: ['Admin', 'Cashier', 'Manager'],
+    },
+    {
+      labelKey: 'menu.category',
+      route: '/categories',
+      icon: Boxes,
+      roles: ['Admin', 'Cashier', 'Manager'],
+    },
+    {
+      labelKey: 'menu.purchase',
+      route: '/purchases/create',
+      icon: PackagePlus,
+      roles: ['Admin', 'Manager'],
+    },
+    {
+      labelKey: 'menu.purchase_history',
+      route: '/purchases/purchases-history',
+      icon: ReceiptText,
+      roles: ['Admin', 'Manager'],
+    },
     { labelKey: 'menu.user', route: '/users', icon: Users, roles: ['Admin'] },
     { labelKey: 'menu.role', route: '/roles', icon: ShieldCheck, roles: ['Admin'] },
-    { labelKey: 'menu.customer', route: '/customers', icon: ContactRound, roles: ['Admin', 'Cashier'] },
-    { labelKey : 'menu.supplier', route: '/suppliers', icon: Truck, roles: ['Admin', 'Manager']},
-    {labelKey: 'menu.profile', route: '/profile', icon: UserCircle, roles: ['Admin', 'Manager', 'Cashier']}
+    {
+      labelKey: 'menu.customer',
+      route: '/customers',
+      icon: ContactRound,
+      roles: ['Admin', 'Cashier'],
+    },
+    { labelKey: 'menu.supplier', route: '/suppliers', icon: Truck, roles: ['Admin', 'Manager'] },
+    {
+      labelKey: 'menu.profile',
+      route: '/profile',
+      icon: UserCircle,
+      roles: ['Admin', 'Manager', 'Cashier'],
+    },
   ];
 
   constructor(private authService: AuthService) {}
