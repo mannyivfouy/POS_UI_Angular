@@ -13,7 +13,7 @@ export class ConfirmDialog {
   @Input() confirmText = 'Confirm';
   @Input() cancelText = 'Cancel';
   @Input() showCancel = true;
-  @Input() type: 'danger' | 'warning' | 'info' = 'danger';
+  @Input() type: 'danger' | 'warning' | 'info' | 'success' = 'danger';
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
@@ -52,6 +52,9 @@ export class ConfirmDialog {
         return 'bg-indigo-500 hover:bg-indigo-600';
 
       case 'info':
+        return 'bg-indigo-600 hover:bg-indigo-700';
+
+      case 'success':
         return 'bg-indigo-600 hover:bg-indigo-700';
 
       default:

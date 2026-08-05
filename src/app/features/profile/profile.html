@@ -1,0 +1,305 @@
+<form [formGroup]="profileForm" (ngSubmit)="submit()" class="space-y-5">
+  <!-- Avatar Upload -->
+  <div class="flex items-center gap-4">
+    <div
+      (click)="avatarInput.click()"
+      class="relative flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-gray-700"
+    >
+      @if (avatarPreview) {
+        <img
+          [src]="avatarPreview"
+          alt="Avatar preview"
+          class="h-full w-full rounded-full object-cover"
+        />
+      } @else {
+        <lucide-icon [img]="icons.User" class="text-gray-400" />
+      }
+
+      <button
+        type="button"
+        (click)="$event.stopPropagation(); avatarInput.click()"
+        class="absolute -bottom-0.5 -right-0.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-gray-800"
+      >
+        <lucide-icon [img]="icons.Camera" class="h-3 w-3 text-white" />
+      </button>
+    </div>
+
+    <div>
+      <p class="text-sm font-medium text-gray-600">
+        {{ 'profile.form.upload_avatar' | translate }}
+      </p>
+
+      <p class="text-xs text-gray-400">
+        {{ 'profile.form.avatar_hint' | translate }}
+      </p>
+
+      <input
+        type="file"
+        accept="image/png,image/jpeg"
+        class="hidden"
+        #avatarInput
+        (change)="onAvatarChange($event)"
+      />
+    </div>
+  </div>
+
+  <hr class="border-gray-200" />
+
+  <!-- Full Name -->
+  <div>
+    <span class="text-red-600">* </span>
+    <label class="text-sm font-medium text-gray-700">
+      {{ 'profile.form.fullname' | translate }}
+    </label>
+
+    <div class="mt-1">
+      <input
+        type="text"
+        formControlName="fullname"
+        placeholder="Jane Cooper"
+        class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        [ngClass]="{
+          'border-red-500 bg-red-50 text-red-600':
+            profileForm.get('fullname')?.touched && profileForm.get('fullname')?.invalid,
+          'border-gray-200': !(
+            profileForm.get('fullname')?.touched && profileForm.get('fullname')?.invalid
+          ),
+        }"
+      />
+    </div>
+
+    <p
+      *ngIf="profileForm.get('fullname')?.touched && profileForm.get('fullname')?.errors"
+      class="mt-1 text-sm text-red-600"
+    >
+      <span *ngIf="profileForm.get('fullname')?.hasError('required')">
+        {{ 'profile.validation.fullname_required' | translate }}
+      </span>
+
+      <span *ngIf="profileForm.get('fullname')?.hasError('minlength')">
+        {{ 'profile.validation.fullname_min' | translate }}
+      </span>
+
+      <span *ngIf="profileForm.get('fullname')?.hasError('maxlength')">
+        {{ 'profile.validation.fullname_max' | translate }}
+      </span>
+    </p>
+  </div>
+
+  <!-- username + Password -->
+  <div class="grid grid-cols-2 gap-3">
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'profile.form.username' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="text"
+          formControlName="username"
+          placeholder="Johnson"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              profileForm.get('username')?.touched && profileForm.get('username')?.invalid,
+            'border-gray-200': !(
+              profileForm.get('username')?.touched && profileForm.get('username')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="profileForm.get('username')?.touched && profileForm.get('username')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="profileForm.get('username')?.hasError('required')">
+          {{ 'profile.validation.username_required' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('username')?.hasError('minlength')">
+          {{ 'profile.validation.username_min' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('username')?.hasError('maxlength')">
+          {{ 'profile.validation.username_max' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('username')?.hasError('server')">
+          {{ 'profile.validation.username_exists' | translate }}
+        </span>
+      </p>
+    </div>
+
+    <!-- Password -->
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'profile.form.password' | translate }}
+      </label>
+
+      <div class="mt-1 relative">
+        <input
+          [type]="isPasswordVisible ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="••••••••"
+          class="w-full px-3 pr-10 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              profileForm.get('password')?.touched && profileForm.get('password')?.invalid,
+            'border-gray-200': !(
+              profileForm.get('password')?.touched && profileForm.get('password')?.invalid
+            ),
+          }"
+        />
+
+        <button
+          type="button"
+          (click)="togglePassword()"
+          class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer"
+        >
+          <lucide-icon [img]="isPasswordVisible ? icons.EyeOff : icons.Eye" class="h-4 w-4" />
+        </button>
+      </div>
+
+      <p
+        *ngIf="profileForm.get('password')?.touched && profileForm.get('password')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="profileForm.get('password')?.hasError('required')">
+          {{ 'profile.validation.password_required' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('password')?.hasError('minlength')">
+          {{ 'profile.validation.password_min' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('password')?.hasError('maxlength')">
+          {{ 'profile.validation.password_max' | translate }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Email + Phone -->
+  <div class="grid grid-cols-2 gap-3">
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'profile.form.email' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="text"
+          formControlName="email"
+          placeholder="jane@gmail.com"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              profileForm.get('email')?.touched && profileForm.get('email')?.invalid,
+            'border-gray-200': !(
+              profileForm.get('email')?.touched && profileForm.get('email')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="profileForm.get('email')?.hasError('required')">
+          {{ 'profile.validation.email_required' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('email')?.hasError('email')">
+          {{ 'profile.validation.email_invalid' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('email')?.hasError('maxlength')">
+          {{ 'profile.validation.email_max' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('email')?.hasError('server')">
+          {{ 'profile.validation.email_exists' | translate }}
+        </span>
+      </p>
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'profile.form.phone' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="text"
+          formControlName="phone"
+          placeholder="092828373"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid,
+            'border-gray-200': !(
+              profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="profileForm.get('phone')?.touched && profileForm.get('phone')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="profileForm.get('phone')?.hasError('required')">
+          {{ 'profile.validation.phone_required' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('phone')?.hasError('minlength')">
+          {{ 'profile.validation.phone_min' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('phone')?.hasError('maxlength')">
+          {{ 'profile.validation.phone_max' | translate }}
+        </span>
+
+        <span *ngIf="profileForm.get('phone')?.hasError('server')">
+          {{ 'profile.validation.phone_exists' | translate }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+
+  <div class="flex justify-end gap-3">
+    <button
+      type="button"
+      (click)="onCancel()"
+      class="rounded-lg px-5 py-2 text-sm text-white bg-pink-600 hover:bg-pink-700 font-semibold cursor-pointer transition"
+    >
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="rounded-lg px-5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 cursor-pointer transition"
+    >
+      {{ 'common.save' | translate }}
+    </button>
+  </div>
+</form>
+
+<app-confirm-dialog
+  [open]="showSuccessDialog"
+  [title]="'profile.alert.title' | translate"
+  [message]="'profile.alert.message' | translate"
+  confirmText="OK"
+  [showCancel]="false"
+  type="info"
+  (confirm)="closeSuccessDialog()"
+></app-confirm-dialog>

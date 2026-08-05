@@ -5,7 +5,8 @@
     "ok": "OK",
     "close": "Close",
     "print": "Print",
-    "compare_stats": "Compare to last month"
+    "compare_stats": "Compare to last month",
+    "save" : "Save"
   },
   "drawer": {
     "manage_information": "Manage information"
@@ -26,7 +27,8 @@
     "user": "User",
     "role": "Role",
     "customer": "Customer",
-    "supplier": "Supplier"
+    "supplier": "Supplier",
+    "profile" : "Profile"
   },
   "user": {
     "list": {
@@ -373,6 +375,42 @@
       "created_by": "Created By",
       "payment_status": "Payment Status",
       "items": "Items"
+    }
+  },
+  "profile" : {
+    "form" : {
+      "upload_avatar" : "Upload avatar",
+      "avatar_hint" : "PNG or JPG, up to 2MB",
+      "fullname" : "Fullname",
+      "username" : "Username",
+      "password" : "Password",
+      "email" : "Email",
+      "phone" : "Phone",
+      "cancel" : "Cancel"
+    },
+    "validation": {
+      "fullname_required": "Fullname is required ",
+      "fullname_min": "Fullname must be at least 3 characters ",
+      "fullname_max": "Fullname cannot exceed 50 characters ",
+      "username_required": "Username is required ",
+      "username_min": "Username must be at least 3 characters ",
+      "username_max": "Username cannot exceed 20 characters ",
+      "username_exists": "Username already exists",
+      "password_required": "Password is required ",
+      "password_min": "Password must be at least 6 characters ",
+      "password_max": "Password cannot exceed 20 characters ",
+      "email_required": "Email is required ",
+      "email_invalid": "Please enter a valid email address ",
+      "email_max": "Email cannot exceed 100 characters ",
+      "email_exists": "Email already exists",
+      "phone_required": "Phone is required ",
+      "phone_min": "Phone must be at least 9 characters ",
+      "phone_max": "Phone cannot exceed 15 characters ",
+      "phone_exists": "Phone already exists"
+    },
+    "alert": {
+      "title" : "Success",
+      "message" : "Profile updated successfully"
     }
   }
 }

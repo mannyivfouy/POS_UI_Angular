@@ -192,16 +192,16 @@ export class UserForm implements OnChanges {
     passwordControl?.updateValueAndValidity();
   }
 
-  setServerError(field: string, message: string){
+  setServerError(field: string, message: string) {
     const control = this.userForm.get(field);
 
     if (!control) return;
 
     control.setErrors({
       ...control.errors,
-      server: message
-    })
+      server: message,
+    });
 
-    control.markAllAsTouched()
+    control.markAllAsTouched();
   }
 }

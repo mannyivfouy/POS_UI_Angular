@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { LucideAngularModule, LayoutDashboard, ShoppingCart, History, Archive, Boxes, Package, ShoppingBag, ReceiptText, Users, ShieldCheck, UserCircle, Contact, PackagePlus, Truck } from 'lucide-angular';
+import { LucideAngularModule, LayoutDashboard, ShoppingCart, History, Archive, Boxes, Package, ShoppingBag, ReceiptText, Users, ShieldCheck, UserCircle, Contact, PackagePlus, Truck, ContactRound } from 'lucide-angular';
 import { LucideWarehouse } from '@lucide/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -26,8 +26,9 @@ export class SidebarComponent {
     { labelKey: 'menu.purchase_history', route: '/purchases/purchases-history', icon: ReceiptText, roles: ['Admin', 'Manager'] },
     { labelKey: 'menu.user', route: '/users', icon: Users, roles: ['Admin'] },
     { labelKey: 'menu.role', route: '/roles', icon: ShieldCheck, roles: ['Admin'] },
-    { labelKey: 'menu.customer', route: '/customers', icon: UserCircle, roles: ['Admin', 'Cashier'] },
-    {labelKey : 'menu.supplier', route: '/suppliers', icon: Truck, roles: ['Admin', 'Manager']}
+    { labelKey: 'menu.customer', route: '/customers', icon: ContactRound, roles: ['Admin', 'Cashier'] },
+    { labelKey : 'menu.supplier', route: '/suppliers', icon: Truck, roles: ['Admin', 'Manager']},
+    {labelKey: 'menu.profile', route: '/profile', icon: UserCircle, roles: ['Admin', 'Manager', 'Cashier']}
   ];
 
   constructor(private authService: AuthService) {}
