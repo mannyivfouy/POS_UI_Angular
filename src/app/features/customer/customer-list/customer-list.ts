@@ -1,5 +1,12 @@
 import { ChangeDetectorRef, Component, ViewChild, ViewChildren } from '@angular/core';
-import { CircleUser, LucideAngularModule, Pencil, Plus, Trash2 } from 'lucide-angular';
+import {
+  CircleUser,
+  ContactRound,
+  LucideAngularModule,
+  Pencil,
+  Plus,
+  Trash2,
+} from 'lucide-angular';
 import { Drawer } from '../../../shared/components/drawer/drawer';
 import { CustomerForm } from '../customer-form/customer-form';
 import { Customer } from '../../../core/models/customer.mode';
@@ -11,7 +18,7 @@ import { StatsGrid } from '../../../shared/components/stats-grid/stats-grid';
 import { Search } from '../../../shared/components/search/search';
 import { CommonModule } from '@angular/common';
 import { Pagination } from '../../../shared/components/pagination/pagination';
-import { ConfirmDialog } from "../../../shared/components/confirm-dialog/confirm-dialog";
+import { ConfirmDialog } from '../../../shared/components/confirm-dialog/confirm-dialog';
 
 @Component({
   selector: 'app-customer-list',
@@ -24,8 +31,8 @@ import { ConfirmDialog } from "../../../shared/components/confirm-dialog/confirm
     Pagination,
     Drawer,
     ConfirmDialog,
-    CustomerForm
-],
+    CustomerForm,
+  ],
   templateUrl: './customer-list.html',
   styleUrl: './customer-list.css',
 })
@@ -41,6 +48,7 @@ export class CustomerList {
     Pencil,
     Trash2,
     CircleUser,
+    ContactRound,
   };
 
   customers: Customer[] = [];
@@ -128,7 +136,12 @@ export class CustomerList {
       next: (res) => {
         const stats = res.data;
         this.stats = [
-          { titleKey: 'customer.stats.total', value: stats.totalCustomer, icon: CircleUser },
+          {
+            titleKey: 'customer.stats.total',
+            value: stats.totalCustomer,
+            icon: ContactRound,
+            iconColor: 'indigo',
+          },
         ];
         this.cdr.detectChanges();
       },

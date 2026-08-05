@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { ChevronDown, Contact, LucideAngularModule, Pencil, Plus, Trash2 } from 'lucide-angular';
+import { ChevronDown, Contact, LucideAngularModule, Pencil, Plus, Trash2, Truck } from 'lucide-angular';
 import { Supplier } from '../../../core/models/supplier.model';
 import { StatsCardModel } from '../../../shared/models/stats-card.model';
 import { SupplierService } from '../../../core/services/supplier.service';
@@ -42,6 +42,7 @@ export class SupplierList {
     Pencil,
     Trash2,
     ChevronDown,
+    Truck
   };
 
   suppliers: Supplier[] = [];
@@ -150,7 +151,7 @@ export class SupplierList {
           {
             titleKey: 'supplier.stats.total',
             value: stats.totalSupplier,
-            icon: Contact,
+            icon: Truck,
             iconColor: 'indigo',
             trend: stats.totalSupplierTrend,
             format: 'number',
@@ -158,7 +159,7 @@ export class SupplierList {
           {
             titleKey: 'supplier.stats.active',
             value: stats.activeSupplier,
-            icon: Contact,
+            icon: Truck,
             iconColor: 'green',
             trend: stats.activeSupplierTrend,
             format: 'number',
@@ -166,7 +167,7 @@ export class SupplierList {
           {
             titleKey: 'supplier.stats.inactive',
             value: stats.inactiveSupplier,
-            icon: Contact,
+            icon: Truck,
             iconColor: 'red',
             trend: stats.inactiveSupplierTrend,
             format: 'number',
