@@ -1,20 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { SearchService } from '../../../core/services/search.service';
 import { LanguageService } from '../../../core/services/language.service';
 import { CommonModule } from '@angular/common';
-import { Bell, CircleQuestionMark, LucideAngularModule } from 'lucide-angular';
+import { Bell, CircleQuestionMark, LucideAngularModule, Menu } from 'lucide-angular';
 import { LoadingScreenService } from '../../../core/services/loading.service';
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, LucideAngularModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header {
+  @Output() toggleSidebar = new EventEmitter<void>()
+
   icons = {
     Bell,
     CircleQuestionMark,
+    Menu
   };
 
   constructor(
