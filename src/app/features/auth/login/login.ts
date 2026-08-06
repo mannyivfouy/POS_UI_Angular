@@ -71,7 +71,18 @@ export class LoginComponent {
       next: (res) => {
         this.isLoading = false;
         this.authService.saveSession(res.result.token, res.result.user);
-        this.router.navigateByUrl('/dashboard');
+
+        const user = this.authService.getUser();
+
+        if (user.roleId.name === 'Cashier') {
+          this.router.navigateByUrl('/sales/create');
+        } else if (user.roleId.name === 'Manager') {
+          this.router.navigateByUrl('/sales/sales-history');
+        } else if (user.roleId.name === 'Admin') {
+          this.router.navigateByUrl('/dashboard');
+        } else {
+          this.router.navigateByUrl('/login');
+        }
       },
       error: (err) => {
         this.isLoading = false;
@@ -81,5 +92,3 @@ export class LoginComponent {
     });
   }
 }
-
-
