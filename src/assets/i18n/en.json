@@ -114,13 +114,11 @@
     "table": {
       "product": "Product",
       "stock_qty": "Stock Quantity",
-      "cost": "Cost",
-      "price": "Price",
+      "price": "Selling Price",
       "description": "Description",
+      "category" : "Category",
       "supplier": "Supplier",
       "status": "Status",
-      "createdAt": "Created At",
-      "updatedAt": "Updated At",
       "action": "Actions"
     }
   },

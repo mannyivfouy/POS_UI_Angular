@@ -5,6 +5,8 @@ import {
   ArchiveRestore,
   ArchiveX,
   LucideAngularModule,
+  Package,
+  PackageSearch,
   Pencil,
   Plus,
   Trash2,
@@ -42,6 +44,7 @@ export class ProductList {
     Archive,
     ArchiveX,
     ArchiveRestore,
+    PackageSearch
   };
 
   environment = environment;
@@ -113,9 +116,30 @@ export class ProductList {
       next: (res) => {
         const stats = res.data;
         this.stats = [
-          { titleKey: 'product.stats.total', value: stats.totalProduct, icon: Archive },
-          { titleKey: 'product.stats.active', value: stats.activeProduct, icon: ArchiveRestore },
-          { titleKey: 'product.stats.inactive', value: stats.inactiveProduct, icon: ArchiveX },
+          {
+            titleKey: 'product.stats.total',
+            value: stats.totalProduct,
+            icon: Package,
+            iconColor: 'indigo',
+            trend: stats.totalProductTrend,
+            format: 'number'
+          },
+          {
+            titleKey: 'product.stats.active',
+            value: stats.activeProduct,
+            icon: Package,
+            iconColor: 'green',
+            trend: stats.activeProductTrend,
+            format: 'number'
+          },
+          {
+            titleKey: 'product.stats.inactive',
+            value: stats.inactiveProduct,
+            icon: Package,
+            iconColor: 'red',
+            trend: stats.inactiveProductTrend,
+            format: 'number'
+          },
         ];
         this.cdr.detectChanges();
       },
