@@ -5,6 +5,7 @@ export interface Product {
   _id: string;
   name: string;
   barcode: string;
+  sku: string;
   costPrice: number;
   sellingPrice: number;
   stockQty: number;
