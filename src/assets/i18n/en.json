@@ -120,6 +120,23 @@
       "supplier": "Supplier",
       "status": "Status",
       "action": "Actions"
+    },
+    "detail_dialog" : {
+      "title": "Product Details",
+      "sku": "SKU",
+      "product_info": "Product Information",
+      "barcode": "Barcode",
+      "category": "Category",
+      "supplier": "Supplier",
+      "unit": "Unit",
+      "pricing_and_stock": "Pricing & Stock",
+      "cost_price": "Cost Price",
+      "selling_price": "Selling Price",
+      "stock": "Stock",
+      "low_stock_alert": "Low Stock Alert",
+      "description": "Description",
+      "created_at": "Created",
+      "updated_at": "Last Updated"
     }
   },
   "supplier": {

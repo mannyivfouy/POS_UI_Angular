@@ -1,0 +1,237 @@
+@if (open && product) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm animate__animated"
+    [ngClass]="closing ? 'animate__fadeOut' : 'animate__fadeIn'"
+    (animationend)="animationEnd()"
+    (click)="closingDialog()"
+  >
+    <div
+      class="w-full max-w-4xl max-h-[90vh] overflow-hidden rounded-2xl bg-white shadow-2xl animate__animated animate__faster"
+      [ngClass]="closing ? 'animate__zoomOut' : 'animate__zoomIn'"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Header -->
+      <div class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+        <div>
+          <h2 class="text-xl font-semibold text-gray-800">
+            {{'product.detail_dialog.title' | translate}}
+          </h2>
+        </div>
+
+        <button
+          class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl bg-red-100 text-red-600 transition hover:bg-red-200"
+          (click)="closingDialog()"
+        >
+          <lucide-icon [img]="icons.X"></lucide-icon>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="max-h-[70vh] overflow-y-auto p-6 space-y-6">
+        <!-- Product Header -->
+        <div class="flex items-center gap-5 rounded-xl border border-gray-200 p-5">
+          <!-- Product Image -->
+          <div
+            class="flex h-28 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gray-50 border border-gray-200"
+          >
+            @if (product.image) {
+              <img
+                [src]="
+                  product.image
+                    ? environment.fileUrl + product.image
+                    : 'assets/images/image_not_found.jpg'
+                "
+              />
+            } @else {
+              <img src="assets/images/image_not_found.jpg" />
+            }
+          </div>
+
+          <!-- Product Name -->
+          <div class="min-w-0">
+            <h3 class="text-xl font-semibold text-gray-800">
+              {{ product.name }}
+            </h3>
+
+            <p class="mt-1 text-sm text-gray-500">
+              {{'product.detail_dialog.sku' | translate}} :
+              {{ product.sku }}</p>
+            <span
+              class="mt-3 inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize"
+              [ngClass]="
+                product.status === 'active'
+                  ? 'bg-green-100 text-green-600'
+                  : 'bg-red-100 text-red-600'
+              "
+            >
+              {{ product.status }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Product Information -->
+        <div>
+          <h3 class="mb-4 text-lg font-semibold text-gray-800">
+            {{'product.detail_dialog.product_info' | translate}}
+          </h3>
+
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
+            <!-- Barcode -->
+            <div class="rounded-xl border border-gray-200 p-4">
+              <p class="text-xs uppercase text-gray-500">
+                {{'product.detail_dialog.barcode' | translate}}
+              </p>
+
+              <p class="mt-1 font-medium text-gray-800">
+                {{ product.barcode }}
+              </p>
+            </div>
+
+            <!-- Category -->
+            <div class="rounded-xl border border-gray-200 p-4">
+              <p class="text-xs uppercase text-gray-500">
+                {{'product.detail_dialog.category' | translate}}
+              </p>
+
+              <p class="mt-1 font-medium text-gray-800">
+                {{ product.categoryId.name }}
+              </p>
+            </div>
+
+            <!-- Supplier -->
+            <div class="rounded-xl border border-gray-200 p-4">
+              <p class="text-xs uppercase text-gray-500">
+                {{'product.detail_dialog.supplier' | translate}}
+              </p>
+
+              <p class="mt-1 font-medium text-gray-800">
+                {{ product.supplierId.name }}
+              </p>
+            </div>
+
+            <!-- Unit -->
+            <div class="rounded-xl border border-gray-200 p-4">
+              <p class="text-xs uppercase text-gray-500">
+                {{'product.detail_dialog.unit' | translate}}
+              </p>
+
+              <p class="mt-1 font-medium text-gray-800">
+                {{ product.unit }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pricing & Stock -->
+        <div>
+          <h3 class="mb-4 text-lg font-semibold text-gray-800">
+            {{'product.detail_dialog.pricing_and_stock' | translate}}
+          </h3>
+
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
+            <!-- Cost -->
+            <div class="rounded-xl border border-gray-200 p-4">
+              <p class="text-xs uppercase text-gray-500">
+                {{'product.detail_dialog.cost_price' | translate}}
+              </p>
+
+              <p class="mt-1 text-lg font-semibold text-gray-800">
+                {{ product.costPrice | currency }}
+              </p>
+            </div>
+
+            <!-- Selling -->
+            <div class="rounded-xl border border-gray-200 p-4">
+              <p class="text-xs uppercase text-gray-500">
+                {{'product.detail_dialog.selling_price' | translate}}
+              </p>
+
+              <p class="mt-1 text-lg font-semibold text-gray-800">
+                {{ product.sellingPrice | currency }}
+              </p>
+            </div>
+
+            <!-- Stock -->
+            <div class="rounded-xl border border-gray-200 p-4">
+              <p class="text-xs uppercase text-gray-500">
+                {{'product.detail_dialog.stock' | translate}}
+              </p>
+
+              <p class="mt-1 text-lg font-semibold text-gray-800">
+                {{ product.stockQty }}
+                <span class="text-sm font-normal text-gray-500">
+                  {{ product.unit }}
+                </span>
+              </p>
+            </div>
+
+            <!-- Low Stock Alert -->
+            <div class="rounded-xl border border-gray-200 p-4">
+              <p class="text-xs uppercase text-gray-500">
+                {{'product.detail_dialog.low_stock_alert' | translate}}
+              </p>
+
+              <p class="mt-1 text-lg font-semibold text-gray-800">
+                {{ product.lowStockAlert }}
+                <span class="text-sm font-normal text-gray-500">
+                  {{ product.unit }}
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="rounded-xl border border-gray-200 p-4">
+          <h3 class="mb-2 font-semibold text-gray-700">
+            {{'product.detail_dialog.description' | translate}}
+          </h3>
+
+          <p class="text-sm leading-6 text-gray-600">
+            {{ product.description || '-' }}
+          </p>
+        </div>
+
+        <!-- Metadata -->
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div class="rounded-xl border border-gray-200 p-4">
+            <p class="text-xs uppercase text-gray-500">
+              {{'product.detail_dialog.created_at' | translate}}
+            </p>
+
+            <p class="mt-1 font-medium text-gray-800">
+              {{ product.createdAt | date: 'medium' }}
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-gray-200 p-4">
+            <p class="text-xs uppercase text-gray-500">
+              {{'product.detail_dialog.updated_at' | translate}}
+            </p>
+
+            <p class="mt-1 font-medium text-gray-800">
+              {{ product.updatedAt | date: 'medium' }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="flex items-center justify-end gap-3 border-t border-gray-200 px-6 py-4">
+        <button
+          class="cursor-pointer rounded-lg bg-pink-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-pink-700"
+          (click)="closingDialog()"
+        >
+          {{ 'common.close' | translate }}
+        </button>
+
+        <!-- <button
+          class="cursor-pointer rounded-lg bg-indigo-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-indigo-700"
+          (click)="editProduct(product._id)"
+        >
+          Edit Product
+        </button> -->
+      </div>
+    </div>
+  </div>
+}

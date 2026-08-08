@@ -120,6 +120,23 @@
       "supplier": "អ្នកផ្គត់ផ្គង់",
       "status": "ស្ថានភាព",
       "action": "សកម្មភាព"
+    },
+    "detail_dialog" : {
+      "title": "ព័ត៌មានលម្អិតនៃទំនិញ",
+      "sku": "លេខកូដសម្គាល់",
+      "product_info": "ព័ត៌មានទំនិញ",
+      "barcode": "បារកូដ",
+      "category": "ប្រភេទទំនិញ",
+      "supplier": "អ្នកផ្គត់ផ្គង់",
+      "unit": "ខ្នាត",
+      "pricing_and_stock": "តម្លៃ និងស្តុក",
+      "cost_price": "តម្លៃដើម",
+      "selling_price": "តម្លៃលក់",
+      "stock": "ចំនួនក្នុងស្តុក",
+      "low_stock_alert": "ការដាស់តឿនស្តុកទាប",
+      "description": "ការពិពណ៌នា",
+      "created_at": "កាលបរិច្ឆេទបង្កើត",
+      "updated_at": "កាលបរិច្ឆេទកែប្រែ"
     }
   },
   "supplier": {

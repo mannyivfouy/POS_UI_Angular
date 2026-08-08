@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResponse } from '../models/paginated-response.model';
-import { Product } from '../models/product.model';
+import { Product, ProductDetailResponse } from '../models/product.model';
 import { ProductStats } from '../models/stats.model';
 
 @Injectable({
@@ -40,5 +40,24 @@ export class ProductService {
 
   getProductStats(): Observable<ProductStats> {
     return this.http.get<ProductStats>(`${this.apiUrl}/stats`);
+  }
+
+  getProductById(id: string): Observable<ProductDetailResponse<Product>> {
+    return this.http.get<ProductDetailResponse<Product>>(`${this.apiUrl}/${id}`);
+  }
+
+  // CREATE
+  createUser(data: FormData): Observable<Product> {
+    return this.http.post<Product>(`${this.apiUrl}/create`, data);
+  }
+
+  // UPDATE
+  updateUser(id: string, data: FormData): Observable<Product> {
+    return this.http.put<Product>(`${this.apiUrl}/update/${id}`, data);
+  }
+
+  // DELETE
+  deleteUser(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
