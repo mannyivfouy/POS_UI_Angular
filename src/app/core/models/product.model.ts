@@ -19,3 +19,8 @@ export interface Product {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface ProductDetailResponse<T> {
+  message: string;
+  data: T;
+}

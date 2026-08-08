@@ -12,7 +12,7 @@ import {
   Trash2,
 } from 'lucide-angular';
 import { environment } from '../../../../environments/environment';
-import { Product } from '../../../core/models/product.model';
+import { Product, ProductDetailResponse } from '../../../core/models/product.model';
 import { StatsCardModel } from '../../../shared/models/stats-card.model';
 import { ProductService } from '../../../core/services/product.service';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -21,6 +21,7 @@ import { Search } from '../../../shared/components/search/search';
 import { Pagination } from '../../../shared/components/pagination/pagination';
 import { Drawer } from '../../../shared/components/drawer/drawer';
 import { LoadingScreenService } from '../../../core/services/loading.service';
+import { ProductDetailDialog } from '../product-detail-dialog/product-detail-dialog';
 
 @Component({
   selector: 'app-product-list',
@@ -32,6 +33,7 @@ import { LoadingScreenService } from '../../../core/services/loading.service';
     Search,
     Pagination,
     Drawer,
+    ProductDetailDialog,
   ],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
@@ -44,7 +46,7 @@ export class ProductList {
     Archive,
     ArchiveX,
     ArchiveRestore,
-    PackageSearch
+    PackageSearch,
   };
 
   environment = environment;
@@ -63,6 +65,7 @@ export class ProductList {
 
   isDrawerOpen = false;
   selectedProduct: Product | null = null;
+  isDetailOpen = false;
 
   constructor(
     private productService: ProductService,
@@ -122,7 +125,7 @@ export class ProductList {
             icon: Package,
             iconColor: 'indigo',
             trend: stats.totalProductTrend,
-            format: 'number'
+            format: 'number',
           },
           {
             titleKey: 'product.stats.active',
@@ -130,7 +133,7 @@ export class ProductList {
             icon: Package,
             iconColor: 'green',
             trend: stats.activeProductTrend,
-            format: 'number'
+            format: 'number',
           },
           {
             titleKey: 'product.stats.inactive',
@@ -138,7 +141,7 @@ export class ProductList {
             icon: Package,
             iconColor: 'red',
             trend: stats.inactiveProductTrend,
-            format: 'number'
+            format: 'number',
           },
         ];
         this.cdr.detectChanges();
@@ -169,4 +172,21 @@ export class ProductList {
   }
 
   delete(product: any) {}
+
+  viewProductDetail(id: string): void {
+    this.productService.getProductById(id).subscribe({
+      next: (res) => {
+        this.selectedProduct = res.data;
+        this.isDetailOpen = true;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
+  closeDetail(): void {
+    this.isDetailOpen = false;
+    this.selectedProduct = null;
+  }
 }

@@ -143,6 +143,7 @@
               <td class="px-6 py-3 text-right">
                 <div class="flex justify-end gap-2">
                   <button
+                  (click)="viewProductDetail(product._id)"
                     class="text-gray-600 hover:text-indigo-600 px-3 py-1 rounded-md text-sm cursor-pointer"
                   >
                     <lucide-icon [img]="icons.PackageSearch" class="w-4 h-4"></lucide-icon>
@@ -193,3 +194,9 @@
     </div>
   </div>
 </div>
+
+<app-product-detail-dialog
+  [open]="isDetailOpen"
+  [product]="selectedProduct"
+  (close)="closeDetail()"
+></app-product-detail-dialog>
