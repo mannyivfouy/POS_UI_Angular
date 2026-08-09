@@ -1,32 +1,104 @@
 <header class="h-11 bg-[#F7F9FB] border-b border-gray-200 flex items-center justify-between px-6">
-  <!-- LEFT (you can add title/search later) -->
+  <!-- LEFT -->
   <div class="flex items-center">
     <button
       (click)="toggleSidebar.emit()"
       class="p-2 rounded-lg hover:text-indigo-600 cursor-pointer"
     >
-      <lucide-icon
-        [img]="icons.Menu"
-        class="w-5 h-5"
-      ></lucide-icon>
+      <lucide-icon [img]="icons.Menu" class="w-5 h-5"></lucide-icon>
     </button>
   </div>
 
-
   <!-- RIGHT -->
   <div class="flex items-center gap-2">
-    <!-- Notification Button -->
-    <button
-      class="relative flex items-center justify-center w-9 h-9 cursor-pointer"
-    >
-      <lucide-icon [img]="icons.Bell" class="w-5 h-5 text-gray-600 hover:text-indigo-600"></lucide-icon>
+    <!-- Notification -->
+    <div class="relative">
+      <!-- Bell Button -->
+      <button
+        type="button"
+        (click)="toggleNotifications()"
+        class="relative flex items-center justify-center w-9 h-9 cursor-pointer"
+      >
+        <lucide-icon
+          [img]="icons.Bell"
+          class="w-5 h-5 text-gray-600 hover:text-indigo-600"
+        ></lucide-icon>
 
-      <!-- Notification dot -->
-      <!-- <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span> -->
-    </button>
+        <!-- 1 notification → red dot -->
+        <span
+          *ngIf="notificationCount === 1"
+          class="absolute top-1 right-1 w-2 h-2 px-1 py-1 bg-red-500 rounded-full border-2 border-[#F7F9FB]"
+        ></span>
+
+        <!-- 2+ notifications → number -->
+        <span
+          *ngIf="notificationCount >= 2"
+          class="absolute top-0.5 -right-0.5 min-w-4 h-4 px-1 flex items-center justify-center bg-red-500 text-white text-[9px] font-semibold rounded-full border-2 border-[#F7F9FB]"
+        >
+          {{ notificationCount > 9 ? '9+' : notificationCount }}
+        </span>
+      </button>
+
+      <!-- Notification Dropdown -->
+      <div
+        *ngIf="showNotifications"
+        class="absolute right-0 top-10 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+      >
+        <!-- Dropdown Header -->
+        <div class="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+          <h3 class="text-sm font-semibold text-gray-800">
+            {{ 'notification.notification' | translate }}
+          </h3>
+
+          <span *ngIf="notificationCount > 0" class="text-xs text-gray-400">
+            {{ notificationCount }}
+          </span>
+        </div>
+
+        <!-- Notification List -->
+        <div class="max-h-80 overflow-y-auto">
+          <!-- Low Stock Notification -->
+          <div
+            *ngFor="let product of lowStockProducts"
+            class="flex gap-3 px-4 py-3 hover:bg-gray-50 border-b border-gray-100 cursor-pointer"
+          >
+            <!-- Icon -->
+            <div
+              class="shrink-0 w-8 h-8 rounded-lg bg-red-100 text-red-500 flex items-center justify-center"
+            >
+              <lucide-icon [img]="icons.CircleQuestionMark" class="w-4 h-4"></lucide-icon>
+            </div>
+
+            <!-- Content -->
+            <div class="min-w-0">
+              <p class="text-sm font-medium text-gray-800">
+                {{ 'notification.low_stock' | translate }}
+              </p>
+
+              <p class="text-xs text-gray-500 mt-0.5">
+                {{ product.name }} {{ 'notification.has_only' | translate }}
+                <span class="font-semibold text-red-500">
+                  {{ product.stockQty }}
+                </span>
+                {{'notification.items_left' | translate}}
+              </p>
+            </div>
+          </div>
+
+          <!-- No Notifications -->
+          <div
+            *ngIf="lowStockProducts.length === 0"
+            class="px-4 py-8 text-center text-sm text-gray-400"
+          >
+            No new notifications
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Language Button -->
     <button
+      type="button"
       (click)="toggleLanguage()"
       class="flex items-center gap-2 rounded-lg border-2 border-gray-200 bg-white px-3 py-1 hover:border-indigo-600 transition cursor-pointer"
     >

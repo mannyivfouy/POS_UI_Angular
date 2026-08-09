@@ -24,3 +24,8 @@ export interface ProductDetailResponse<T> {
   message: string;
   data: T;
 }
+
+export interface LowStockResponse {
+  message: string
+  data: Product[]
+}

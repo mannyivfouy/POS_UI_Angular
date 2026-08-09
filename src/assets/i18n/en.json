@@ -8,6 +8,12 @@
     "compare_stats": "Compare to last month",
     "save" : "Save"
   },
+  "notification" : {
+    "notification" : "Notification",
+    "low_stock" : "Low Stock",
+    "has_only" : "has only",
+    "items_left" : "items left"
+  },
   "drawer": {
     "manage_information": "Manage information"
   },

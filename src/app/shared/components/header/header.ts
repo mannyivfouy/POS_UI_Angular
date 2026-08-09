@@ -1,38 +1,65 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { AuthService } from '../../../core/services/auth.service';
-import { SearchService } from '../../../core/services/search.service';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { CommonModule } from '@angular/common';
 import { Bell, CircleQuestionMark, LucideAngularModule, Menu } from 'lucide-angular';
 import { LoadingScreenService } from '../../../core/services/loading.service';
+import { ProductService } from '../../../core/services/product.service';
+import { Product } from '../../../core/models/product.model';
+import { NavigationStart, Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, LucideAngularModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, TranslatePipe],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {
-  @Output() toggleSidebar = new EventEmitter<void>()
+export class Header implements OnInit {
+  @Output() toggleSidebar = new EventEmitter<void>();
 
   icons = {
     Bell,
     CircleQuestionMark,
-    Menu
+    Menu,
   };
 
+  lowStockProducts: Product[] = [];
+  showNotifications = false;
+  notificationCount = 0;
+
   constructor(
-    private authService: AuthService,
-    private searchService: SearchService,
     public languageService: LanguageService,
     private loadingScreenService: LoadingScreenService,
+    private productService: ProductService,
+    private cdr: ChangeDetectorRef,
+    private router : Router
   ) {}
 
-  get user() {
-    return this.authService.getUser();
+  ngOnInit(): void {
+    this.loadLowStockProducts();
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.showNotifications = false
+      }
+    })
   }
 
-  onSearch(event: any) {
-    this.searchService.setSearch(event.target.value);
+  loadLowStockProducts(): void {
+    this.productService.getLowStockAlert().subscribe({
+      next: (res) => {
+        this.lowStockProducts = res.data;
+        this.notificationCount = res.data.length;
+
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Failed to load low stock products:', err);
+      },
+    });
+  }
+
+  toggleNotifications(): void {
+    this.showNotifications = !this.showNotifications;
   }
 
   changeLanguage(lang: string) {
