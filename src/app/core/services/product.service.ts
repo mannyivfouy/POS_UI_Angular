@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResponse } from '../models/paginated-response.model';
-import { Product, ProductDetailResponse } from '../models/product.model';
+import { LowStockResponse, Product, ProductDetailResponse } from '../models/product.model';
 import { ProductStats } from '../models/stats.model';
 
 @Injectable({
@@ -40,6 +40,10 @@ export class ProductService {
 
   getProductStats(): Observable<ProductStats> {
     return this.http.get<ProductStats>(`${this.apiUrl}/stats`);
+  }
+
+  getLowStockAlert(): Observable<LowStockResponse> {
+    return this.http.get<LowStockResponse>(`${this.apiUrl}/low-stock`)
   }
 
   getProductById(id: string): Observable<ProductDetailResponse<Product>> {

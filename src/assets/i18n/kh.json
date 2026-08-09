@@ -6,7 +6,13 @@
     "close": "បិទ",
     "print": "បោះពុម្ព",
     "compare_stats": "ប្រៀបធៀបនឹងខែមុន",
-    "save" : "រក្សាទុក"
+    "save": "រក្សាទុក"
+  },
+  "notification": {
+    "notification": "ការជូនដំណឹង",
+    "low_stock": "ស្តុកជិតអស់",
+    "has_only": "មានត្រឹមតែ",
+    "items_left": "ទំនិញដែលនៅសល់"
   },
   "drawer": {
     "manage_information": "គ្រប់គ្រងព័ត៌មាន"
@@ -28,7 +34,7 @@
     "role": "តួនាទី",
     "customer": "អតិថិជន",
     "supplier": "អ្នកផ្គត់ផ្គង់",
-    "profile" : "ប្រវត្តិរូប"
+    "profile": "ប្រវត្តិរូប"
   },
   "user": {
     "list": {
@@ -116,12 +122,12 @@
       "stock_qty": "ចំនួនផលិតផល",
       "price": "តម្លៃលក់",
       "description": "ការពិពណ៌នា",
-      "category" : "ប្រភេទផលិតផល",
+      "category": "ប្រភេទផលិតផល",
       "supplier": "អ្នកផ្គត់ផ្គង់",
       "status": "ស្ថានភាព",
       "action": "សកម្មភាព"
     },
-    "detail_dialog" : {
+    "detail_dialog": {
       "title": "ព័ត៌មានលម្អិតនៃទំនិញ",
       "sku": "លេខកូដសម្គាល់",
       "product_info": "ព័ត៌មានទំនិញ",
@@ -394,15 +400,15 @@
       "items": "មុខទំនិញ"
     }
   },
-  "profile" : {
-    "form" : {
-      "upload_avatar" : "បញ្ចូលរូបភាពប្រវត្តិរូប",
-      "avatar_hint" : "PNG ឬ JPG ទំហំតិចជាង 2MB",
-      "fullname" : "ឈ្មោះពេញ",
-      "username" : "ឈ្មោះអ្នកប្រើប្រាស់",
-      "password" : "ពាក្យសម្ងាត់",
-      "email" : "អ៊ីមែល",
-      "phone" : "លេខទូរស័ព្ទ"
+  "profile": {
+    "form": {
+      "upload_avatar": "បញ្ចូលរូបភាពប្រវត្តិរូប",
+      "avatar_hint": "PNG ឬ JPG ទំហំតិចជាង 2MB",
+      "fullname": "ឈ្មោះពេញ",
+      "username": "ឈ្មោះអ្នកប្រើប្រាស់",
+      "password": "ពាក្យសម្ងាត់",
+      "email": "អ៊ីមែល",
+      "phone": "លេខទូរស័ព្ទ"
     },
     "validation": {
       "fullname_required": "ត្រូវបញ្ចូលឈ្មោះពេញ",
@@ -425,8 +431,8 @@
       "phone_exists": "លេខទូរស័ព្ទនេះមានរួចហើយ"
     },
     "alert": {
-      "title" : "ជោគជ័យ",
-      "message" : "បានធ្វើបច្ចុប្បន្នភាពប្រវត្តិរូបដោយជោគជ័យ"
+      "title": "ជោគជ័យ",
+      "message": "បានធ្វើបច្ចុប្បន្នភាពប្រវត្តិរូបដោយជោគជ័យ"
     }
   }
 }
