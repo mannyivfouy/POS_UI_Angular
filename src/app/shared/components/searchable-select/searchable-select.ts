@@ -1,5 +1,5 @@
 import { Component, Input, Output } from '@angular/core';
-import { SelectOption } from '../../models/searchable-select';
+import { SelectOption } from '../../models/searchable-select.model';
 import { ChevronDown, LucideAngularModule } from 'lucide-angular';
 
 @Component({

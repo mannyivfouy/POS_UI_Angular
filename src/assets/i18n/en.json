@@ -6,13 +6,13 @@
     "close": "Close",
     "print": "Print",
     "compare_stats": "Compare to last month",
-    "save" : "Save"
+    "save": "Save"
   },
-  "notification" : {
-    "notification" : "Notification",
-    "low_stock" : "Low Stock",
-    "has_only" : "has only",
-    "items_left" : "items left"
+  "notification": {
+    "notification": "Notification",
+    "low_stock": "Low Stock",
+    "has_only": "has only",
+    "items_left": "items left"
   },
   "drawer": {
     "manage_information": "Manage information"
@@ -34,7 +34,7 @@
     "role": "Role",
     "customer": "Customer",
     "supplier": "Supplier",
-    "profile" : "Profile"
+    "profile": "Profile"
   },
   "user": {
     "list": {
@@ -122,12 +122,12 @@
       "stock_qty": "Stock Quantity",
       "price": "Selling Price",
       "description": "Description",
-      "category" : "Category",
+      "category": "Category",
       "supplier": "Supplier",
       "status": "Status",
       "action": "Actions"
     },
-    "detail_dialog" : {
+    "detail_dialog": {
       "title": "Product Details",
       "sku": "SKU",
       "product_info": "Product Information",
@@ -143,6 +143,50 @@
       "description": "Description",
       "created_at": "Created",
       "updated_at": "Last Updated"
+    },
+    "delete": {
+      "title": "Delete Product",
+      "message": "Are you sure you want to delete {{name}}?"
+    },
+    "form": {
+      "create_title": "Create Product",
+      "edit_title": "Edit Product",
+      "upload_image": "Upload Product Image",
+      "image_hint": "PNG or JPG, up to 2MB ",
+      "name": "Name",
+      "barcode": "Barcode",
+      "sku": "SKU",
+      "lowStockAlert": "Low Stock Alert",
+      "unit": "Unit",
+      "description": "Description",
+      "description_placeholder": "Enter product description or details...",
+      "category": "Category",
+      "Supplier": "Supplier",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "active_description": "Product can be scanned, sold, and managed",
+      "inactive_description": "Product cannot be scanned or selected for sale",
+      "cancel": "Cancel",
+      "create": "Create Product",
+      "update": "Update Product"
+    },
+    "validation": {
+      "name_required": "Product name is required",
+      "name_min": "Product name must be at least 3 characters",
+      "name_max": "Product name cannot exceed 20 characters",
+      "barcode_required": "Barcode is required",
+      "barcode_exists": "Barcode already exists",
+      "sku_required": "SKU is required",
+      "sku_exists": "SKU already exists",
+      "lowStockAlert_min": "Low stock alert must be 0 or greater",
+      "unit_required": "Unit is required",
+      "unit_min": "Unit must be at least 3 characters",
+      "unit_max": "Unit cannot exceed 20 characters",
+      "description_max": "Description cannot exceed 100 characters",
+      "categoryId_required": "Category is required",
+      "supplierId_required": "Supplier is required",
+      "status_required": "Status is required"
     }
   },
   "supplier": {
@@ -349,7 +393,7 @@
     "subtitle": "Create a new stock purchase",
     "save_purchase": "Save Purchase",
     "purchase_info": {
-      "title": "Perchase Information",
+      "title": "Purchase Information",
       "supplier": "Supplier",
       "supplier_placeholder": "Select Supplier",
       "purchase_date": "Purchase Date",
@@ -361,7 +405,7 @@
     "list": {
       "title": "Sale History",
       "subtitle": "All system sale history",
-      "search": "Seach sale history...",
+      "search": "Search sale history...",
       "add": "Create New Sale"
     },
     "stats": {
@@ -398,16 +442,16 @@
       "items": "Items"
     }
   },
-  "profile" : {
-    "form" : {
-      "upload_avatar" : "Upload avatar",
-      "avatar_hint" : "PNG or JPG, up to 2MB",
-      "fullname" : "Fullname",
-      "username" : "Username",
-      "password" : "Password",
-      "email" : "Email",
-      "phone" : "Phone",
-      "cancel" : "Cancel"
+  "profile": {
+    "form": {
+      "upload_avatar": "Upload avatar",
+      "avatar_hint": "PNG or JPG, up to 2MB",
+      "fullname": "Fullname",
+      "username": "Username",
+      "password": "Password",
+      "email": "Email",
+      "phone": "Phone",
+      "cancel": "Cancel"
     },
     "validation": {
       "fullname_required": "Fullname is required ",
@@ -430,8 +474,8 @@
       "phone_exists": "Phone already exists"
     },
     "alert": {
-      "title" : "Success",
-      "message" : "Profile updated successfully"
+      "title": "Success",
+      "message": "Profile updated successfully"
     }
   }
 }
