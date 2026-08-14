@@ -1,7 +1,400 @@
-<p>product-form works!</p>
+<form [formGroup]="productForm" (ngSubmit)="submit()" class="space-y-5">
+  <!-- Image Upload -->
+  <div class="flex items-center gap-4">
+    <div
+      (click)="imageInput.click()"
+      class="relative flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-gray-700"
+    >
+      @if (imagePreview) {
+        <img
+          [src]="imagePreview"
+          alt="Avatar preview"
+          class="h-full w-full rounded-full object-cover"
+        />
+      } @else {
+        <lucide-icon [img]="icons.Package" class="text-gray-400" />
+      }
 
-  
-<app-searchable-select
-  label="Category"
-  placeholder="Select Category"
-></app-searchable-select>
+      <button
+        type="button"
+        (click)="$event.stopPropagation(); imageInput.click()"
+        class="absolute -bottom-0.5 -right-0.5 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-gray-800"
+      >
+        <lucide-icon [img]="icons.Camera" class="h-3 w-3 text-white" />
+      </button>
+    </div>
+
+    <div>
+      <p class="text-sm font-medium text-gray-600">
+        {{ 'product.form.upload_image' | translate }}
+      </p>
+
+      <p class="text-xs text-gray-400">
+        {{ 'product.form.image_hint' | translate }}
+      </p>
+
+      <input
+        type="file"
+        accept="image/png,image/jpeg"
+        class="hidden"
+        #imageInput
+        (change)="onImageChange($event)"
+      />
+    </div>
+  </div>
+
+  <hr class="border-gray-200" />
+
+  <!-- Product Name -->
+  <div>
+    <span class="text-red-600">* </span>
+    <label class="text-sm font-medium text-gray-700">
+      {{ 'product.form.name' | translate }}
+    </label>
+
+    <div class="mt-1">
+      <input
+        type="text"
+        formControlName="name"
+        placeholder="Coca Cola 330ML"
+        class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        [ngClass]="{
+          'border-red-500 bg-red-50 text-red-600':
+            productForm.get('name')?.touched && productForm.get('name')?.invalid,
+          'border-gray-200': !(
+            productForm.get('name')?.touched && productForm.get('name')?.invalid
+          ),
+        }"
+      />
+    </div>
+
+    <p
+      *ngIf="productForm.get('name')?.touched && productForm.get('name')?.errors"
+      class="mt-1 text-sm text-red-600"
+    >
+      <span *ngIf="productForm.get('name')?.hasError('required')">
+        {{ 'product.validation.name_required' | translate }}
+      </span>
+
+      <span *ngIf="productForm.get('name')?.hasError('minlength')">
+        {{ 'product.validation.name_min' | translate }}
+      </span>
+
+      <span *ngIf="productForm.get('name')?.hasError('maxlength')">
+        {{ 'product.validation.name_max' | translate }}
+      </span>
+    </p>
+  </div>
+
+  <!-- Category + Supplier -->
+  <div class="grid grid-cols-2 gap-3">
+    <!-- Category -->
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'product.form.category' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <app-searchable-select
+          formControlName="categoryId"
+          [placeholder]="'product.form.category_placeholder' | translate"
+          [searchType]="'product.form.category' | translate"
+          [items]="categories"
+          [invalid]="
+            productForm.get('categoryId')?.touched === true &&
+            productForm.get('categoryId')?.invalid === true
+          "
+        ></app-searchable-select>
+      </div>
+
+      <p
+        *ngIf="productForm.get('categoryId')?.touched && productForm.get('categoryId')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="productForm.get('categoryId')?.hasError('required')">
+          {{ 'product.validation.categoryId_required' | translate }}
+        </span>
+      </p>
+    </div>
+
+    <!-- Supplier -->
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'product.form.supplier' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <app-searchable-select
+          formControlName="supplierId"
+          [placeholder]="'product.form.supplier_placeholder' | translate"
+          [searchType]="'product.form.supplier' | translate"
+          [items]="suppliers"
+          [invalid]="
+            productForm.get('supplierId')?.touched === true &&
+            productForm.get('supplierId')?.invalid === true
+          "
+        ></app-searchable-select>
+      </div>
+
+      <p
+        *ngIf="productForm.get('supplierId')?.touched && productForm.get('supplierId')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="productForm.get('supplierId')?.hasError('required')">
+          {{ 'product.validation.supplierId_required' | translate }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Barcode + SKU -->
+  <div class="grid grid-cols-2 gap-3">
+    <!-- Barcode -->
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'product.form.barcode' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="text"
+          formControlName="barcode"
+          placeholder="8901234567890"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              productForm.get('barcode')?.touched && productForm.get('barcode')?.invalid,
+            'border-gray-200': !(
+              productForm.get('barcode')?.touched && productForm.get('barcode')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="productForm.get('barcode')?.touched && productForm.get('barcode')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="productForm.get('barcode')?.hasError('required')">
+          {{ 'product.validation.barcode_required' | translate }}
+        </span>
+
+        <span *ngIf="productForm.get('barcode')?.hasError('server')">
+          {{ 'product.validation.barcode_exists' | translate }}
+        </span>
+      </p>
+    </div>
+
+    <!-- SKU -->
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'product.form.sku' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="text"
+          formControlName="sku"
+          placeholder="SKU-001"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              productForm.get('sku')?.touched && productForm.get('sku')?.invalid,
+            'border-gray-200': !(
+              productForm.get('sku')?.touched && productForm.get('sku')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="productForm.get('sku')?.touched && productForm.get('sku')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="productForm.get('sku')?.hasError('required')">
+          {{ 'product.validation.sku_required' | translate }}
+        </span>
+
+        <span *ngIf="productForm.get('sku')?.hasError('server')">
+          {{ 'product.validation.sku_exists' | translate }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Unit + Low Stock Alert -->
+  <div class="grid grid-cols-2 gap-3">
+    <!-- Unit -->
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'product.form.unit' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="text"
+          formControlName="unit"
+          placeholder="Piece"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              productForm.get('unit')?.touched && productForm.get('unit')?.invalid,
+            'border-gray-200': !(
+              productForm.get('unit')?.touched && productForm.get('unit')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="productForm.get('unit')?.touched && productForm.get('unit')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="productForm.get('unit')?.hasError('required')">
+          {{ 'product.validation.unit_required' | translate }}
+        </span>
+
+        <span *ngIf="productForm.get('unit')?.hasError('minlength')">
+          {{ 'product.validation.unit_min' | translate }}
+        </span>
+
+        <span *ngIf="productForm.get('unit')?.hasError('maxlength')">
+          {{ 'product.validation.unit_max' | translate }}
+        </span>
+      </p>
+    </div>
+
+    <!-- Low Stock Alert -->
+    <div>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'product.form.lowStockAlert' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <input
+          type="number"
+          formControlName="lowStockAlert"
+          min="0"
+          class="w-full px-3 py-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-600"
+          [ngClass]="{
+            'border-red-500 bg-red-50 text-red-600':
+              productForm.get('lowStockAlert')?.touched &&
+              productForm.get('lowStockAlert')?.invalid,
+            'border-gray-200': !(
+              productForm.get('lowStockAlert')?.touched && productForm.get('lowStockAlert')?.invalid
+            ),
+          }"
+        />
+      </div>
+
+      <p
+        *ngIf="
+          productForm.get('lowStockAlert')?.touched && productForm.get('lowStockAlert')?.errors
+        "
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="productForm.get('lowStockAlert')?.hasError('min')">
+          {{ 'product.validation.lowStockAlert_min' | translate }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div>
+    <label class="text-sm font-medium text-gray-700">
+      {{ 'product.form.description' | translate }}
+    </label>
+
+    <div class="mt-1">
+      <textarea
+        formControlName="description"
+        rows="4"
+        [placeholder]="'product.form.description_placeholder' | translate"
+        class="w-full rounded-lg border bg-gray-100 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-600"
+        [ngClass]="{
+          'border-red-500 bg-red-50 text-red-600':
+            productForm.get('description')?.touched && productForm.get('description')?.invalid,
+          'border-gray-200': !(
+            productForm.get('description')?.touched && productForm.get('description')?.invalid
+          ),
+        }"
+      ></textarea>
+    </div>
+
+    <p
+      *ngIf="productForm.get('description')?.touched && productForm.get('description')?.errors"
+      class="mt-1 text-sm text-red-600"
+    >
+      <span *ngIf="productForm.get('description')?.hasError('maxlength')">
+        {{ 'product.validation.description_max' | translate }}
+      </span>
+    </p>
+  </div>
+
+  <!-- Product Status -->
+  <div class="flex items-center justify-between rounded-lg border border-gray-200 p-3">
+    <div>
+      <p class="text-sm font-medium text-gray-600">
+        {{ 'product.form.status' | translate }}
+
+        {{
+          productForm.get('status')?.value === 'active'
+            ? ('product.form.active' | translate)
+            : ('product.form.inactive' | translate)
+        }}
+      </p>
+
+      <p class="text-xs text-gray-400">
+        {{
+          productForm.get('status')?.value === 'active'
+            ? ('product.form.active_description' | translate)
+            : ('product.form.inactive_description' | translate)
+        }}
+      </p>
+    </div>
+
+    <button
+      type="button"
+      (click)="toggleStatus()"
+      class="relative h-6 w-11 rounded-full transition-colors duration-300 ease-in-out cursor-pointer"
+      [ngClass]="{
+        'bg-indigo-600': productForm.get('status')?.value === 'active',
+        'bg-gray-300': productForm.get('status')?.value === 'inactive',
+      }"
+    >
+      <span
+        class="absolute left-1 top-1 h-4 w-4 rounded-full bg-white shadow transition-transform duration-300 ease-in-out"
+        [ngClass]="{
+          'translate-x-5': productForm.get('status')?.value === 'active',
+          'translate-x-0': productForm.get('status')?.value === 'inactive',
+        }"
+      ></span>
+    </button>
+  </div>
+
+  <!-- button -->
+  <div class="flex justify-end gap-3">
+    <button
+      type="button"
+      (click)="onCancel()"
+      class="rounded-lg px-5 py-2 text-sm text-white bg-pink-600 hover:bg-pink-700 font-semibold cursor-pointer transition"
+    >
+      {{ 'product.form.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="rounded-lg px-5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 cursor-pointer transition"
+    >
+      {{
+        isEditingMode ? ('product.form.update' | translate) : ('product.form.create' | translate)
+      }}
+    </button>
+  </div>
+</form>

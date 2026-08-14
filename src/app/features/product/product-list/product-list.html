@@ -143,12 +143,11 @@
               <td class="px-6 py-3 text-right">
                 <div class="flex justify-end gap-2">
                   <button
-                  (click)="viewProductDetail(product._id)"
+                    (click)="viewProductDetail(product._id)"
                     class="text-gray-600 hover:text-indigo-600 px-3 py-1 rounded-md text-sm cursor-pointer"
                   >
                     <lucide-icon [img]="icons.PackageSearch" class="w-4 h-4"></lucide-icon>
                   </button>
-
 
                   <button
                     class="text-gray-600 hover:text-indigo-600 px-3 py-1 rounded-md text-sm cursor-pointer"
@@ -182,18 +181,33 @@
       <!-- drawer -->
       <app-drawer
         [open]="isDrawerOpen"
-        [title]="selectedProduct ? 'Edit Product' : 'Create Product'"
+        [title]="
+          selectedProduct
+            ? ('product.form.edit_title' | translate)
+            : ('product.form.create_title' | translate)
+        "
         (close)="closeDrawer()"
       >
-        <!-- <app-product-form
-          [product]="selectedProduct"
-          (saved)="onSaved()"
-          (cancel)="closeDrawer()"
-        ></app-product-form> -->
+        <app-product-form
+          [productData]="selectedProduct"
+          (saved)="onSave($event)"
+          (cancel)="onCancel()"
+        ></app-product-form>
       </app-drawer>
     </div>
   </div>
 </div>
+
+<app-confirm-dialog
+  [open]="showDeleteDialog"
+  [title]="'product.delete.title' | translate"
+  [message]="'product.delete.message' | translate: { name: selectedProduct?.name }"
+  [confirmText]="'common.delete' | translate"
+  [cancelText]="'common.cancel' | translate"
+  type="danger"
+  (confirm)="confirmDelete()"
+  (cancel)="cancelDelete()"
+></app-confirm-dialog>
 
 <app-product-detail-dialog
   [open]="isDetailOpen"

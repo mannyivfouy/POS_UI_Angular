@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import {
   Archive,
   ArchiveRestore,
@@ -22,6 +22,8 @@ import { Pagination } from '../../../shared/components/pagination/pagination';
 import { Drawer } from '../../../shared/components/drawer/drawer';
 import { LoadingScreenService } from '../../../core/services/loading.service';
 import { ProductDetailDialog } from '../product-detail-dialog/product-detail-dialog';
+import { ConfirmDialog } from '../../../shared/components/confirm-dialog/confirm-dialog';
+import { ProductForm } from '../product-form/product-form';
 
 @Component({
   selector: 'app-product-list',
@@ -34,11 +36,19 @@ import { ProductDetailDialog } from '../product-detail-dialog/product-detail-dia
     Pagination,
     Drawer,
     ProductDetailDialog,
-  ],
+    ConfirmDialog,
+    ProductForm
+],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
 export class ProductList {
+  @ViewChild(Drawer)
+  drawer?: Drawer;
+
+  @ViewChild(ProductForm)
+  productForm?: ProductForm;
+
   icons = {
     Plus,
     Pencil,
@@ -64,8 +74,10 @@ export class ProductList {
   loading = false;
 
   isDrawerOpen = false;
-  selectedProduct: Product | null = null;
   isDetailOpen = false;
+  showDeleteDialog = false;
+
+  selectedProduct: Product | null = null;
 
   constructor(
     private productService: ProductService,
@@ -158,12 +170,50 @@ export class ProductList {
   }
 
   closeDrawer() {
+    this.productForm?.resetForm();
+
     this.isDrawerOpen = false;
+
+    setTimeout(() => {
+      this.selectedProduct = null;
+    }, 500);
   }
 
-  onSaved() {
-    this.closeDrawer();
-    this.loadProducts();
+  onCancel() {
+    this.drawer?.onClose();
+  }
+
+  onSave(formData: FormData) {
+    if (this.selectedProduct) {
+      this.productService.updateProduct(this.selectedProduct._id, formData).subscribe({
+        next: (res) => {
+          this.loadProducts();
+          this.onCancel();
+        },
+        error: (err) => {
+          if (err.status === 409) {
+            this.productForm?.setServerError(err.error.field, err.error.message);
+            return;
+          }
+          console.error(err);
+        },
+      });
+    } else {
+      this.productService.createProduct(formData).subscribe({
+        next: (res) => {
+          this.loadProducts();
+          this.onCancel();
+        },
+        error: (err) => {
+          if (err.status === 409) {
+            this.productForm?.setServerError(err.error.field, err.error.message);
+            return;
+          }
+
+          console.error(err);
+        },
+      });
+    }
   }
 
   edit(product: Product) {
@@ -171,7 +221,31 @@ export class ProductList {
     this.isDrawerOpen = true;
   }
 
-  delete(product: any) {}
+  delete(product: Product) {
+    this.selectedProduct = product;
+    this.showDeleteDialog = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteDialog = false;
+    this.selectedProduct = null;
+  }
+
+  confirmDelete() {
+    this.showDeleteDialog = false;
+    if (!this.selectedProduct) return;
+
+    this.productService.deleteProduct(this.selectedProduct._id).subscribe({
+      next: () => {
+        this.selectedProduct = null;
+        this.loadProducts();
+        this.loadStats();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
 
   viewProductDetail(id: string): void {
     this.productService.getProductById(id).subscribe({

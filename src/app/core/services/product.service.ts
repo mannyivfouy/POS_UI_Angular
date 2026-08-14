@@ -51,17 +51,17 @@ export class ProductService {
   }
 
   // CREATE
-  createUser(data: FormData): Observable<Product> {
+  createProduct(data: FormData): Observable<Product> {
     return this.http.post<Product>(`${this.apiUrl}/create`, data);
   }
 
   // UPDATE
-  updateUser(id: string, data: FormData): Observable<Product> {
+  updateProduct(id: string, data: FormData): Observable<Product> {
     return this.http.put<Product>(`${this.apiUrl}/update/${id}`, data);
   }
 
   // DELETE
-  deleteUser(id: string): Observable<any> {
+  deleteProduct(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

@@ -6,7 +6,9 @@
     "close": "បិទ",
     "print": "បោះពុម្ព",
     "compare_stats": "ប្រៀបធៀបនឹងខែមុន",
-    "save": "រក្សាទុក"
+    "save": "រក្សាទុក",
+    "no_result_found": "រកមិនឃើញលទ្ធផលទេ",
+    "search": "ស្វែងរក{{type}}..."
   },
   "notification": {
     "notification": "ការជូនដំណឹង",
@@ -143,6 +145,52 @@
       "description": "ការពិពណ៌នា",
       "created_at": "កាលបរិច្ឆេទបង្កើត",
       "updated_at": "កាលបរិច្ឆេទកែប្រែ"
+    },
+    "delete": {
+      "title": "លុបផលិតផល",
+      "message": "តើអ្នកប្រាកដថាចង់លុប {{name}} មែនទេ?"
+    },
+    "form": {
+      "create_title": "បង្កើតផលិតផល",
+      "edit_title": "កែប្រែផលិតផល",
+      "upload_image": "បញ្ចូលរូបភាពផលិតផល",
+      "image_hint": "PNG ឬ JPG ទំហំតិចជាង 2MB",
+      "name": "ឈ្មោះផលិតផល",
+      "barcode": "បារកូដ",
+      "sku": "លេខកូដសម្គាល់",
+      "lowStockAlert": "ការរំលឹកស្តុកតិច",
+      "unit": "ខ្នាត",
+      "description": "ការពិពណ៌នា",
+      "description_placeholder": "បញ្ចូលការពិពណ៌នា ឬព័ត៌មានលម្អិតអំពីទំនិញ...",
+      "category": "ប្រភេទទំនិញ",
+      "category_placeholder": "ជ្រើសរើសប្រភេទទំនិញ",
+      "supplier": "អ្នកផ្គត់ផ្គង់",
+      "supplier_placeholder": "ជ្រើសរើសអ្នកផ្គត់ផ្គង់",
+      "status": "ស្ថានភាព",
+      "active": "សកម្ម",
+      "inactive": "អសកម្ម",
+      "active_description": "ទំនិញអាចស្កែន លក់ និងគ្រប់គ្រងបាន",
+      "inactive_description": "ទំនិញមិនអាចស្កែន ឬជ្រើសរើសសម្រាប់លក់បានទេ",
+      "create": "បង្កើតផលិតផល",
+      "update": "ធ្វើបច្ចុប្បន្នភាពផលិតផល",
+      "cancel": "បោះបង់"
+    },
+    "validation": {
+      "name_required": "ត្រូវបញ្ចូលឈ្មោះទំនិញ",
+      "name_min": "ឈ្មោះទំនិញត្រូវមានយ៉ាងតិច 3 តួអក្សរ",
+      "name_max": "ឈ្មោះទំនិញមិនអាចលើស 20 តួអក្សរ",
+      "barcode_required": "ត្រូវបញ្ចូលបារកូដ",
+      "barcode_exists": "បារកូដនេះមានរួចហើយ",
+      "sku_required": "ត្រូវបញ្ចូលលេខកូដសម្គាល់",
+      "sku_exists": "លេខកូដសម្គាល់នេះមានរួចហើយ",
+      "lowStockAlert_min": "កម្រិតជូនដំណឹងស្តុកតិចត្រូវចាប់ពី 0 ឡើងទៅ",
+      "unit_required": "ត្រូវបញ្ចូលខ្នាត",
+      "unit_min": "ខ្នាតត្រូវមានយ៉ាងតិច 3 តួអក្សរ",
+      "unit_max": "ខ្នាតមិនអាចលើស 20 តួអក្សរ",
+      "description_max": "ការពិពណ៌នាមិនអាចលើស 100 តួអក្សរ",
+      "categoryId_required": "សូមជ្រើសរើសប្រភេទទំនិញ",
+      "supplierId_required": "សូមជ្រើសរើសអ្នកផ្គត់ផ្គង់",
+      "status_required": "សូមជ្រើសរើសស្ថានភាព"
     }
   },
   "supplier": {
