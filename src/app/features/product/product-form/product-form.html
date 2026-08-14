@@ -86,6 +86,69 @@
     </p>
   </div>
 
+  <!-- Category + Supplier -->
+  <div class="grid grid-cols-2 gap-3">
+    <!-- Category -->
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'product.form.category' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <app-searchable-select
+          formControlName="categoryId"
+          [placeholder]="'product.form.category_placeholder' | translate"
+          [searchType]="'product.form.category' | translate"
+          [items]="categories"
+          [invalid]="
+            productForm.get('categoryId')?.touched === true &&
+            productForm.get('categoryId')?.invalid === true
+          "
+        ></app-searchable-select>
+      </div>
+
+      <p
+        *ngIf="productForm.get('categoryId')?.touched && productForm.get('categoryId')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="productForm.get('categoryId')?.hasError('required')">
+          {{ 'product.validation.categoryId_required' | translate }}
+        </span>
+      </p>
+    </div>
+
+    <!-- Supplier -->
+    <div>
+      <span class="text-red-600">* </span>
+      <label class="text-sm font-medium text-gray-700">
+        {{ 'product.form.supplier' | translate }}
+      </label>
+
+      <div class="mt-1">
+        <app-searchable-select
+          formControlName="supplierId"
+          [placeholder]="'product.form.supplier_placeholder' | translate"
+          [searchType]="'product.form.supplier' | translate"
+          [items]="suppliers"
+          [invalid]="
+            productForm.get('supplierId')?.touched === true &&
+            productForm.get('supplierId')?.invalid === true
+          "
+        ></app-searchable-select>
+      </div>
+
+      <p
+        *ngIf="productForm.get('supplierId')?.touched && productForm.get('supplierId')?.errors"
+        class="mt-1 text-sm text-red-600"
+      >
+        <span *ngIf="productForm.get('supplierId')?.hasError('required')">
+          {{ 'product.validation.supplierId_required' | translate }}
+        </span>
+      </p>
+    </div>
+  </div>
+
   <!-- Barcode + SKU -->
   <div class="grid grid-cols-2 gap-3">
     <!-- Barcode -->
@@ -242,8 +305,6 @@
     </div>
   </div>
 
-  
-
   <!-- Description -->
   <div>
     <label class="text-sm font-medium text-gray-700">
@@ -314,6 +375,26 @@
           'translate-x-0': productForm.get('status')?.value === 'inactive',
         }"
       ></span>
+    </button>
+  </div>
+
+  <!-- button -->
+  <div class="flex justify-end gap-3">
+    <button
+      type="button"
+      (click)="onCancel()"
+      class="rounded-lg px-5 py-2 text-sm text-white bg-pink-600 hover:bg-pink-700 font-semibold cursor-pointer transition"
+    >
+      {{ 'product.form.cancel' | translate }}
+    </button>
+
+    <button
+      type="submit"
+      class="rounded-lg px-5 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 cursor-pointer transition"
+    >
+      {{
+        isEditingMode ? ('product.form.update' | translate) : ('product.form.create' | translate)
+      }}
     </button>
   </div>
 </form>

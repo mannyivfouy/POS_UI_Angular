@@ -7,8 +7,8 @@
     "print": "បោះពុម្ព",
     "compare_stats": "ប្រៀបធៀបនឹងខែមុន",
     "save": "រក្សាទុក",
-    "no_result_found" : "រកមិនឃើញលទ្ធផលទេ",
-    "search" : "ស្វែងរក"
+    "no_result_found": "រកមិនឃើញលទ្ធផលទេ",
+    "search": "ស្វែងរក{{type}}..."
   },
   "notification": {
     "notification": "ការជូនដំណឹង",
@@ -163,7 +163,9 @@
       "description": "ការពិពណ៌នា",
       "description_placeholder": "បញ្ចូលការពិពណ៌នា ឬព័ត៌មានលម្អិតអំពីទំនិញ...",
       "category": "ប្រភេទទំនិញ",
-      "Supplier": "អ្នកផ្គត់ផ្គង់",
+      "category_placeholder": "ជ្រើសរើសប្រភេទទំនិញ",
+      "supplier": "អ្នកផ្គត់ផ្គង់",
+      "supplier_placeholder": "ជ្រើសរើសអ្នកផ្គត់ផ្គង់",
       "status": "ស្ថានភាព",
       "active": "សកម្ម",
       "inactive": "អសកម្ម",

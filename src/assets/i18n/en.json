@@ -8,7 +8,7 @@
     "compare_stats": "Compare to last month",
     "save": "Save",
     "no_result_found": "No results found",
-    "search" : "Search"
+    "search": "Search {{type}}..."
   },
   "notification": {
     "notification": "Notification",
@@ -163,7 +163,9 @@
       "description": "Description",
       "description_placeholder": "Enter product description or details...",
       "category": "Category",
-      "Supplier": "Supplier",
+      "category_placeholder" : "Select Category",
+      "supplier": "Supplier",
+      "supplier_placeholder" : "Select Supplier",
       "status": "Status",
       "active": "Active",
       "inactive": "Inactive",

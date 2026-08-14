@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -20,6 +21,8 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { CategoryService } from '../../../core/services/category.service';
+import { SupplierService } from '../../../core/services/supplier.service';
 
 @Component({
   selector: 'app-product-form',
@@ -54,7 +57,12 @@ export class ProductForm implements OnChanges {
 
   isEditingMode = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private categoryService: CategoryService,
+    private supplierService: SupplierService,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
     this.productForm = this.fb.group({
@@ -71,6 +79,8 @@ export class ProductForm implements OnChanges {
     });
 
     this.loadProduct();
+    this.loadCategories();
+    this.loadSuppliers();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -109,6 +119,42 @@ export class ProductForm implements OnChanges {
     this.imagePreview = this.productData.image
       ? `http://localhost:5000${this.productData.image}`
       : null;
+  }
+
+  loadCategories(): void {
+    this.categoryService
+      .getCategories({
+        page: 1,
+        limit: 100,
+        status: 'active',
+      })
+      .subscribe({
+        next: (res) => {
+          this.categories = res.data;
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          console.error('Failed to load categories', err);
+        },
+      });
+  }
+
+  loadSuppliers(): void {
+    this.supplierService
+      .getSuppliers({
+        page: 1,
+        limit: 100,
+        status: 'active',
+      })
+      .subscribe({
+        next: (res) => {
+          this.suppliers = res.data;
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          console.error('Failed to load suppliers', err);
+        },
+      });
   }
 
   onImageChange(event: Event) {

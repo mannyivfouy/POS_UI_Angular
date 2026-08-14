@@ -1,7 +1,7 @@
-import { Component, ElementRef, forwardRef, HostListener, Input, Output } from '@angular/core';
+import { Component, ElementRef, forwardRef, HostListener, Input } from '@angular/core';
 import { SelectOption } from '../../models/searchable-select.model';
 import { Check, ChevronDown, LucideAngularModule, Search } from 'lucide-angular';
-import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -18,10 +18,11 @@ import { TranslatePipe } from '@ngx-translate/core';
     },
   ],
 })
-export class SearchableSelect {
+export class SearchableSelect implements ControlValueAccessor{
   @Input() searchType = '';
   @Input() placeholder = '';
   @Input() items: SelectOption[] = [];
+  @Input() invalid = false;
 
   icons = {
     ChevronDown,
@@ -65,8 +66,6 @@ export class SearchableSelect {
     if (this.isOpen) {
       this.searchTerm = '';
     }
-
-    this.onTouched();
   }
 
   selectItem(item: SelectOption): void {
