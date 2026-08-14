@@ -6,7 +6,9 @@
     "close": "បិទ",
     "print": "បោះពុម្ព",
     "compare_stats": "ប្រៀបធៀបនឹងខែមុន",
-    "save": "រក្សាទុក"
+    "save": "រក្សាទុក",
+    "no_result_found" : "រកមិនឃើញលទ្ធផលទេ",
+    "search" : "ស្វែងរក"
   },
   "notification": {
     "notification": "ការជូនដំណឹង",

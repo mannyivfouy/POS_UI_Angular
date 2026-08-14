@@ -6,7 +6,9 @@
     "close": "Close",
     "print": "Print",
     "compare_stats": "Compare to last month",
-    "save": "Save"
+    "save": "Save",
+    "no_result_found": "No results found",
+    "search" : "Search"
   },
   "notification": {
     "notification": "Notification",
