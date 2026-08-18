@@ -24,7 +24,7 @@ export class SaleForm implements OnInit {
   cartItems: SaleCartItem[] = [];
 
   selectedCustomerId: string | null = null;
-  selectedCategoryId = '';
+  selectedCategoryId: string | null = null;
 
   discount = 0;
   tax = 0;
@@ -46,32 +46,38 @@ export class SaleForm implements OnInit {
   }
 
   loadProducts(): void {
-    this.productService
-      .getProducts({
-        page: this.currentPage,
-        limit: this.pageSize,
-        search: this.search,
-        status: 'active',
-        categoryId: this.selectedCategoryId,
-      })
-      .subscribe({
-        next: (res) => {
-          this.products = res.data.filter((product) => product.stockQty > 0);
-          // this.products = res.data;
-          this.cdr.detectChanges();
-        },
-        error: (err) => {
-          console.error('Failed to load products:', err);
-        },
-      });
+    const params: any = {
+      page: this.currentPage,
+      limit: this.pageSize,
+      search: this.search,
+      status: 'active',
+    };
+
+    if (this.selectedCategoryId) {
+      params.categoryId = this.selectedCategoryId;
+    }
+
+    this.productService.getProducts(params).subscribe({
+      next: (res) => {
+        this.products = res.data.filter((product) => product.stockQty > 0);
+
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Failed to load products:', err);
+      },
+    });
   }
 
   loadCategories(): void {
     this.categoryService
-      .getCategories({ page: this.currentPage, limit: this.pageSize, search: this.search })
+      .getCategories({
+        page: 1,
+        limit: 100,
+        status: 'active',
+      })
       .subscribe({
         next: (res) => {
-          console.log(res)
           this.categories = res.data;
           this.cdr.detectChanges();
         },
