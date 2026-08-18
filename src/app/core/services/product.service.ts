@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResponse } from '../models/paginated-response.model';
 import { LowStockResponse, Product, ProductDetailResponse } from '../models/product.model';
@@ -18,6 +18,7 @@ export class ProductService {
     page?: number;
     limit?: number;
     search?: string;
+    categoryId?: string;
   }): Observable<PaginatedResponse<Product>> {
     let httpParams = new HttpParams();
 
@@ -33,9 +34,25 @@ export class ProductService {
       httpParams = httpParams.set('search', String(params.search));
     }
 
-    return this.http.get<PaginatedResponse<Product>>(this.apiUrl, {
+    if (params.categoryId) {
+      httpParams = httpParams.set('categoryId', params.categoryId);
+    }
+
+    let options: {
+      params: HttpParams;
+      headers?: HttpHeaders;
+    } = {
       params: httpParams,
-    });
+    };
+
+    // Skip full loading screen when searching
+    if (params.search) {
+      options.headers = new HttpHeaders({
+        'skip-loading': 'true',
+      });
+    }
+
+    return this.http.get<PaginatedResponse<Product>>(this.apiUrl, options);
   }
 
   getProductStats(): Observable<ProductStats> {
@@ -43,7 +60,7 @@ export class ProductService {
   }
 
   getLowStockAlert(): Observable<LowStockResponse> {
-    return this.http.get<LowStockResponse>(`${this.apiUrl}/low-stock`)
+    return this.http.get<LowStockResponse>(`${this.apiUrl}/low-stock`);
   }
 
   getProductById(id: string): Observable<ProductDetailResponse<Product>> {

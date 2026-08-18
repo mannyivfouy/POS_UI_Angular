@@ -483,5 +483,8 @@
       "title": "Success",
       "message": "Profile updated successfully"
     }
+  },
+  "sale_page" : {
+    
   }
 }
