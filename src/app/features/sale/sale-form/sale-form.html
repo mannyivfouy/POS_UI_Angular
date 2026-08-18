@@ -1,1 +1,61 @@
-<p>sale-form works!</p>
+<div class="flex h-full gap-3 borde">
+  <!-- Products -->
+  <section class="flex-1 rounded-xl bg-white p-6 border-gray-200 shadow-sm overflow-auto">
+    <div class="mb-6">
+      <h1 class="text-xl font-semibold text-gray-800">New Sale</h1>
+
+      <p class="mt-1 text-sm text-gray-500">Select products to add to the sale.</p>
+    </div>
+
+    <!-- Search -->
+    <div class="mb-4">
+      <app-search placeholder="Search products..." (search)="onProductSearch($event)"></app-search>
+    </div>
+
+    <!-- Categories -->
+    <div class="mb-5 flex gap-2 overflow-x-auto pb-1">
+      <button
+        type="button"
+        (click)="onCategoryChange('')"
+        class="shrink-0 rounded-lg px-4 py-2 text-sm font-medium transition cursor-pointer"
+        [class.bg-indigo-600]="selectedCategoryId === ''"
+        [class.text-white]="selectedCategoryId === ''"
+        [class.bg-gray-100]="selectedCategoryId !== ''"
+        [class.text-gray-600]="selectedCategoryId !== ''"
+      >
+        All
+      </button>
+
+      @for (category of categories; track category._id) {
+        <button
+          type="button"
+          (click)="onCategoryChange(category._id)"
+          class="shrink-0 rounded-lg px-4 py-2 text-sm font-medium transition cursor-pointer"
+          [class.bg-indigo-600]="selectedCategoryId === category._id"
+          [class.text-white]="selectedCategoryId === category._id"
+          [class.bg-gray-100]="selectedCategoryId !== category._id"
+          [class.text-gray-600]="selectedCategoryId !== category._id"
+        >
+          {{ category.name }}
+        </button>
+      }
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+      @for (product of products; track product._id) {
+        <app-product-card [product]="product" (addToCart)="addToCart($event)" />
+      }
+    </div>
+  </section>
+
+  <!-- Cart -->
+  <section class="w-full rounded-xl bg-white p-6 lg:w-125 border-gray-200 shadow-sm overflow-auto">
+    <app-sale-cart
+      [items]="cartItems"
+      (quantityChange)="onQuantityChange($event)"
+      (remove)="removeFromCart($event)"
+      (clear)="clearCart()"
+    ></app-sale-cart>
+  </section>
+</div>

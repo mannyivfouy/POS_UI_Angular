@@ -24,6 +24,7 @@ import { LoadingScreenService } from '../../../core/services/loading.service';
 import { ProductDetailDialog } from '../product-detail-dialog/product-detail-dialog';
 import { ConfirmDialog } from '../../../shared/components/confirm-dialog/confirm-dialog';
 import { ProductForm } from '../product-form/product-form';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -37,8 +38,8 @@ import { ProductForm } from '../product-form/product-form';
     Drawer,
     ProductDetailDialog,
     ConfirmDialog,
-    ProductForm
-],
+    ProductForm,
+  ],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
@@ -70,6 +71,7 @@ export class ProductList {
   totalItems = 0;
 
   searchKeyword = '';
+  statusFilter = '';
 
   loading = false;
 
@@ -82,11 +84,18 @@ export class ProductList {
   constructor(
     private productService: ProductService,
     private cdr: ChangeDetectorRef,
-    private loadingScreenService: LoadingScreenService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.route.queryParams.subscribe((param) => {
+      this.page = +(param['page'] ?? 1);
+      ((this.limit = +(param['limit'] ?? 10)),
+        (this.searchKeyword = param['search'] ?? ''),
+        (this.statusFilter = param['status'] ?? ''));
+        this.loadProducts();
+    });
     this.loadStats();
   }
 
@@ -108,6 +117,7 @@ export class ProductList {
         page: this.page,
         limit: this.limit,
         search: this.searchKeyword,
+        status: this.statusFilter,
       })
       .subscribe({
         next: (res) => {
