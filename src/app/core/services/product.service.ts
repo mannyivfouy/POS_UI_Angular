@@ -18,6 +18,7 @@ export class ProductService {
     page?: number;
     limit?: number;
     search?: string;
+    status?: string;
     categoryId?: string;
   }): Observable<PaginatedResponse<Product>> {
     let httpParams = new HttpParams();
@@ -30,8 +31,12 @@ export class ProductService {
       httpParams = httpParams.set('limit', String(params.limit));
     }
 
-    if (params.page != null) {
+    if (params.search) {
       httpParams = httpParams.set('search', String(params.search));
+    }
+
+    if (params.status) {
+      httpParams = httpParams.set('status', String(params.status));
     }
 
     if (params.categoryId) {

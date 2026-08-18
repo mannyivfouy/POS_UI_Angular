@@ -51,12 +51,13 @@ export class SaleForm implements OnInit {
         page: this.currentPage,
         limit: this.pageSize,
         search: this.search,
+        status: 'active',
         categoryId: this.selectedCategoryId,
       })
       .subscribe({
         next: (res) => {
-          // this.products = res.data.filter((product) => product.stockQty > 0);
-          this.products = res.data;
+          this.products = res.data.filter((product) => product.stockQty > 0);
+          // this.products = res.data;
           this.cdr.detectChanges();
         },
         error: (err) => {
