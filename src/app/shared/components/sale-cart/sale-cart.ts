@@ -12,10 +12,14 @@ import { environment } from '../../../../environments/environment';
 })
 export class SaleCart {
   @Input() items: SaleCartItem[] = [];
+  @Input() discount = 0;
+  @Input() subtotal = 0;
+  @Input() total = 0;
 
   @Output() quantityChange = new EventEmitter<{ productId: string; quantity: number }>();
   @Output() remove = new EventEmitter<string>();
   @Output() clear = new EventEmitter<string>();
+  @Output() placeOrder = new EventEmitter<void>();
 
   icons = {
     ShoppingCart,
@@ -34,7 +38,11 @@ export class SaleCart {
   }
 
   decreaseQuantity(item: any) {
-    if (item.quantity <= 0) {
+    if (item.quantity <= 1) {
+      this.quantityChange.emit({
+        productId: item.product._id,
+        quantity: 0,
+      });
       return;
     }
 
