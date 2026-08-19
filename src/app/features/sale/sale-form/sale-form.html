@@ -53,9 +53,13 @@
   <section class="w-full rounded-xl bg-white p-6 lg:w-125 border-gray-200 shadow-sm overflow-auto">
     <app-sale-cart
       [items]="cartItems"
+      [subtotal]="subtotal"
+      [discount]="discount"
+      [total]="total"
       (quantityChange)="onQuantityChange($event)"
       (remove)="removeFromCart($event)"
       (clear)="clearCart()"
+      (placeOrder)="openPayment()"
     ></app-sale-cart>
   </section>
 </div>

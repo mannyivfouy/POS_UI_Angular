@@ -27,7 +27,8 @@ export class SaleForm implements OnInit {
   selectedCategoryId: string | null = null;
 
   discount = 0;
-  tax = 0;
+  subtotal = 0;
+  total = 0;
   note = '';
 
   currentPage = 1;
@@ -60,7 +61,7 @@ export class SaleForm implements OnInit {
     this.productService.getProducts(params).subscribe({
       next: (res) => {
         this.products = res.data.filter((product) => product.stockQty > 0);
-
+        // this.products = res.data
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -101,17 +102,25 @@ export class SaleForm implements OnInit {
         total: product.sellingPrice,
       });
     }
+
+    this.calculateTotals();
   }
 
   onQuantityChange(event: { productId: string; quantity: number }): void {
-    const item = this.cartItems.find((item) => item.product._id === event.productId);
+    const itemIndex = this.cartItems.findIndex((item) => item.product._id === event.productId);
 
-    if (!item) {
-      return;
+    if (itemIndex === -1) return;
+
+    if (event.quantity <= 0) {
+      this.cartItems.splice(itemIndex, 1);
+    } else {
+      const item = this.cartItems[itemIndex];
+
+      item.quantity = event.quantity;
+      item.total = item.quantity * item.sellingPrice;
     }
 
-    item.quantity = event.quantity;
-    item.total = item.quantity * item.sellingPrice;
+    this.calculateTotals();
   }
 
   onProductSearch(value: string): void {
@@ -130,9 +139,22 @@ export class SaleForm implements OnInit {
 
   removeFromCart(productId: string): void {
     this.cartItems = this.cartItems.filter((item) => item.product._id !== productId);
+
+    this.calculateTotals();
   }
 
   clearCart(): void {
     this.cartItems = [];
+    this.calculateTotals();
+  }
+
+  calculateTotals(): void {
+    this.subtotal = this.cartItems.reduce((sum, item) => sum + item.total, 0);
+
+    this.total = this.subtotal - this.discount;
+  }
+
+  openPayment() {
+    alert("payment")
   }
 }
