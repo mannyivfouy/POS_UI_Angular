@@ -9,10 +9,12 @@ import { ProductCard } from '../../../shared/components/product-card/product-car
 import { SaleCart } from '../../../shared/components/sale-cart/sale-cart';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../../core/services/category.service';
+import { PaymentMethodModal } from '../../../shared/components/payment-method-modal/payment-method-modal';
+import { PaymentMethod } from '../../../core/models/payment.model';
 
 @Component({
   selector: 'app-sale-form',
-  imports: [Search, ProductCard, SaleCart, CommonModule],
+  imports: [Search, ProductCard, SaleCart, PaymentMethodModal, CommonModule],
   templateUrl: './sale-form.html',
   styleUrl: './sale-form.css',
 })
@@ -34,6 +36,8 @@ export class SaleForm implements OnInit {
   currentPage = 1;
   pageSize = 20;
   search = '';
+
+  showPaymentModal = false;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -154,7 +158,27 @@ export class SaleForm implements OnInit {
     this.total = this.subtotal - this.discount;
   }
 
-  openPayment() {
-    alert("payment")
+  openPaymentModal(): void {
+    this.showPaymentModal = true;
   }
+
+  closePaymentModal(): void {
+    this.showPaymentModal = false;
+  }
+
+  onPaymentMethodSelected(method: PaymentMethod): void {
+  console.log('Selected payment method:', method);
+
+  this.showPaymentModal = false;
+
+  if (method === 'bakongKHQR') {
+    // Later: open KHQR payment modal
+    console.log('Open KHQR payment');
+  }
+
+  if (method === 'cash') {
+    // Later: open cash payment modal
+    console.log('Open cash payment');
+  }
+}
 }

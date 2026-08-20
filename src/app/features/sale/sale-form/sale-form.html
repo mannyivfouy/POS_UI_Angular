@@ -59,7 +59,14 @@
       (quantityChange)="onQuantityChange($event)"
       (remove)="removeFromCart($event)"
       (clear)="clearCart()"
-      (placeOrder)="openPayment()"
+      (placeOrder)="openPaymentModal()"
     ></app-sale-cart>
   </section>
 </div>
+
+<app-payment-method-modal
+  [visible]="showPaymentModal"
+  [total]="total"
+  (closed)="closePaymentModal()"
+  (selected)="onPaymentMethodSelected($event)"
+></app-payment-method-modal>
