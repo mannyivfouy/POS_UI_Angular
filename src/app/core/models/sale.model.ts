@@ -12,6 +12,9 @@ export interface Sale {
   tax: number;
   total: number;
   paymentStatus: 'pending' | 'paid' | string;
+  paymentMethod: "cash" | "bakongKHQR";
+  paymentReference?: string;
+  paymentExpiresAt?: Date;
   note?: string;
   createdBy?: User;
 }

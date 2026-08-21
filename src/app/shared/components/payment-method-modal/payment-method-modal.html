@@ -1,0 +1,105 @@
+@if (visible || closing) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/30 p-4 backdrop-blur-sm animate__animated"
+    [class.animate__fadeIn]="!closing"
+    [class.animate__fadeOut]="closing"
+  >
+    <div
+      class="w-full max-w-md rounded-2xl bg-white shadow-xl animate__animated animate__faster"
+      [class.animate__zoomIn]="!closing"
+      [class.animate__zoomOut]="closing"
+      (animationend)="onAnimationEnd()"
+    >
+      <!-- Header -->
+      <div class="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+        <div>
+          <h2 class="text-lg font-semibold text-gray-900">Payment Method</h2>
+
+          <p class="mt-1 text-sm text-gray-500">Select how the customer will pay</p>
+        </div>
+
+        <button
+          type="button"
+          class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl bg-red-100 text-red-600 transition hover:bg-red-200"
+          (click)="close()"
+        >
+          <lucide-icon [img]="icons.X"></lucide-icon>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="space-y-3 px-6 py-5">
+        <!-- Cash -->
+        <label
+          class="flex cursor-pointer items-center gap-4 rounded-xl border p-4 transition"
+          [class.border-indigo-600]="selectedMethod === 'cash'"
+          [class.bg-indigo-50]="selectedMethod === 'cash'"
+          [class.border-gray-200]="selectedMethod !== 'cash'"
+        >
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="cash"
+            [(ngModel)]="selectedMethod"
+            class="h-4 w-4 text-indigo-600"
+          />
+
+          <div>
+            <p class="font-medium text-gray-900">Cash</p>
+
+            <p class="text-sm text-gray-500">Customer pays with cash</p>
+          </div>
+        </label>
+
+        <!-- Bakong KHQR -->
+        <label
+          class="flex cursor-pointer items-center gap-4 rounded-xl border p-4 transition"
+          [class.border-indigo-600]="selectedMethod === 'bakongKHQR'"
+          [class.bg-indigo-50]="selectedMethod === 'bakongKHQR'"
+          [class.border-gray-200]="selectedMethod !== 'bakongKHQR'"
+        >
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="bakongKHQR"
+            [(ngModel)]="selectedMethod"
+            class="h-4 w-4 text-indigo-600"
+          />
+
+          <div>
+            <p class="font-medium text-gray-900">Bakong KHQR</p>
+
+            <p class="text-sm text-gray-500">Customer scans the QR code</p>
+          </div>
+        </label>
+      </div>
+
+      <!-- Footer -->
+      <div class="border-t border-gray-200 px-6 py-4">
+        <div class="mb-4 flex items-center justify-between">
+          <span class="text-sm text-gray-500"> Total </span>
+
+          <span class="text-lg font-semibold text-gray-900"> ${{ total | number: '1.2-2' }} </span>
+        </div>
+
+        <div class="flex justify-end gap-3">
+          <button
+            type="button"
+            (click)="close()"
+            class="cursor-pointer rounded-lg bg-pink-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-pink-700"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            (click)="continuePayment()"
+            class="cursor-pointer rounded-lg bg-indigo-600 px-5 py-2 text-sm font-semibold text-white transition hover:bg-indigo-700"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
