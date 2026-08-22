@@ -6,6 +6,11 @@ import { PaginatedResponse } from '../models/paginated-response.model';
 import { Sale, SaleDetailResponse } from '../models/sale.model';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SaleStats } from '../models/stats.model';
+import {
+  CompleteSaleRequest,
+  PrepareSalePaymentRequest,
+  PrepareSalePaymentResponse,
+} from '../models/sale-payment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -56,12 +61,16 @@ export class SaleService {
     return this.http.get<PaginatedResponse<Sale>>(this.apiUrl, options);
   }
 
-  getSaleById(id: string): Observable<SaleDetailResponse> {
-    return this.http.get<SaleDetailResponse>(`${this.apiUrl}/${id}`);
+  prepareSalePayment(data: PrepareSalePaymentRequest): Observable<PrepareSalePaymentResponse> {
+    return this.http.post<PrepareSalePaymentResponse>(`${this.apiUrl}/prepare-payment`, data);
   }
 
-  createSale(data: FormData): Observable<Sale> {
-    return this.http.post<Sale>(`${this.apiUrl}/create`, data);
+  completeSale(data: CompleteSaleRequest): Observable<Sale> {
+    return this.http.post<Sale>(`${this.apiUrl}/complete`, data);
+  }
+
+  getSaleById(id: string): Observable<SaleDetailResponse> {
+    return this.http.get<SaleDetailResponse>(`${this.apiUrl}/${id}`);
   }
 
   getSaleStats(): Observable<SaleStats> {

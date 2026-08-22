@@ -1,4 +1,12 @@
-export type PaymentMethod = 'cash' | 'bakongKHQR'
+export type PaymentMethod = 'cash' | 'bakongKHQR';
+
+export interface BakongPaymentState {
+  qr: string;
+  md5: string;
+  amount: number;
+  billNumber: string;
+  status: 'waiting' | 'checking' | 'paid' | 'failed' | 'cancelled';
+}
 
 export interface CreateBakongPaymentRequest {
   amount: number;

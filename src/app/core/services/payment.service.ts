@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PaymentService {
-  private apiUrl = `${environment}/payment/bakong`;
+  private apiUrl = `${environment.apiUrl}/payments/bakong`;
 
   constructor(private http: HttpClient) {}
 

@@ -137,7 +137,7 @@
               </td>
 
               <td class="px-6 py-3 text-sm text-gray-600">
-                {{ sale.customerId.name }}
+                {{ sale.customerId?.name || 'Walk-in Customer' }}
               </td>
 
               <td class="px-6 py-3 text-sm text-gray-600">

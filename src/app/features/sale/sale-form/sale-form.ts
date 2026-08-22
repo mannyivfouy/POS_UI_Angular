@@ -10,11 +10,23 @@ import { SaleCart } from '../../../shared/components/sale-cart/sale-cart';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../../core/services/category.service';
 import { PaymentMethodModal } from '../../../shared/components/payment-method-modal/payment-method-modal';
-import { PaymentMethod } from '../../../core/models/payment.model';
+import {
+  BakongPaymentState,
+  CheckBakongPaymentResponse,
+  PaymentMethod,
+} from '../../../core/models/payment.model';
+import { KhqrPaymentModal } from '../../../shared/components/khqr-payment-modal/khqr-payment-modal';
+import { SaleService } from '../../../core/services/sale.service';
+import {
+  CompleteSaleRequest,
+  PrepareSalePaymentData,
+  PrepareSalePaymentRequest,
+} from '../../../core/models/sale-payment.model';
+import { PaymentService } from '../../../core/services/payment.service';
 
 @Component({
   selector: 'app-sale-form',
-  imports: [Search, ProductCard, SaleCart, PaymentMethodModal, CommonModule],
+  imports: [Search, ProductCard, SaleCart, PaymentMethodModal, CommonModule, KhqrPaymentModal],
   templateUrl: './sale-form.html',
   styleUrl: './sale-form.css',
 })
@@ -38,11 +50,17 @@ export class SaleForm implements OnInit {
   search = '';
 
   showPaymentModal = false;
+  showKhqrPaymentModal = false;
+
+  bakongPayment: BakongPaymentState | null = null;
+  preparedSale: PrepareSalePaymentData | null = null;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private productService: ProductService,
     private categoryService: CategoryService,
+    private saleService: SaleService,
+    private paymentService: PaymentService,
   ) {}
 
   ngOnInit(): void {
@@ -167,18 +185,106 @@ export class SaleForm implements OnInit {
   }
 
   onPaymentMethodSelected(method: PaymentMethod): void {
-  console.log('Selected payment method:', method);
+    this.showPaymentModal = false;
 
-  this.showPaymentModal = false;
+    if (method === 'bakongKHQR') {
+      this.prepareKhqrPayment();
+      return;
+    }
 
-  if (method === 'bakongKHQR') {
-    // Later: open KHQR payment modal
-    console.log('Open KHQR payment');
+    if (method === 'cash') {
+      // Later: open cash payment modal
+      console.log('Open cash payment');
+    }
   }
 
-  if (method === 'cash') {
-    // Later: open cash payment modal
-    console.log('Open cash payment');
+  closeKhqrPaymentModal(): void {
+    this.showKhqrPaymentModal = false;
   }
-}
+
+  prepareKhqrPayment(): void {
+    if (this.cartItems.length === 0) {
+      return;
+    }
+
+    const data: PrepareSalePaymentRequest = {
+      customerId: this.selectedCustomerId,
+      items: this.cartItems.map((item) => ({
+        productId: item.product._id,
+        quantity: item.quantity,
+        sellingPrice: item.sellingPrice,
+      })),
+      discount: this.discount,
+      tax: 0,
+      note: this.note,
+    };
+
+    this.saleService.prepareSalePayment(data).subscribe({
+      next: (res) => {
+        this.preparedSale = res.data;
+
+        this.bakongPayment = {
+          qr: res.data.qr,
+          md5: res.data.md5,
+          amount: res.data.total,
+          billNumber: res.data.invoiceNo,
+          status: 'waiting',
+        };
+
+        this.showKhqrPaymentModal = true;
+
+        this.cdr.detectChanges();
+      },
+
+      error: (err) => {
+        console.error('Failed to prepare sale payment:', err);
+      },
+    });
+  }
+
+  onBakongPaymentCompleted(payment: CheckBakongPaymentResponse): void {
+    if (!this.preparedSale) {
+      console.error('Prepared sale not found');
+      return;
+    }
+
+    const completeRequest: CompleteSaleRequest = {
+      invoiceNo: this.preparedSale.invoiceNo,
+      customerId: this.preparedSale.customerId,
+      items: this.preparedSale.items,
+      subtotal: this.preparedSale.subtotal,
+      discount: this.preparedSale.discount,
+      tax: this.preparedSale.tax,
+      total: this.preparedSale.total,
+      md5: this.preparedSale.md5,
+      note: this.note,
+    };
+
+    this.saleService.completeSale(completeRequest).subscribe({
+      next: (res) => {
+        console.log('Sale completed:', res);
+        this.showKhqrPaymentModal = false;
+        this.clearSaleForm();
+      },
+      error: (err) => {
+        console.error('Failed to complete sale:', err);
+      },
+    });
+  }
+
+  private clearSaleForm(): void {
+    this.cartItems = [];
+
+    this.selectedCustomerId = null;
+
+    this.discount = 0;
+    this.subtotal = 0;
+    this.total = 0;
+    this.note = '';
+
+    this.preparedSale = null;
+    this.bakongPayment = null;
+
+    this.calculateTotals();
+  }
 }
