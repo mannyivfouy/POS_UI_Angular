@@ -70,3 +70,10 @@
   (closed)="closePaymentModal()"
   (selected)="onPaymentMethodSelected($event)"
 ></app-payment-method-modal>
+
+<app-khqr-payment-modal
+  [visible]="showKhqrPaymentModal"
+  [payment]="bakongPayment!"
+  (cancelled)="closeKhqrPaymentModal()"
+  (complete)="onBakongPaymentCompleted($event)"
+></app-khqr-payment-modal>
