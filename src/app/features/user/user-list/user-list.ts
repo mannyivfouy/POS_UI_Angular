@@ -186,7 +186,7 @@ export class UserList {
             icon: Users,
             iconColor: 'indigo',
             trend: stats.totalUserTrend,
-            format: 'number'
+            format: 'number',
           },
           {
             titleKey: 'user.stats.active',
@@ -194,7 +194,7 @@ export class UserList {
             icon: Users,
             iconColor: 'green',
             trend: stats.activeUserTrend,
-            format: 'number'
+            format: 'number',
           },
           {
             titleKey: 'user.stats.inactive',
@@ -202,7 +202,7 @@ export class UserList {
             icon: Users,
             iconColor: 'red',
             trend: stats.inactiveUserTrend,
-            format: 'number'
+            format: 'number',
           },
         ];
         this.cdr.detectChanges();
@@ -278,7 +278,7 @@ export class UserList {
   }
 
   edit(user: User) {
-    this.selectedUser = user;
+    this.selectedUser = { ...user };
     this.isDrawerOpen = true;
   }
 

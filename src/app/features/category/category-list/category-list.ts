@@ -235,7 +235,7 @@ export class CategoryList {
   }
 
   edit(category: Category) {
-    this.selectedCategory = category;
+    this.selectedCategory = { ...category };
     this.isDrawerOpen = true;
   }
 
