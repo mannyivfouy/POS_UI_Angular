@@ -213,6 +213,7 @@ export class SupplierList {
       this.supplierService.updateSupplier(this.selectedSupplier._id, formData).subscribe({
         next: (res) => {
           this.loadSuppliers();
+          this.loadStats();
           this.onCancel();
         },
         error: (err) => {
@@ -228,6 +229,7 @@ export class SupplierList {
       this.supplierService.createSupplier(formData).subscribe({
         next: (res) => {
           this.loadSuppliers();
+          this.loadStats()
           this.onCancel();
         },
         error: (err) => {

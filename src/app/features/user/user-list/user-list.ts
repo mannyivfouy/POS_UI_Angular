@@ -247,6 +247,7 @@ export class UserList {
       this.userService.updateUser(this.selectedUser._id, formData).subscribe({
         next: (res) => {
           this.loadUsers();
+          this.loadStats()
           this.onCancel();
         },
         error: (err) => {
@@ -263,6 +264,7 @@ export class UserList {
       this.userService.createUser(formData).subscribe({
         next: (res) => {
           this.loadUsers();
+          this.loadStats()
           this.onCancel();
         },
         error: (err) => {

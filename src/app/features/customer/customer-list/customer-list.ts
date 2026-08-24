@@ -170,6 +170,7 @@ export class CustomerList {
       this.customerService.updateCustomer(this.selectedCustomer._id, formData).subscribe({
         next: (res) => {
           this.loadCustomers();
+          this.loadStats()
           this.onCancel();
         },
         error: (err) => {
@@ -185,6 +186,7 @@ export class CustomerList {
       this.customerService.createCustomer(formData).subscribe({
         next: (res) => {
           this.loadCustomers();
+          this.loadStats()
           this.onCancel();
         },
         error: (err) => {
