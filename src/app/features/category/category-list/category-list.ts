@@ -203,6 +203,7 @@ export class CategoryList {
       this.categoryService.updateCategory(this.selectedCategory._id, formData).subscribe({
         next: (res) => {
           this.loadCategories();
+          this.loadStats()
           this.onCancel();
         },
         error: (err) => {
@@ -217,6 +218,7 @@ export class CategoryList {
       this.categoryService.createCategory(formData).subscribe({
         next: (res) => {
           this.loadCategories();
+          this.loadStats()
           this.onCancel();
         },
         error: (err) => {

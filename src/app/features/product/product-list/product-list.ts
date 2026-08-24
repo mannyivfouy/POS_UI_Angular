@@ -198,6 +198,7 @@ export class ProductList {
       this.productService.updateProduct(this.selectedProduct._id, formData).subscribe({
         next: (res) => {
           this.loadProducts();
+          this.loadStats();
           this.onCancel();
         },
         error: (err) => {
@@ -212,6 +213,7 @@ export class ProductList {
       this.productService.createProduct(formData).subscribe({
         next: (res) => {
           this.loadProducts();
+          this.loadStats()
           this.onCancel();
         },
         error: (err) => {
