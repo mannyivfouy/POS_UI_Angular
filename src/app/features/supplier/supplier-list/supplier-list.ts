@@ -1,5 +1,13 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { ChevronDown, Contact, LucideAngularModule, Pencil, Plus, Trash2, Truck } from 'lucide-angular';
+import {
+  ChevronDown,
+  Contact,
+  LucideAngularModule,
+  Pencil,
+  Plus,
+  Trash2,
+  Truck,
+} from 'lucide-angular';
 import { Supplier } from '../../../core/models/supplier.model';
 import { StatsCardModel } from '../../../shared/models/stats-card.model';
 import { SupplierService } from '../../../core/services/supplier.service';
@@ -42,7 +50,7 @@ export class SupplierList {
     Pencil,
     Trash2,
     ChevronDown,
-    Truck
+    Truck,
   };
 
   suppliers: Supplier[] = [];
@@ -235,7 +243,7 @@ export class SupplierList {
   }
 
   edit(supplier: Supplier) {
-    this.selectedSupplier = supplier;
+    this.selectedSupplier = { ...supplier };
     this.isDrawerOpen = true;
   }
 

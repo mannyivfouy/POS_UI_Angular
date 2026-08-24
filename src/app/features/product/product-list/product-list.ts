@@ -94,7 +94,7 @@ export class ProductList {
       ((this.limit = +(param['limit'] ?? 10)),
         (this.searchKeyword = param['search'] ?? ''),
         (this.statusFilter = param['status'] ?? ''));
-        this.loadProducts();
+      this.loadProducts();
     });
     this.loadStats();
   }
@@ -227,7 +227,7 @@ export class ProductList {
   }
 
   edit(product: Product) {
-    this.selectedProduct = product;
+    this.selectedProduct = { ...product };
     this.isDrawerOpen = true;
   }
 

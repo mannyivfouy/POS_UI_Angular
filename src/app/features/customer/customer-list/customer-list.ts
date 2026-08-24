@@ -204,7 +204,7 @@ export class CustomerList {
   }
 
   edit(customer: Customer) {
-    this.selectedCustomer = customer;
+    this.selectedCustomer = { ...customer };
     this.isDrawerOpen = true;
   }
 
