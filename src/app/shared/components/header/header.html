@@ -13,6 +13,12 @@
   <div class="flex items-center gap-2">
     <!-- Notification -->
     <div class="relative">
+      <!-- Background Overlay -->
+      <div
+        *ngIf="showNotifications"
+        (click)="closeNotifications()"
+        class="fixed inset-0 z-40"
+      ></div>
       <!-- Bell Button -->
       <button
         type="button"
@@ -60,13 +66,14 @@
           <!-- Low Stock Notification -->
           <div
             *ngFor="let product of lowStockProducts"
+            routerLink="/stocks"
             class="flex gap-3 px-4 py-3 hover:bg-gray-50 border-b border-gray-100 cursor-pointer"
           >
             <!-- Icon -->
             <div
               class="shrink-0 w-8 h-8 rounded-lg bg-red-100 text-red-500 flex items-center justify-center"
             >
-              <lucide-icon [img]="icons.CircleQuestionMark" class="w-4 h-4"></lucide-icon>
+              <lucide-icon [img]="icons.Package" class="w-4 h-4"></lucide-icon>
             </div>
 
             <!-- Content -->
@@ -80,7 +87,7 @@
                 <span class="font-semibold text-red-500">
                   {{ product.stockQty }}
                 </span>
-                {{'notification.items_left' | translate}}
+                {{ 'notification.items_left' | translate }}
               </p>
             </div>
           </div>
@@ -90,7 +97,7 @@
             *ngIf="lowStockProducts.length === 0"
             class="px-4 py-8 text-center text-sm text-gray-400"
           >
-            No new notifications
+            {{ 'common.no_result_found' | translate }}
           </div>
         </div>
       </div>

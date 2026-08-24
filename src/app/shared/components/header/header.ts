@@ -1,15 +1,15 @@
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LanguageService } from '../../../core/services/language.service';
 import { CommonModule } from '@angular/common';
-import { Bell, CircleQuestionMark, LucideAngularModule, Menu } from 'lucide-angular';
+import { Bell, CircleQuestionMark, LucideAngularModule, Menu, Package } from 'lucide-angular';
 import { LoadingScreenService } from '../../../core/services/loading.service';
 import { ProductService } from '../../../core/services/product.service';
 import { Product } from '../../../core/models/product.model';
-import { NavigationStart, Router } from '@angular/router';
+import { NavigationStart, Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, LucideAngularModule, TranslatePipe],
+  imports: [CommonModule, LucideAngularModule, TranslatePipe, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
@@ -18,8 +18,8 @@ export class Header implements OnInit {
 
   icons = {
     Bell,
-    CircleQuestionMark,
     Menu,
+    Package
   };
 
   lowStockProducts: Product[] = [];
@@ -60,6 +60,10 @@ export class Header implements OnInit {
 
   toggleNotifications(): void {
     this.showNotifications = !this.showNotifications;
+  }
+
+  closeNotifications(): void {
+    this.showNotifications = false
   }
 
   changeLanguage(lang: string) {
