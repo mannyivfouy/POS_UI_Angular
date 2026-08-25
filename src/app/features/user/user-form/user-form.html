@@ -33,9 +33,15 @@
         {{ 'user.form.avatar_hint' | translate }}
       </p>
 
+      @if (userForm.get('avatar')?.hasError('server')) {
+        <p class="mt-1 text-sm text-red-500">
+          {{ 'user.validation.upload_type' | translate }}
+        </p>
+      }
+
       <input
         type="file"
-        accept="image/png,image/jpeg"
+        accept=".jpg,.png"
         class="hidden"
         #avatarInput
         (change)="onAvatarChange($event)"

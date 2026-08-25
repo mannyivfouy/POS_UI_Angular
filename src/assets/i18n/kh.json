@@ -64,7 +64,7 @@
       "create_title": "បង្កើតអ្នកប្រើប្រាស់",
       "edit_title": "កែប្រែអ្នកប្រើប្រាស់",
       "upload_avatar": "បញ្ចូលរូបភាពប្រវត្តិរូប",
-      "avatar_hint": "PNG ឬ JPG ទំហំតិចជាង 2MB",
+      "avatar_hint": "PNG ឬ JPG ទំហំតិចជាង 5MB",
       "fullname": "ឈ្មោះពេញ",
       "username": "ឈ្មោះអ្នកប្រើប្រាស់",
       "password": "ពាក្យសម្ងាត់",
@@ -82,6 +82,8 @@
       "update": "ធ្វើបច្ចុប្បន្នភាពអ្នកប្រើប្រាស់"
     },
     "validation": {
+      "upload_type": "អនុញ្ញាតតែរូបភាព JPG និង PNG ប៉ុណ្ណោះ",
+      "upload_size": "ទំហំរូបភាពមិនអាចលើសពី 5 MB បានទេ",
       "fullname_required": "ត្រូវបញ្ចូលឈ្មោះពេញ",
       "fullname_min": "ឈ្មោះពេញត្រូវមានយ៉ាងតិច 3 តួអក្សរ",
       "fullname_max": "ឈ្មោះពេញមិនអាចលើស 50 តួអក្សរ",
@@ -137,7 +139,7 @@
       "category": "ប្រភេទទំនិញ",
       "supplier": "អ្នកផ្គត់ផ្គង់",
       "unit": "ខ្នាត",
-      "sellingPrice" : "តម្លៃលក់",
+      "sellingPrice": "តម្លៃលក់",
       "pricing_and_stock": "តម្លៃ និងស្តុក",
       "cost_price": "តម្លៃដើម",
       "selling_price": "តម្លៃលក់",
@@ -155,7 +157,7 @@
       "create_title": "បង្កើតផលិតផល",
       "edit_title": "កែប្រែផលិតផល",
       "upload_image": "បញ្ចូលរូបភាពផលិតផល",
-      "image_hint": "PNG ឬ JPG ទំហំតិចជាង 2MB",
+      "image_hint": "PNG ឬ JPG ទំហំតិចជាង 5MB",
       "name": "ឈ្មោះផលិតផល",
       "barcode": "បារកូដ",
       "sku": "លេខកូដសម្គាល់",
@@ -177,6 +179,8 @@
       "cancel": "បោះបង់"
     },
     "validation": {
+      "upload_type": "អនុញ្ញាតតែរូបភាព JPG និង PNG ប៉ុណ្ណោះ",
+      "upload_size": "ទំហំរូបភាពមិនអាចលើសពី 5 MB បានទេ",
       "name_required": "ត្រូវបញ្ចូលឈ្មោះទំនិញ",
       "name_min": "ឈ្មោះទំនិញត្រូវមានយ៉ាងតិច 3 តួអក្សរ",
       "name_max": "ឈ្មោះទំនិញមិនអាចលើស 20 តួអក្សរ",

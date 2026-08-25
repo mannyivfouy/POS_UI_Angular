@@ -33,9 +33,15 @@
         {{ 'product.form.image_hint' | translate }}
       </p>
 
+      @if (productForm.get('image')?.hasError('server')) {
+        <p class="mt-1 text-xs text-red-500">
+          {{ 'product.validation.upload_type' | translate }}
+        </p>
+      }
+
       <input
         type="file"
-        accept="image/png,image/jpeg"
+        accept=".jpg,.png"
         class="hidden"
         #imageInput
         (change)="onImageChange($event)"

@@ -256,6 +256,11 @@ export class UserList {
             return;
           }
 
+          if (err.status === 400){
+            this.userForm?.setServerError(err.error.field, err.error.message);
+            return
+          }
+
           console.error(err);
         },
       });
@@ -271,6 +276,11 @@ export class UserList {
           if (err.status === 409) {
             this.userForm?.setServerError(err.error.field, err.error.message);
             return;
+          }
+
+          if (err.status === 400){
+            this.userForm?.setServerError(err.error.field, err.error.message);
+            return
           }
 
           console.error(err);
