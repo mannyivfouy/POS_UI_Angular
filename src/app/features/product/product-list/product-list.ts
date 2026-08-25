@@ -206,6 +206,12 @@ export class ProductList {
             this.productForm?.setServerError(err.error.field, err.error.message);
             return;
           }
+
+          if (err.status === 400){
+            this.productForm?.setServerError(err.error.field, err.error.message);
+            return
+          }
+
           console.error(err);
         },
       });
@@ -220,6 +226,11 @@ export class ProductList {
           if (err.status === 409) {
             this.productForm?.setServerError(err.error.field, err.error.message);
             return;
+          }
+
+          if (err.status === 400){
+            this.productForm?.setServerError(err.error.field, err.error.message);
+            return
           }
 
           console.error(err);
