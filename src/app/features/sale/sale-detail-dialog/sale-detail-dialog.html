@@ -39,7 +39,7 @@
               {{ 'sale.detail_dialog.customer' | translate }}
             </p>
             <p class="mt-1 font-medium text-gray-800">
-              {{ sale.customerId.name }}
+              {{ sale.customerId?.name || 'Walk-in Customer' }}
             </p>
           </div>
 

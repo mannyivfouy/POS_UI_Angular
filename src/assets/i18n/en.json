@@ -180,7 +180,7 @@
     },
     "validation": {
       "upload_type": "អនុញ្ញាតតែរូបភាព JPG និង PNG ប៉ុណ្ណោះ",
-"upload_size": "ទំហំរូបភាពមិនអាចលើសពី 5 MB បានទេ",
+      "upload_size": "ទំហំរូបភាពមិនអាចលើសពី 5 MB បានទេ",
       "name_required": "Product name is required",
       "name_min": "Product name must be at least 3 characters",
       "name_max": "Product name cannot exceed 20 characters",
@@ -427,7 +427,7 @@
     "table": {
       "invoice_no": "Invoice No",
       "customer": "Customer",
-      "sale_date": "Purchase Date",
+      "sale_date": "Sale Date",
       "total": "Total",
       "payment_status": "Payment Status",
       "created_by": "Created By",
