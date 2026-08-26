@@ -12,11 +12,15 @@ export class LanguageService {
 
     this.translate.setFallbackLang(this.defaultLanguage);
     this.translate.use(savedLanguage);
+
+    this.setBodyLanguageClass(savedLanguage);
   }
 
   setLanguage(lang: string): void {
     this.translate.use(lang);
     localStorage.setItem('lang', lang);
+
+    this.setBodyLanguageClass(lang);
   }
 
   getCurrentLanguage(): string {
@@ -25,5 +29,10 @@ export class LanguageService {
 
   getAvailableLanguages(): string[] {
     return ['en', 'kh'];
+  }
+
+  private setBodyLanguageClass(lang: string): void {
+    document.body.classList.remove('lang-en', 'lang-kh');
+    document.body.classList.add(`lang-${lang}`);
   }
 }

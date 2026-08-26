@@ -5,3 +5,9 @@
 body {
   font-family: 'Inter', 'Kantumruy Pro', sans-serif;
 }
+
+@layer utilities {
+  body.lang-kh th {
+    font-size: 14px !important;
+  }
+}
