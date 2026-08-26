@@ -5,7 +5,7 @@ import { User } from './user.model';
 export interface Sale {
   _id: string;
   invoiceNo: string;
-  customerId: Customer;
+  customerId?: Customer;
   saleDate: Date;
   subtotal: number;
   discount: number;
