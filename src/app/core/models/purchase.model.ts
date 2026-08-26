@@ -41,11 +41,9 @@ export interface CreatePurchase {
 
   items: CreatePurchaseItem[];
 
-  subtotal: number;
   discount: number;
   tax: number;
   shipping: number;
-  total: number;
 
   note?: string;
 }
@@ -54,7 +52,12 @@ export interface CreatePurchaseItem {
   productId: string;
   quantity: number;
   costPrice: number;
-  total: number;
+  total?: number
+}
+
+export interface CreatePurchaseResponse {
+  message: string;
+  data: Purchase;
 }
 
 export interface PurchaseItemForm extends CreatePurchaseItem {
