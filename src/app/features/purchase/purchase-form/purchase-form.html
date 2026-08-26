@@ -1,4 +1,4 @@
-<div class="space-y-4">
+<form [formGroup]="purchaseForm" (ngSubmit)="submit()" class="space-y-4">
   <!-- Header -->
   <div class="mb-6 flex items-center justify-between">
     <div>
@@ -18,20 +18,33 @@
       {{ 'purchase_form.purchase_info.title' | translate }}
     </h2>
 
-    <div class="grid grid-cols-4 gap-5">
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
       <!-- Supplier -->
       <div>
         <label class="mb-2 block text-sm font-medium text-gray-700">
           {{ 'purchase_form.purchase_info.supplier' | translate }}
         </label>
 
-        <select
-          class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-indigo-500"
+        <app-searchable-select
+          formControlName="supplierId"
+          [placeholder]="'product.form.supplier_placeholder' | translate"
+          [searchType]="'product.form.supplier' | translate"
+          [items]="suppliers"
+          [invalid]="
+            purchaseForm.get('supplierId')?.touched === true &&
+            purchaseForm.get('supplierId')?.invalid === true
+          "
+        ></app-searchable-select>
+
+        <p
+          *ngIf="
+            purchaseForm.get('supplierId')?.touched &&
+            purchaseForm.get('supplierId')?.hasError('required')
+          "
+          class="mt-1 text-xs text-red-500"
         >
-          <option>
-            {{ 'purchase_form.purchase_info.supplier_placeholder' | translate }}
-          </option>
-        </select>
+          Supplier is required.
+        </p>
       </div>
 
       <!-- Purchase Date -->
@@ -42,7 +55,8 @@
 
         <input
           type="date"
-          class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-indigo-500"
+          formControlName="purchaseDate"
+          class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
         />
       </div>
 
@@ -53,11 +67,11 @@
         </label>
 
         <select
-          class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-indigo-500"
+          formControlName="paymentStatus"
+          class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
         >
-          <option>Pending</option>
-
-          <option>Paid</option>
+          <option value="pending">Pending</option>
+          <option value="paid">Paid</option>
         </select>
       </div>
 
@@ -69,122 +83,338 @@
 
         <input
           readonly
-          value="AUTO-000125"
-          class="w-full rounded-lg border border-gray-300 px-3 py-2"
+          value="AUTO-GENERATED"
+          class="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-gray-500"
         />
       </div>
     </div>
   </div>
 
-  <!-- Product Search -->
+  <!-- Add Products -->
   <div class="mb-6 rounded-xl bg-white p-6 shadow-sm">
-    <h2 class="mb-4 text-lg font-semibold text-gray-800">Add Products</h2>
+    <div class="mb-4">
+      <h2 class="text-lg font-semibold text-gray-800">Add Products</h2>
 
-    <div class="relative">
-      <input
-        type="text"
-        placeholder="Search product by name or barcode..."
-        class="w-full rounded-lg border border-gray-300 px-4 py-3 pl-10 outline-none focus:border-indigo-500"
-      />
+      <p class="mt-1 text-sm text-gray-500">Select a product from the selected supplier.</p>
+    </div>
 
-      <!-- Search Icon -->
-      <span class="absolute left-3 top-3.5 text-gray-400"> 🔍 </span>
+    <!-- Product Select -->
+    <div>
+      <label class="mb-2 block text-sm font-medium text-gray-700"> Product </label>
+
+      <app-searchable-select
+        formControlName="productId"
+        [items]="supplierProducts"
+        [placeholder]="
+          purchaseForm.get('supplierId')?.value
+            ? 'Search product by name or barcode...'
+            : 'Select supplier first'
+        "
+        [searchType]="'product'"
+      ></app-searchable-select>
+
+      <!-- Supplier not selected -->
+      <p *ngIf="!purchaseForm.get('supplierId')?.value" class="mt-2 text-xs text-gray-500">
+        Please select a supplier before adding products.
+      </p>
+
+      <!-- No products -->
+      <p
+        *ngIf="purchaseForm.get('supplierId')?.value && supplierProducts.length === 0"
+        class="mt-2 text-xs text-gray-500"
+      >
+        No products found for this supplier.
+      </p>
     </div>
   </div>
 
-  <!-- Purchase Items Table -->
+  <!-- Purchase Items -->
   <div class="mb-6 overflow-hidden rounded-xl bg-white shadow-sm">
+    <!-- Header -->
     <div class="border-b px-6 py-4">
-      <h2 class="font-semibold text-gray-800">Purchase Items</h2>
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="font-semibold text-gray-800">Purchase Items</h2>
+
+          <p *ngIf="purchaseItems.length > 0" class="mt-1 text-xs text-gray-500">
+            {{ totalProducts }} product{{ totalProducts !== 1 ? 's' : '' }}
+            ·
+            {{ totalQuantity }} total quantity
+          </p>
+        </div>
+      </div>
     </div>
 
-    <table class="w-full">
-      <thead class="bg-gray-50">
-        <tr class="text-left text-sm text-gray-600">
-          <th class="px-6 py-4">Product</th>
+    <!-- Empty State -->
+    <div
+      *ngIf="purchaseItems.length === 0"
+      class="flex flex-col items-center justify-center px-6 py-12 text-center"
+    >
+      <div
+        class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-gray-100 text-gray-400"
+      >
+        <lucide-icon [img]="icons.ChevronDown" class="h-5 w-5"></lucide-icon>
+      </div>
 
-          <th class="px-6 py-4 text-center">Current Stock</th>
+      <p class="font-medium text-gray-700">No products added</p>
 
-          <th class="px-6 py-4 text-center">Quantity</th>
+      <p class="mt-1 text-sm text-gray-500">Select a product above to add it to this purchase.</p>
+    </div>
 
-          <th class="px-6 py-4 text-center">Cost Price</th>
+    <!-- Table -->
+    <div *ngIf="purchaseItems.length > 0" class="overflow-x-auto">
+      <table class="w-full min-w-225">
+        <!-- Table Head -->
+        <thead class="bg-gray-50">
+          <tr class="text-left text-sm text-gray-600">
+            <th class="px-6 py-4 font-medium">Product</th>
 
-          <th class="px-6 py-4 text-center">Subtotal</th>
+            <th class="px-6 py-4 text-center font-medium">Current Stock</th>
 
-          <th class="px-6 py-4 text-center">Action</th>
-        </tr>
-      </thead>
+            <th class="px-6 py-4 text-center font-medium">Quantity</th>
 
-      <tbody>
-        <!-- Example Row -->
+            <th class="px-6 py-4 text-center font-medium">Cost Price</th>
 
-        <tr class="border-t">
-          <td class="px-6 py-4">
-            <div>
-              <p class="font-medium text-gray-800">Coca Cola 330ml</p>
+            <th class="px-6 py-4 text-center font-medium">Subtotal</th>
 
-              <p class="text-sm text-gray-500">SKU: COKE330</p>
-            </div>
-          </td>
+            <th class="px-6 py-4 text-center font-medium">Action</th>
+          </tr>
+        </thead>
 
-          <td class="px-6 py-4 text-center">50</td>
+        <!-- Table Body -->
+        <tbody>
+          <tr *ngFor="let item of purchaseItems; let i = index" class="border-t border-gray-100">
+            <!-- Product -->
+            <td class="px-6 py-4">
+              <div>
+                <p class="font-medium text-gray-800">
+                  {{ item.product.name }}
+                </p>
 
-          <td class="px-6 py-4 text-center">
-            <input type="number" value="10" class="w-20 rounded-lg border px-2 py-1 text-center" />
-          </td>
+                <p class="mt-1 text-sm text-gray-500">SKU: {{ item.product.sku || '-' }}</p>
+              </div>
+            </td>
 
-          <td class="px-6 py-4 text-center">
-            <input
-              type="number"
-              value="0.75"
-              class="w-24 rounded-lg border px-2 py-1 text-center"
-            />
-          </td>
+            <!-- Current Stock -->
+            <td class="px-6 py-4 text-center text-gray-600">
+              {{ item.product.stockQty }}
+            </td>
 
-          <td class="px-6 py-4 text-center font-medium">$7.50</td>
+            <!-- Quantity -->
+            <td class="px-6 py-4">
+              <div class="flex justify-center">
+                <input
+                  type="number"
+                  min="1"
+                  [value]="item.quantity"
+                  (input)="updateQuantity(item, $any($event.target).value)"
+                  class="w-20 rounded-lg border border-gray-300 px-2 py-1.5 text-center outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                />
+              </div>
+            </td>
 
-          <td class="px-6 py-4 text-center">
-            <button class="rounded-lg p-2 text-red-500 hover:bg-red-50">🗑</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <!-- Cost Price -->
+            <td class="px-6 py-4">
+              <div class="flex justify-center">
+                <div class="relative">
+                  <span class="absolute left-2.5 top-1.5 text-sm text-gray-400"> $ </span>
+
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    [value]="item.costPrice"
+                    (input)="updateCostPrice(item, $any($event.target).value)"
+                    class="w-28 rounded-lg border border-gray-300 py-1.5 pl-6 pr-2 text-center outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  />
+                </div>
+              </div>
+            </td>
+
+            <!-- Subtotal -->
+            <td class="px-6 py-4 text-center font-medium text-gray-800">
+              ${{ getItemTotal(item) | number: '1.2-2' }}
+            </td>
+
+            <!-- Action -->
+            <td class="px-6 py-4 text-center">
+              <button
+                type="button"
+                (click)="removeItem(i)"
+                class="rounded-lg p-2 text-red-500 transition hover:bg-red-50 hover:text-red-600 cursor-pointer"
+                title="Remove product"
+              >
+                <lucide-icon [img]="icons.Trash2" class="h-4 w-4"></lucide-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Purchase Adjustment -->
+  <div class="mb-6 rounded-xl bg-white p-6 shadow-sm">
+    <h2 class="mb-5 text-lg font-semibold text-gray-800">Purchase Adjustment</h2>
+
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+      <!-- Discount -->
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700"> Discount </label>
+
+        <div class="relative">
+          <span class="absolute left-3 top-2 text-sm text-gray-400"> $ </span>
+
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            formControlName="discount"
+            class="w-full rounded-lg border border-gray-300 py-2 pl-7 pr-3 outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          />
+        </div>
+      </div>
+
+      <!-- Tax -->
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700"> Tax </label>
+
+        <div class="relative">
+          <span class="absolute left-3 top-2 text-sm text-gray-400"> $ </span>
+
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            formControlName="tax"
+            class="w-full rounded-lg border border-gray-300 py-2 pl-7 pr-3 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          />
+        </div>
+      </div>
+
+      <!-- Shipping -->
+      <div>
+        <label class="mb-2 block text-sm font-medium text-gray-700"> Shipping </label>
+
+        <div class="relative">
+          <span class="absolute left-3 top-2 text-sm text-gray-400"> $ </span>
+
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            formControlName="shipping"
+            class="w-full rounded-lg border border-gray-300 py-2 pl-7 pr-3 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Note -->
+    <div class="mt-5">
+      <label class="mb-2 block text-sm font-medium text-gray-700"> Note </label>
+
+      <textarea
+        formControlName="note"
+        rows="3"
+        maxlength="100"
+        placeholder="Add a note about this purchase..."
+        class="w-full resize-none rounded-lg border border-gray-300 px-3 py-2 outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+      ></textarea>
+
+      <p class="mt-1 text-right text-xs text-gray-400">
+        {{ purchaseForm.get('note')?.value?.length || 0 }}/100
+      </p>
+    </div>
   </div>
 
   <!-- Summary -->
-  <div class="flex justify-end mb-6">
-    <div class="w-96 rounded-xl bg-white p-6 shadow-sm">
+  <div class="mb-6 flex justify-end">
+    <div class="w-full rounded-xl bg-white p-6 shadow-sm md:w-96">
       <h2 class="mb-5 text-lg font-semibold text-gray-800">Summary</h2>
 
       <div class="space-y-4">
+        <!-- Total Products -->
         <div class="flex justify-between text-gray-600">
-          <span> Total Products </span>
+          <span>Total Products</span>
 
-          <span class="font-medium text-gray-800"> 3 </span>
+          <span class="font-medium text-gray-800">
+            {{ totalProducts }}
+          </span>
         </div>
 
+        <!-- Total Quantity -->
         <div class="flex justify-between text-gray-600">
-          <span> Total Quantity </span>
+          <span>Total Quantity</span>
 
-          <span class="font-medium text-gray-800"> 35 </span>
+          <span class="font-medium text-gray-800">
+            {{ totalQuantity }}
+          </span>
         </div>
 
         <hr />
 
-        <div class="flex justify-between text-lg font-bold">
-          <span> Grand Total </span>
+        <!-- Subtotal -->
+        <div class="flex justify-between text-gray-600">
+          <span>Subtotal</span>
 
-          <span class="text-indigo-600"> $19.50 </span>
+          <span class="font-medium text-gray-800"> ${{ subtotal | number: '1.2-2' }} </span>
+        </div>
+
+        <!-- Discount -->
+        <div class="flex justify-between text-gray-600">
+          <span>Discount</span>
+
+          <span class="font-medium text-gray-800"> -${{ discount | number: '1.2-2' }} </span>
+        </div>
+
+        <!-- Tax -->
+        <div class="flex justify-between text-gray-600">
+          <span>Tax</span>
+
+          <span class="font-medium text-gray-800"> ${{ tax | number: '1.2-2' }} </span>
+        </div>
+
+        <!-- Shipping -->
+        <div class="flex justify-between text-gray-600">
+          <span>Shipping</span>
+
+          <span class="font-medium text-gray-800"> ${{ shipping | number: '1.2-2' }} </span>
+        </div>
+
+        <hr />
+
+        <!-- Grand Total -->
+        <div class="flex items-center justify-between text-lg font-bold">
+          <span class="text-gray-800"> Grand Total </span>
+
+          <span class="text-indigo-600"> ${{ grandTotal | number: '1.2-2' }} </span>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="flex justify-end">
+  <!-- Actions -->
+  <div class="flex justify-end gap-3">
     <button
-      class="rounded-lg bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-700 cursor-pointer"
+      type="button"
+      (click)="resetForm()"
+      [disabled]="isSubmitting"
+      class="cursor-pointer rounded-lg border border-gray-300 bg-white px-5 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
     >
-      {{ 'purchase_form.save_purchase' | translate }}
+      Cancel
+    </button>
+
+    <button
+      type="submit"
+      [disabled]="isSubmitting || purchaseItems.length === 0"
+      class="cursor-pointer rounded-lg bg-indigo-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+    >
+      <span *ngIf="!isSubmitting">
+        {{ 'purchase_form.save_purchase' | translate }}
+      </span>
+
+      <span *ngIf="isSubmitting"> Saving... </span>
     </button>
   </div>
-</div>
+</form>

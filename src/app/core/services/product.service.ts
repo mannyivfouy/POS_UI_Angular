@@ -20,6 +20,7 @@ export class ProductService {
     search?: string;
     status?: string;
     categoryId?: string;
+    supplierId?: string;
   }): Observable<PaginatedResponse<Product>> {
     let httpParams = new HttpParams();
 
@@ -41,6 +42,10 @@ export class ProductService {
 
     if (params.categoryId) {
       httpParams = httpParams.set('categoryId', params.categoryId);
+    }
+
+    if (params.supplierId) {
+      httpParams = httpParams.set('supplierId', params.supplierId);
     }
 
     let options: {
