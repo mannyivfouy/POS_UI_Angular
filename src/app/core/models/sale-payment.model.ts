@@ -1,3 +1,5 @@
+export type BakongCurrency = 'KHR' | 'USD'
+
 export interface SalePaymentItem {
   productId: string;
   quantity: number;
@@ -22,6 +24,9 @@ export interface PrepareSalePaymentData {
   total: number;
   qr: string;
   md5: string;
+  amount: number;
+  currency: BakongCurrency;
+  expiresAt: string;
 }
 
 export interface PrepareSalePaymentResponse {

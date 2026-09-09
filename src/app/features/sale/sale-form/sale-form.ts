@@ -226,8 +226,10 @@ export class SaleForm implements OnInit {
         this.bakongPayment = {
           qr: res.data.qr,
           md5: res.data.md5,
-          amount: res.data.total,
+          amount: res.data.amount,
           billNumber: res.data.invoiceNo,
+          currency: res.data.currency,
+          expiresAt: res.data.expiresAt,
           status: 'waiting',
         };
 
