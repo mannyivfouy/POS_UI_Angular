@@ -1,84 +1,61 @@
 <div *ngIf="visible" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-  <div class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl">
-    <!-- Header -->
-    <div class="flex items-start justify-between border-b border-gray-100 px-6 py-5">
-      <div>
-        <h2 class="text-lg font-semibold text-gray-900">KHQR Payment</h2>
-
-        <p class="mt-1 text-sm text-gray-500">Scan the QR code to complete payment</p>
-      </div>
-
-      <button
-        type="button"
-        class="flex h-9 w-9 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"
-        (click)="close()"
-        aria-label="Close"
-      >
-        <lucide-icon [img]="icons.X" [size]="20"></lucide-icon>
-      </button>
+  <div class="w-full max-w-sm overflow-hidden rounded-2xl bg-white shadow-2xl">
+    <!-- Header: red banner with KHQR wordmark + diagonal corner, matching the real KHQR card -->
+    <div class="relative overflow-hidden bg-red-600 py-4 text-center">
+      <span class="text-lg font-semibold tracking-wide text-white">KHQR</span>
     </div>
 
-    <!-- Payment Information -->
-    <div class="px-6 pt-5">
-      <!-- Merchant -->
-      <div>
-        <p class="text-xs font-medium uppercase tracking-wide text-gray-400">Merchant</p>
-
-        <p class="mt-1 text-sm font-semibold text-gray-900">POS System</p>
-      </div>
-
-      <!-- Amount -->
-      <div class="mt-5">
-        <p class="text-xs font-medium uppercase tracking-wide text-gray-400">Amount</p>
-
-        <p class="mt-1 text-3xl font-bold tracking-tight text-gray-900">
-          {{ payment.amount | currency: 'USD' }}
-        </p>
+    <!-- Merchant + amount -->
+    <div class="px-5 pt-4">
+      <p class="text-sm font-bold text-gray-500">{{ merchantName }}</p>
+      <div class="mt-0.5 flex items-baseline gap-1.5">
+        <span class="text-[26px] font-semibold text-gray-900">{{ formattedAmount }}</span>
+        <span class="text-sm font-bold text-gray-500">{{ payment.currency }}</span>
       </div>
     </div>
 
-    <!-- QR Code -->
-    <div class="flex justify-center px-6 py-7">
-      <div class="rounded-xl border border-gray-100 bg-white p-4 shadow-sm">
+    <div class="mx-5 mt-4 border-t border-dashed border-gray-300"></div>
+
+    <!-- QR with center overlay icon, matching the real Bakong app style -->
+    <div class="flex justify-center px-5 pb-1 pt-4">
+      <div class="relative h-55 w-55">
         <qrcode
           [qrdata]="payment.qr"
-          [width]="260"
-          [errorCorrectionLevel]="'M'"
-          [margin]="2"
+          [width]="220"
+          [errorCorrectionLevel]="'H'"
+          [margin]="1"
         ></qrcode>
-      </div>
-    </div>
-
-    <!-- Payment Status -->
-    <div class="px-6">
-      <div class="flex flex-col items-center rounded-xl bg-gray-50 px-4 py-4 text-center">
-        <div class="flex items-center gap-2">
-          <span class="h-2.5 w-2.5 animate-pulse rounded-full bg-amber-500"></span>
-
-          <span class="text-sm font-semibold text-gray-800"> Waiting for payment </span>
+        <div
+          class="absolute left-1/2 top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-gray-900 ring-4 ring-white"
+        >
+          <span class="text-sm font-medium text-white">
+            <lucide-icon [img]="icons.DollarSign" class="w-5 h-5 stroke-3"></lucide-icon>
+          </span>
         </div>
-
-        <p class="mt-1 text-xs text-gray-500">Scan the QR code using your banking app</p>
       </div>
     </div>
 
-    <!-- Bill Number -->
-    <div class="mx-6 mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
-      <span class="text-sm text-gray-500"> Bill number </span>
+    <!-- Expiry -->
+    <div class="px-5 pb-1 pt-3 text-center">
+      <p class="text-xs text-gray-500">
+        Expires in <span class="font-medium text-gray-900">{{ formattedTime }}</span>
+      </p>
+    </div>
 
-      <span class="text-sm font-medium text-gray-900">
-        {{ payment.billNumber }}
-      </span>
+    <!-- Bill number -->
+    <div class="mx-5 mt-4 flex items-center justify-between border-t border-gray-100 pt-3">
+      <span class="text-xs text-gray-500">Bill number</span>
+      <span class="text-xs font-medium text-gray-900">{{ payment.billNumber }}</span>
     </div>
 
     <!-- Footer -->
-    <div class="px-6 pb-6 pt-5">
+    <div class="px-5 pb-5 pt-4">
       <button
         type="button"
-        class="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
+        class="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm font-semibold text-gray-700 transition hover:bg-gray-50 hover:text-gray-900 cursor-pointer"
         (click)="close()"
       >
-        Cancel Payment
+        Cancel payment
       </button>
     </div>
   </div>

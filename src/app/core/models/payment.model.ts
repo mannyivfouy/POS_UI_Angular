@@ -1,10 +1,13 @@
 export type PaymentMethod = 'cash' | 'bakongKHQR';
+export type BakongCurrency = 'KHR' | 'USD';
 
 export interface BakongPaymentState {
   qr: string;
   md5: string;
   amount: number;
   billNumber: string;
+  currency: BakongCurrency;
+  expiresAt: string;
   status: 'waiting' | 'checking' | 'paid' | 'failed' | 'cancelled';
 }
 
@@ -18,6 +21,9 @@ export interface CreateBakongPaymentResponse {
   data: {
     qr: string;
     md5: string;
+    amount: number;
+    currency: BakongCurrency;
+    expiresAt: string;
   };
 }
 
