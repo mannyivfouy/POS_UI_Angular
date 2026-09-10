@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { BakongPaymentState, CheckBakongPaymentResponse } from '../../../core/models/payment.model';
 import { Clock, DollarSign, LucideAngularModule, QrCode, X } from 'lucide-angular';
 import { CommonModule } from '@angular/common';
@@ -24,13 +32,16 @@ export class KhqrPaymentModal implements OnChanges {
 
   formattedTime = '--:--';
 
-  constructor(private paymentService: PaymentService) {}
+  constructor(
+    private paymentService: PaymentService,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   icons = {
     X,
     Clock,
     QrCode,
-    DollarSign
+    DollarSign,
   };
 
   ngOnChanges(): void {
@@ -102,20 +113,25 @@ export class KhqrPaymentModal implements OnChanges {
 
     if (!this.payment?.expiresAt) {
       this.formattedTime = '--:--';
-      console.warn(
-        'BakongPaymentState.expiresAt is missing — countdown disabled. ' +
-          'Backend must return expiresAt in CreateBakongPaymentResponse.',
-      );
+
+      console.warn('BakongPaymentState.expiresAt is missing — countdown disabled.');
+
       return;
     }
 
     const expiresAtMs = new Date(this.payment.expiresAt).getTime();
 
     const tick = () => {
-      const secondsLeft = Math.max(0, Math.round((expiresAtMs - Date.now()) / 1000));
-      const m = Math.floor(secondsLeft / 60);
-      const s = secondsLeft % 60;
-      this.formattedTime = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+      const secondsLeft = Math.max(0, Math.ceil((expiresAtMs - Date.now()) / 1000));
+
+      const minutes = Math.floor(secondsLeft / 60);
+      const seconds = secondsLeft % 60;
+
+      this.formattedTime =
+        `${minutes.toString().padStart(2, '0')}:` + `${seconds.toString().padStart(2, '0')}`;
+
+      // Force Angular to update the modal UI
+      this.cdr.detectChanges();
 
       if (secondsLeft <= 0) {
         this.stopCountdown();
@@ -123,7 +139,10 @@ export class KhqrPaymentModal implements OnChanges {
       }
     };
 
+    // Update immediately
     tick();
+
+    // Then update every second
     this.countdownInterval = setInterval(tick, 1000);
   }
 
