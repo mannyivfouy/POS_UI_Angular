@@ -62,7 +62,13 @@ export class SaleService {
   }
 
   prepareSalePayment(data: PrepareSalePaymentRequest): Observable<PrepareSalePaymentResponse> {
-    return this.http.post<PrepareSalePaymentResponse>(`${this.apiUrl}/prepare-payment`, data);
+    const headers = new HttpHeaders({
+      'skip-loading': 'true',
+    });
+
+    return this.http.post<PrepareSalePaymentResponse>(`${this.apiUrl}/prepare-payment`, data, {
+      headers,
+    });
   }
 
   completeSale(data: CompleteSaleRequest): Observable<Sale> {
