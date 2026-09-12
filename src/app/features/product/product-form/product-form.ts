@@ -203,7 +203,7 @@ export class ProductForm implements OnChanges {
         return;
       }
 
-      if (value !== null && value !== '') {
+      if (value !== null && value !== undefined) {
         formData.append(key, value);
       }
     });
