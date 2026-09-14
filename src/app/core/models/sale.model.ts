@@ -11,7 +11,7 @@ export interface Sale {
   discount: number;
   tax: number;
   total: number;
-  paymentStatus: 'pending' | 'paid' | 'expired' | 'failed' | string;
+  paymentStatus: 'pending' | 'paid' | 'expired' | 'failed' | 'cancelled' | string;
   paymentMethod: 'cash' | 'bakongKHQR';
   paymentReference?: string;
   paymentExpiresAt?: Date;

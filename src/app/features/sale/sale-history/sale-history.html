@@ -154,7 +154,9 @@
                   [ngClass]="
                     sale.paymentStatus === 'paid'
                       ? 'bg-green-100 text-green-600'
-                      : 'bg-orange-100 text-orange-600'
+                      : sale.paymentStatus === 'cancelled'
+                        ? 'bg-red-100 text-red-600'
+                        : 'bg-orange-100 text-orange-600'
                   "
                 >
                   {{ sale.paymentStatus }}

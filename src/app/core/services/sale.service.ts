@@ -7,6 +7,8 @@ import { Sale, SaleDetailResponse } from '../models/sale.model';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SaleStats } from '../models/stats.model';
 import {
+  CancelSaleRequest,
+  CancelSaleResponse,
   CompleteSaleRequest,
   PrepareSalePaymentRequest,
   PrepareSalePaymentResponse,
@@ -73,6 +75,11 @@ export class SaleService {
 
   completeSale(data: CompleteSaleRequest): Observable<Sale> {
     return this.http.post<Sale>(`${this.apiUrl}/complete`, data);
+  }
+
+
+  cancelSale(data: CancelSaleRequest): Observable<CancelSaleResponse> {
+    return this.http.post<CancelSaleResponse>(`${this.apiUrl}/cancel`, data);
   }
 
   getSaleById(id: string): Observable<SaleDetailResponse> {

@@ -289,4 +289,30 @@ export class SaleForm implements OnInit {
 
     this.calculateTotals();
   }
+
+  // NEW
+  cancelPayment(): void {
+    const sale = this.preparedSale;
+
+    if (!sale) {
+      return;
+    }
+
+    this.saleService
+      .cancelSale({
+        invoiceNo: sale.invoiceNo,
+      })
+      .subscribe({
+        next: (res) => {
+          console.log(res.message);
+
+          this.showKhqrPaymentModal = false;
+          this.preparedSale = null;
+          this.bakongPayment = null;
+        },
+        error: (err) => {
+          console.error('Cancel Payment Error:', err);
+        },
+      });
+  }
 }
