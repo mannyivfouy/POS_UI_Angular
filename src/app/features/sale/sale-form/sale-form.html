@@ -74,6 +74,6 @@
 <app-khqr-payment-modal
   [visible]="showKhqrPaymentModal"
   [payment]="bakongPayment!"
-  (cancelled)="closeKhqrPaymentModal()"
+  (cancelled)="cancelPayment()"
   (complete)="onBakongPaymentCompleted($event)"
 ></app-khqr-payment-modal>

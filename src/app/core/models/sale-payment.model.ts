@@ -15,6 +15,7 @@ export interface PrepareSalePaymentRequest {
 }
 
 export interface PrepareSalePaymentData {
+  saleId: string
   invoiceNo: string;
   customerId: string | null;
   items: SalePaymentItem[];
@@ -44,4 +45,16 @@ export interface CompleteSaleRequest {
   total: number;
   md5: string;
   note: string;
+}
+
+export interface CancelSaleRequest {
+  invoiceNo: string
+}
+
+export interface CancelSaleResponse {
+  message: string;
+  data: {
+    invoiceNo: string;
+    paymentStatus: 'cancelled'
+  }
 }
